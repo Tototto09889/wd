@@ -2,7 +2,7 @@
 title: "Berserk of Gluttony Bahasa Indonesia"
 description: "Novel"
 pubDate: "22 Februari 2025"
-heroImage: ""
+heroImage: "/berserk of gluttony.jpeg"
 ---
 
 Penulis  : Ichinoda Ichiri , Isshiki Ichika

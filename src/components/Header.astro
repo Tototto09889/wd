@@ -1,77 +1,83 @@
 ---
-import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Novel</HeaderLink>
-			<HeaderLink href="/list">List</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-		</div>
-		<div class="social-links">
-			<a href="YOUR_TELEGRAM_LINK" target="_blank">
-				<span class="sr-only">Telegram</span>
-				<svg viewBox="0 0 496 512" aria-hidden="true" width="32" height="32" fill="currentColor">
-					<path d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8Zm121.8,217L263,341c-16.4,10-32.8,4.2-49.2-5.8s-27.1-25.9-27.1-43.6V207.9c0-15.1,8.4-29.3,22.8-36.2s33.6-8.5,49.2,5.8l53.3,32.5c14.2,8.7,21.8,23.3,21.8,38.6s-7.6,29.9-21.8,38.6Z"/>
-				</svg>
-			</a>
-			<a href="YOUR_INSTAGRAM_LINK" target="_blank">
-				<span class="sr-only">Instagram</span>
-				<svg viewBox="0 0 448 512" aria-hidden="true" width="32" height="32" fill="currentColor">
-					<path d="M224,202.7C179.3,202.7,143,166.4,143,121.7S179.3,40.7,224,40.7,305,77,305,121.7,268.7,202.7,224,202.7Zm144.7,24.5c0-28.7-23.3-52-52-52H125.3c-28.7,0-52,23.3-52,52V389c0,28.7,23.3,52,52,52H316.7c28.7,0,52-23.3,52-52ZM400,441V71.9c0-37.7-30.6-68.3-68.3-68.3H116.3C78.6,3.6,48,34.2,48,71.9V441c0,37.7,30.6,68.3,68.3,68.3H331.7C369.4,509.3,400,478.7,400,441Z"/>
-				</svg>
-			</a>
-			<a href="YOUR_TERAKTEER_LINK" target="_blank">
-				<span class="sr-only">Trakteer</span>
-				<svg viewBox="0 0 512 512" aria-hidden="true" width="32" height="32" fill="currentColor">
-					<path d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm100.8,320c-16.8,0-33.6-6.4-46.4-19.2-12.8-12.8-19.2-29.6-19.2-46.4s6.4-33.6,19.2-46.4c12.8-12.8,29.6-19.2,46.4-19.2s33.6,6.4,46.4,19.2c12.8,12.8,19.2,29.6,19.2,46.4s-6.4,33.6-19.2,46.4C389.6,313.6,372.8,320,356.8,320ZM155.2,320c-16.8,0-33.6-6.4-46.4-19.2-12.8-12.8-19.2-29.6-19.2-46.4s6.4-33.6,19.2-46.4c12.8-12.8,29.6-19.2,46.4-19.2s33.6,6.4,46.4,19.2c12.8,12.8,19.2,29.6,19.2,46.4s-6.4,33.6-19.2,46.4C188.8,313.6,172,320,155.2,320Z"/>
-				</svg>
-			</a>
-		</div>
-	</nav>
+  <nav>
+    <h2><a href="/">{SITE_TITLE}</a></h2>
+    <div class="dropdown">
+      <button class="dropbtn">Menu</button>
+      <div class="dropdown-content">
+        <a href="/">Home</a>
+        <a href="/blog">Novel</a>
+        <a href="/list">List</a>
+        <a href="/about">About</a>
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="YOUR_TELEGRAM_LINK" target="_blank">
+        <span class="sr-only">Telegram</span>
+        <svg viewBox="0 0 496 512" aria-hidden="true" width="32" height="32" fill="currentColor">
+          <path d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8Zm121.8,217L263,341c-16.4,10-32.8,4.2-49.2-5.8s-27.1-25.9-27.1-43.6V207.9c0-15.1,8.4-29.3,22.8-36.2s33.6-8.5,49.2,5.8l53.3,32.5c14.2,8.7,21.8,23.3,21.8,38.6s-7.6,29.9-21.8,38.6Z"/>
+        </svg>
+      </a>
+      <a href="YOUR_INSTAGRAM_LINK" target="_blank">
+        <span class="sr-only">Instagram</span>
+        <svg viewBox="0 0 448 512" aria-hidden="true" width="32" height="32" fill="currentColor">
+          <path d="M224,202.7C179.3,202.7,143,166.4,143,121.7S179.3,40.7,224,40.7,305,77,305,121.7,268.7,202.7,224,202.7Zm144.7,24.5c0-28.7-23.3-52-52-52H125.3c-28.7,0-52,23.3-52,52V389c0,28.7,23.3,52,52,52H316.7c28.7,0,52-23.3,52-52ZM400,441V71.9c0-37.7-30.6-68.3-68.3-68.3H116.3C78.6,3.6,48,34.2,48,71.9V441c0,37.7,30.6,68.3,68.3,68.3H331.7C369.4,509.3,400,478.7,400,441Z"/>
+        </svg>
+      </a>
+      <a href="YOUR_TERAKTEER_LINK" target="_blank">
+        <span class="sr-only">Trakteer</span>
+        <svg viewBox="0 0 512 512" aria-hidden="true" width="32" height="32" fill="currentColor">
+          <path d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm100.8,320c-16.8,0-33.6-6.4-46.4-19.2-12.8-12.8-19.2-29.6-19.2-46.4s6.4-33.6,19.2-46.4c12.8-12.8,29.6-19.2,46.4-19.2s33.6,6.4,46.4,19.2c12.8,12.8,19.2,29.6,19.2,46.4s-6.4,33.6-19.2,46.4C389.6,313.6,372.8,320,356.8,320ZM155.2,320c-16.8,0-33.6-6.4-46.4-19.2-12.8-12.8-19.2-29.6-19.2-46.4s6.4-33.6,19.2-46.4c12.8-12.8,29.6-19.2,46.4-19.2s33.6,6.4,46.4,19.2c12.8,12.8,19.2,29.6,19.2,46.4s-6.4,33.6-19.2,46.4C188.8,313.6,172,320,155.2,320Z"/>
+        </svg>
+      </a>
+    </div>
+  </nav>
 </header>
-<style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
+<style>
+  /*... previous styles... */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+.dropbtn {
+    background-color: transparent;
+    color: var(--black);
+    padding: 1em 0.5em;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+  }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0; /* Align to the right */
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+.dropdown-content a {
+    color: var(--black);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+  }
+
+.dropdown:hover.dropdown-content {
+    display: block;
+  }
+
+  /*... (media query)... */
 </style>

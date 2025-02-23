@@ -20,8 +20,8 @@ heroImage: "/blog-placeholder-4.jpg"
  * Ini menciptakan kontras komedi antara niat Liam dan hasil sebenarnya dari tindakannya.
  * Pada intinya ini adalah sebuah cerita seseorang yang mencoba untuk menjadi jahat, tetapi terus menerus gagal dalam hal itu, dan secara tidak sengaja menjadi penguasa yang baik.
 Intinya, "Aku adalah Penguasa Jahat dari Kekaisaran Intergalaksi!" adalah seri isekai komedi yang menumbangkan ekspektasi dengan menggambarkan seorang protagonis yang berusaha menjadi jahat tetapi secara tidak sengaja menjadi pemimpin yang dermawan.
-#### Link Download
 
+#### Link Download :
 <!DOCTYPE html>
 <html>
 <head>

@@ -28,3 +28,43 @@ Poin-poin penting dalam cerita "Isekai Maou to Shoukan Shoujo Dorei Majutsu":
  * Misteri dan Plot yang Berkembang: Selain petualangan sehari-hari, cerita ini juga memiliki plot yang lebih dalam yang melibatkan misteri tentang dunia Cross Reverie, kekuatan Diablo yang sebenarnya, dan ancaman yang lebih besar yang mungkin muncul.
  * Komedi Situasi dan Komedi Karakter: Banyak humor dalam cerita ini berasal dari interaksi antara Diablo yang berusaha mempertahankan imej Demon Lord dengan kepribadian aslinya yang pemalu, serta interaksinya dengan Rem dan Shera yang memiliki kepribadian yang kontras dan seringkali merepotkan.
 Secara keseluruhan, "Isekai Maou to Shoukan Shoujo Dorei Majutsu" adalah cerita isekai yang menghibur dan menggabungkan elemen fantasi, aksi, komedi, dan ecchi. Cerita ini populer karena premisnya yang unik, karakter utama yang kuat namun relatable dalam kecanggungannya, dan petualangan seru di dunia fantasi yang menarik.
+#### Link Download
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  .download-button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h5>Download Isekai Maou to Shoukan Shoujo Dorei Majutsu</h5>
+
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%201%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 1</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%202%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 2</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%203%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 3</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%204%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 4</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%205%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 5</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%206%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 6</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%207%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 7</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%208%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 8</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%209%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 9</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%2010%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 10</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%2011%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 11</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%2012%20-%20Bakadame.com.pdf" class="download-button" download>Volume 12</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%2013%20-%20Bakadame.com.pdf" class="download-button" download>Volume 13</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%2014%20-%20Bakadame.com.pdf" class="download-button" download>Volume 14</a>
+
+</body>
+</html>
+

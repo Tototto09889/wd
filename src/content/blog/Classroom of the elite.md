@@ -2,7 +2,7 @@
 title: "Classroom of the Elite Bahasa Indonesia"
 description: "Novel"
 pubDate: "22 Februari 2025"
-heroImage: ""
+heroImage: "/IMG_3970.png"
 ---
 "Classroom of the Elite" adalah sebuah seri novel ringan Jepang yang populer, dan telah diadaptasi menjadi manga dan anime. Berikut adalah informasi mengenai genre dan sinopsisnya:
 

@@ -22,7 +22,7 @@ heroImage: ""
  * Inti ceritanya adalah mengenai kejeniusan sang pangeran dalam berstrategi, dan bagaimana hasil dari strategi yang ia buat, sering kali bertolak belakang dengan apa yang ia rencanakan.
 Singkatnya, "Tensai Ouji no Akaji Kokka Saisei Jutsu" adalah kisah komedi fantasi yang cerdas tentang seorang pangeran jenius yang ingin menjual kerajaannya, tetapi selalu berakhir dengan membuatnya lebih makmur.
 
-#### Link Download
+#### Link Download :
 <!DOCTYPE html>
 <html>
 <head>

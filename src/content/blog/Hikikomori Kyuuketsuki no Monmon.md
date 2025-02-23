@@ -4,7 +4,8 @@ description: "Novel"
 pubDate: "23 Februari 2025"
 heroImage: ""
 ---
-"Hikikomori Kyuuketsuki no Monmon":
+"Hikikomori Kyuuketsuki no Monmon"
+
 Genre:
  * Fantasi Urban/Kontemporer
  * Slice of Life / Kehidupan Sehari-hari

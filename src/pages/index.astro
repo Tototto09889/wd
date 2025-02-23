@@ -12,10 +12,17 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <style>
         .project-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr; /* Satu kolom untuk tampilan seluler */
             gap: 20px;
             margin-top: 40px;
         }
+
+        @media (min-width: 768px) {
+            .project-container {
+                grid-template-columns: repeat(2, 1fr); /* Dua kolom untuk tampilan desktop */
+            }
+        }
+
         .project-box {
             border: 1px solid #ddd;
             padding: 20px;
@@ -52,10 +59,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         </p>
         <div class="project-container">
             <div class="project-box">
-                <h3>List Novel Jepang: Melampaui Batas Imajinasi</h3>
-                <p>Jelajahi dunia paralel yang penuh dengan keajaiban, misteri, dan emosi yang mendalam. Daftar ini menghadirkan novel-novel Jepang terbaik yang akan membawa Anda pada petualangan tak terlupakan di setiap halaman.</p>
-                <a href="https://wispy-dream.floral.workers.dev/list/"><button>Lihat Proyek</button></a>
-                <p class="quote">"Setiap novel adalah gerbang menuju dunia lain."</p>
+                <h3>Proyek 1: Light Novel dan Web Novel Jepang</h3>
+                <p>Menyelami dunia fantasi dan petualangan epik dari Light Novel dan Web Novel Jepang pilihan. Temukan kisah-kisah yang memikat hati dan membawa imajinasimu terbang tinggi.</p>
+                <a href="https://wispy-dream.floral.workers.dev/list/"><button>Lihat List</button></a>
+                <p class="quote">"Dalam setiap halaman, petualangan baru menanti."</p>
             </div>
             <div class="project-box">
                 <h3>Proyek 2: Jejak Digital Gemilang</h3>

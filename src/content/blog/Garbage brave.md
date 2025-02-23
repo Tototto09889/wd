@@ -21,3 +21,32 @@ heroImage: "/blog-placeholder-2.jpg"
  * Narasi ini kemungkinan akan melibatkan perjalanannya untuk meningkatkan diri, memperoleh keterampilan dan kemampuan baru, dan pertemuannya dengan berbagai rintangan dan musuh.
  * Intinya, cerita ini berisi pendakian dari titik terendah ke tempat paling atas.
 Singkatnya, "Garbage Brave" adalah kisah tentang pengkhianatan, kelangsungan hidup, dan pembalasan, di mana seorang pahlawan yang pernah dibuang kembali untuk membalas dendamnya.
+
+#### Link Download
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  .download-button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h5>Light Novel</h5>
+
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Garbage%20Brave:%20Yuusha%20No%20Fukushuu%20Monogatari/Isekan%20Ni%20Shoukan%20vol%2001%20-%20CSNovel.Blogspot.com.pdf" class="download-button" download>Volume 1</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Garbage%20Brave:%20Yuusha%20No%20Fukushuu%20Monogatari/Isekan%20Ni%20Shoukan%20vol%2002%20-%20CSNovel.Blogspot.com.pdf" class="download-button" download>Volume 2</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Garbage%20Brave:%20Yuusha%20No%20Fukushuu%20Monogatari/Isekan%20Ni%20Shoukan%20vol%2003%20-%20CSNovel.Blogspot.com.pdf" class="download-button" download>Volume 3</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Garbage%20Brave:%20Yuusha%20No%20Fukushuu%20Monogatari/Isekan%20Ni%20Shoukan%20vol%2004%20-%20CSNovel.Blogspot.com.pdf" class="download-button" download>Volume 4</a>
+</body>
+</html>

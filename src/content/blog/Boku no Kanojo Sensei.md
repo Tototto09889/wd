@@ -1,0 +1,18 @@
+---
+title: "Boku no Kanojo Sensei Bahasa Indonesia"
+description: "Novel"
+pubDate: "23 Februari 2025"
+heroImage: ""
+---
+
+Penulis: Kagami Yuu
+
+Ilustrator: Hoshikawagani
+
+Genre: Romance, Comedy, Ecchi, School
+
+Sinopsis: Tokoh utama dalam cerita ini adalah seorang siswa SMA bernama Tokiya Sena. Ia memiliki seorang guru wali kelas yang cantik dan populer bernama Aizawa Kana. Pada suatu hari, Sena menemukan rahasia besar dari Kana: di luar jam sekolah, ia bekerja sebagai penulis novel romansa dewasa di bawah nama pena "Kanzaki Kana".
+
+Karena rahasianya terungkap, Kana dan Sena membuat kesepakatan untuk saling membantu. Kana meminta Sena untuk membantunya dengan memberikan ide-ide dan pengalaman romantis untuk novelnya, sementara Sena mendapatkan keuntungan dengan memiliki kesempatan untuk lebih dekat dengan guru yang disukainya.
+
+Hubungan mereka berkembang dari hubungan guru-murid menjadi hubungan yang lebih kompleks, di mana mereka harus menavigasi perasaan romantis mereka sambil menjaga rahasia mereka dari orang lain. Kisah ini dipenuhi dengan momen-momen komedi, romantis, dan sedikit ecchi, saat mereka berdua berusaha untuk memahami perasaan mereka satu sama lain dan menghadapi tantangan dalam hubungan mereka.

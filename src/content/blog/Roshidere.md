@@ -6,7 +6,9 @@ heroImage: ""
 ---
 
 Penulis : SunSunSun
+
 Ilustrator : Momoco
+
 Genre : Romansa, Sekolah, Slice of Life
 
 Sinopsis : Novel ini mengisahkan tentang Arisa Mikhailovna Kujou (Alya), seorang siswi SMA berdarah campuran Rusia-Jepang yang cantik dan pintar, dan Masachika Kuze, seorang siswa biasa yang duduk di sebelahnya di kelas. Alya, yang dikenal sebagai "putri kesepian di sekolah", sering kali mengucapkan kata-kata manis atau ungkapan sayang dalam bahasa Rusia, yang sebenarnya ditujukan kepada Masachika. Namun, Masachika yang tidak mengerti bahasa Rusia selalu salah paham dan menganggap gumaman Alya sebagai bahasa asing biasa.

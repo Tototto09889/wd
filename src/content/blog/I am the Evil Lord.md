@@ -20,3 +20,36 @@ heroImage: "/blog-placeholder-4.jpg"
  * Ini menciptakan kontras komedi antara niat Liam dan hasil sebenarnya dari tindakannya.
  * Pada intinya ini adalah sebuah cerita seseorang yang mencoba untuk menjadi jahat, tetapi terus menerus gagal dalam hal itu, dan secara tidak sengaja menjadi penguasa yang baik.
 Intinya, "Aku adalah Penguasa Jahat dari Kekaisaran Intergalaksi!" adalah seri isekai komedi yang menumbangkan ekspektasi dengan menggambarkan seorang protagonis yang berusaha menjadi jahat tetapi secara tidak sengaja menjadi pemimpin yang dermawan.
+#### Link Download
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  .download-button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h5>Light Novel</h5>
+
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Evil%20lord/Evil_LordLN_Vol1~LuiNovel~.pdf" class="download-button" download>Volume 1</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Evil%20lord/Evil_LordLN_Vol2~LuiNovel~.pdf" class="download-button" download>Volume 2</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Evil%20lord/Evil_LordLN_Vol3~LuiNovel~.pdf" class="download-button" download>Volume 3</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Evil%20lord/Evil_LordLN_Vol4~LuiNovel~.pdf" class="download-button" download>Volume 4</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Evil%20lord/Evil_LordLN_Vol5~LuiNovel~.pdf" class="download-button" download>Volume 5</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Evil%20lord/Evil_LordLN_Vol6~LuiNovel~.pdf" class="download-button" download>Volume 6</a>
+  <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Evil%20lord/Evil_LordLN_Vol7~LuiNovel~.pdf" class="download-button" download>Volume 7</a>
+</body>
+</html>
+

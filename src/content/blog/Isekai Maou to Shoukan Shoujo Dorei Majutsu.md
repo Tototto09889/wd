@@ -47,7 +47,6 @@ Secara keseluruhan, "Isekai Maou to Shoukan Shoujo Dorei Majutsu" adalah cerita 
   </style>
 </head>
 <body>
-
   <h5>Download Isekai Maou to Shoukan Shoujo Dorei Majutsu</h5>
 
   <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu/Isekai%20Maou%20to%20Shoukan%20Shoujo%20Dorei%20Majutsu%20-%20Volume%201%20-%20Lib%C3%A9r%C3%A9Novel%20-%20CSNovel.Blogspot.Com.pdf" class="download-button" download>Volume 1</a>

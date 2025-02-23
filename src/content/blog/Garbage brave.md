@@ -22,7 +22,7 @@ heroImage: "/blog-placeholder-2.jpg"
  * Intinya, cerita ini berisi pendakian dari titik terendah ke tempat paling atas.
 Singkatnya, "Garbage Brave" adalah kisah tentang pengkhianatan, kelangsungan hidup, dan pembalasan, di mana seorang pahlawan yang pernah dibuang kembali untuk membalas dendamnya.
 
-#### Link Download
+#### Link Download :
 <!DOCTYPE html>
 <html>
 <head>

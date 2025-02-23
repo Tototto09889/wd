@@ -42,7 +42,7 @@ Singkatnya, "Tensai Ouji no Akaji Kokka Saisei Jutsu" adalah kisah komedi fantas
 </head>
 <body>
 
-  <h1>Light Novel V1</h1>
+  <h5>Light Novel V1</h5>
   <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Genius%20prince/Genius_PrinceV1~RueNovel~.pdf" class="download-button" download>Volume 1</a>
   <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Genius%20prince/Genius_PrinceV2~RueNovel~.pdf" class="download-button" download>Volume 2</a>
   <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Genius%20prince/Genius_PrinceV3~RueNovel~.pdf" class="download-button" download>Volume 3</a>
@@ -56,7 +56,7 @@ Singkatnya, "Tensai Ouji no Akaji Kokka Saisei Jutsu" adalah kisah komedi fantas
   <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Genius%20prince/Tensai%20Ouji%20no%20Akaji%20Kokka%20Saisei%20Jutsu%20-%20Volume%2011.pdf" class="download-button" download>Volume 11</a>
   <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Genius%20prince/Tensai%20Ouji%20no%20Akaji%20Kokka%20Saisei%20Jutsu%20(Sou%20da,%20Baikoku%20Shiyou)%20-%20Volume%2012.pdf" class="download-button" download>Volume 12</a>
 
-  <h1>Light Novel V2</h1>
+  <h5>Light Novel V2</h5>
   <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Genius%20prince/V2/The%20Genius%20Prince,%20vol.%201%20-%20Bahasa%20Indonesia.pdf" class="download-button" download>Volume 1</a>
   <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Genius%20prince/V2/The%20Genius%20Prince,%20vol.%202%20-%20Bahasa%20Indonesia.pdf" class="download-button" download>Volume 2</a>
   <a href="https://gawr-index.floral.workers.dev/0:/LN%20&%20WN/LN%20&%20WN%20Jepang%20P1/Genius%20prince/V2/The%20Genius%20Prince,%20vol.%203%20-%20Bahasa%20Indonesia.pdf" class="download-button" download>Volume 3</a>

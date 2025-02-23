@@ -3,7 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
----
+import Layout from '../layouts/BlogPost.astro';
+--
 
 <!doctype html>
 <html lang="en">
@@ -52,9 +53,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 </head>
 <body>
     <Header />
-    <main>
-        <h1>Selamat datang di blog Wispy dream</h1>
-        <p>
+<Layout
+	title="Selamat datang di Wispy Dream"
+	heroImage="/blog-placeholder-about.jpg"
+       >
+         <p>
             di bawah ini adalah daftar project saya
         </p>
         <div class="project-container">
@@ -83,7 +86,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 <p class="quote">"Bermimpi besar, bekerja cerdas, raih bintang."</p>
             </div>
         </div>
-    </main>
+    </layout>
     <Footer />
 </body>
 </html>

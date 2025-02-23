@@ -5,29 +5,17 @@ import { SITE_TITLE } from '../consts';
 <header>
   <nav>
     <h2><a href="/">{SITE_TITLE}</a></h2>
-    <div style="display: flex;">
-      <button id="theme-toggle" class="theme-toggle">
-        <svg id="light-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 3V5M12 19V21M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M3 12H5M19 12H21M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-        </svg>
-        <svg id="dark-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21 12.79C20.88 9.38 18.03 6.82 14.79 6.82C11.55 6.82 8.71 9.38 8.59 12.79C8.71 16.2 11.55 18.76 14.79 18.76C18.03 18.76 20.88 16.2 21 12.79Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <div class="dropdown">
+      <button class="dropbtn" onclick="myFunction()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 6H22M2 12H22M2 18H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
-      <div class="dropdown">
-        <button class="dropbtn" onclick="myFunction()">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 6H22M2 12H22M2 18H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-        <div id="myDropdown" class="dropdown-content">
-          <a href="/">Home</a>
-          <a href="/blog">Novel</a>
-          <a href="/list">List</a>
-          <a href="/about">About</a>
-          <a href="/search">Cari</a>
-        </div>
+      <div id="myDropdown" class="dropdown-content">
+        <a href="/">Home</a>
+        <a href="/blog">Novel</a>
+        <a href="/list">List</a>
+        <a href="/about">About</a>
       </div>
     </div>
   </nav>
@@ -51,53 +39,13 @@ import { SITE_TITLE } from '../consts';
       }
     }
   }
-
-  // Mode gelap / terang
-  const themeToggle = document.getElementById('theme-toggle');
-  const lightIcon = document.getElementById('light-icon');
-  const darkIcon = document.getElementById('dark-icon');
-
-  const setTheme = (theme) => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      lightIcon.style.display = 'none';
-      darkIcon.style.display = 'block';
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      lightIcon.style.display = 'block';
-      darkIcon.style.display = 'none';
-    }
-  };
-
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme) {
-    setTheme(savedTheme);
-  } else {
-    //default theme
-    setTheme('light');
-  }
-
-  themeToggle.addEventListener('click', () => {
-    if (document.documentElement.classList.contains('dark')) {
-      setTheme('light');
-    } else {
-      setTheme('dark');
-    }
-  });
 </script>
 <style>
   header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
     margin: 0;
     padding: 0 1em;
     background: white;
     box-shadow: 0 2px 8px rgba(var(--black), 5%);
-    z-index: 100;
   }
   h2 {
     margin: 0;
@@ -126,6 +74,7 @@ import { SITE_TITLE } from '../consts';
   .dropdown {
     position: relative;
     display: inline-block;
+    margin-left: auto; /* Aligns dropdown to the right */
   }
 
   /* Dropdown button */
@@ -136,7 +85,7 @@ import { SITE_TITLE } from '../consts';
     font-size: 1em;
     border: none;
     cursor: pointer;
-    display: flex;
+    display: flex; /* Untuk menempatkan svg didalam tombol*/
     align-items: center;
     justify-content: center;
   }
@@ -148,7 +97,7 @@ import { SITE_TITLE } from '../consts';
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    right: 0;
+    right: 0; /* Align dropdown content to the right edge of button*/
   }
 
   .dropdown-content a {
@@ -165,20 +114,5 @@ import { SITE_TITLE } from '../consts';
   }
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
-
-  /* Theme Toggle */
-  .theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5em;
-    display:flex;
-    align-items:center;
-
-  }
-
-  #dark-icon {
-    display: none;
-  }
 
 </style>

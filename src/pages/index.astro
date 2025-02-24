@@ -10,6 +10,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
+        /* --- Box-sizing (PENTING!) --- */
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+        }
+
         /* --- General Styles --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -82,42 +89,41 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
         /* --- Welcome Text Styles --- */
         .welcome-section {
-            text-align: center; /* Pusatkan teks */
+            text-align: center;
             margin-bottom: 2rem;
-            padding: 1rem; /* Tambahkan padding */
-            background-color: #f0f8ff; /* Warna latar belakang yang cerah */
-            border-radius: 0.5rem; /* Sudut membulat */
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Bayangan halus */
+            padding: 1rem;
+            background-color: #f0f8ff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
         }
 
         .welcome-section h3 {
-            font-size: 2.5rem; /* Ukuran font yang lebih besar */
-            color: #28a745; /* Warna hijau yang segar */
+            font-size: 2.5rem;
+            color: #28a745;
             margin-bottom: 0.5rem;
-            font-weight: bold; /* Tebalkan judul */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Efek bayangan teks */
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .welcome-section p {
-            font-size: 1.2rem;  /* Ukuran font yang lebih besar */
-            color: #666;       /* Warna teks yang lebih gelap */
-            /* font-style: italic;  Tidak perlu italic untuk teks lucu */
-            line-height: 1.4;     /* Spasi baris yang nyaman */
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.4;
         }
 
         /* --- Mobile Styles --- */
         @media (max-width: 767px) {
             .project-box {
-                width: 95%;
+                width: 95%; /* Sesuaikan setelah menambahkan box-sizing */
                 max-width: none;
                 margin-left: auto;
                 margin-right: auto;
             }
            .welcome-section h3 {
-               font-size: 2rem; /* Sedikit lebih kecil di mobile */
+               font-size: 2rem;
             }
             .welcome-section p {
-               font-size: 1rem;  /*Sedikit Lebih kecil di mobile*/
+               font-size: 1rem;
             }
         }
 
@@ -135,7 +141,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <Header />
     <main>
         <div class="welcome-section">
-            <h3>Selamat Datang, Kawan2!</h3>
+            <h3>Selamat Datang, Para Pencari Kode!</h3>
             <p>"Siap-siap ngakak, karena di sini proyeknya lebih kocak dari stand-up comedy! Jangan kaget kalau tiba-tiba komputermu bisa ngerap sendiri, ya!"</p>
         </div>
 

@@ -155,73 +155,77 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             font-style: italic;
         }
 
-        /* Contact Form Styles */
-        .contact-section {
-            background-color: #fff;
-            border: 1px solid #dee2e6;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-            margin-bottom: 1rem;
-            width: 95%;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+         /* Formulir Kontak (Terintegrasi) */
+        .contact-form-container {
+            /* Mewarisi semua gaya .project-item */
         }
-
-        .contact-section h5 {
+        .contact-form-container h5 {
             text-align: center;
             margin-bottom: 1rem;
             font-size: 1.5rem;
             color: #0056b3;
         }
-         .contact-section  b {
-           font-size: 1.7rem;
-         }
 
-        .form-group label {
-            display: block;
+        .contact-form-container b{
+            font-size: 1.7rem;
+        }
+
+        .contact-form-container .form-group {
+            margin-bottom: 1rem; /* Spasi antar field */
+        }
+
+        .contact-form-container .form-group label {
+            display: block; /* Label di atas input */
             margin-bottom: 0.25rem;
             color: #495057;
         }
 
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group textarea {
+        /* Gaya untuk input dan textarea (seperti .main-button) */
+        .contact-form-container .form-group input[type="text"],
+        .contact-form-container .form-group input[type="email"],
+        .contact-form-container .form-group textarea {
             width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ced4da;
-            border-radius: 0.25rem;
-            margin-bottom: 1rem;
-            font-size: 1rem;
+            padding: 0.5rem 1rem; /* Padding yang sama dengan .main-button */
+            border: 1px solid #ced4da; /* Border yang sedikit berbeda */
+            border-radius: 0.25rem; /* Border radius yang sama */
+            font-size: 1rem;      /* Ukuran font yang sama */
+            font-family: inherit; /* Font yang sama dengan body */
+             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Transisi */
         }
 
-        .form-group textarea {
-            resize: vertical; /* Allow vertical resizing */
+        .contact-form-container .form-group textarea {
+            resize: vertical;
             min-height: 100px;
         }
 
-      .contact-section button[type="submit"] {
-        background-color: #0056b3; /* Darker blue for submit */
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        cursor: pointer;
-        font-size: 1rem;
-        display: block;
-        width: 100%;
-        transition: background-color 0.2s ease-in-out;
-      }
-
-       .contact-section button[type="submit"]:hover {
-            background-color: #003d82; /* Even darker blue on hover */
+        /* Fokus state untuk input */
+        .contact-form-container .form-group input[type="text"]:focus,
+        .contact-form-container .form-group input[type="email"]:focus,
+        .contact-form-container .form-group textarea:focus {
+            border-color: #80bdff; /* Warna border saat fokus */
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Efek shadow */
         }
 
-        #status {
+
+        /* Tombol Kirim (menggunakan gaya .main-button) */
+        .contact-form-container .submit-button {
+            background-color: #28a745; /* Warna hijau yang sama */
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 1rem;
+            display: block;
+            width: 100%;
             text-align: center;
-            margin-top: 1rem;
-            font-weight: bold;
+            text-decoration: none; /* Menghilangkan underline jika ada */
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .contact-form-container .submit-button:hover {
+            background-color: #218838; /* Warna hijau lebih gelap saat hover */
         }
 
        @media (min-width: 768px) {
@@ -232,23 +236,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 gap: 1rem;
             }
 
-            .project-item {
+            .project-item, .contact-form-container {
                 width: calc(50% - 1rem);
             }
+
             /* Style untuk welcome section di desktop */
             .welcome-section {
-                grid-column: 1 / -1; /* welcome section menggunakan seluruh lebar */
-                width: auto; /* Hapus width */
-                max-width: none; /* Hapus max-width */
-                margin-left: 1rem;  /* Margin kiri */
-                margin-right: 1rem; /* Margin kanan */
+                grid-column: 1 / -1;
+                width: auto;
+                max-width: none;
+                margin-left: 1rem;
+                margin-right: 1rem;
 
             }
-
-            .contact-section{
-               width: calc(50% - 1rem); /* Contact section takes half width on desktop */
-            }
-
         }
     </style>
 </head>
@@ -290,8 +290,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 <h3>Web Download</h3>
                 <p class="smaller-text">Simpanlah serpihan-serpihan kisah ini, seperti menyimpan kenangan dalam botol, berharap suatu saat nanti bisa membukanya kembali dan merasakan kehangatannya.</p>
                 <div class="button-container">
-                    <button class="main-button">Kunjungi</button>
-                    <button class="quote-button">Quote Lain</button>
+                    <button class="main-button">Kunjungi</button>  <button class="quote-button">Quote Lain</button>
                 </div>
                 <div class="button-divider"></div>
                 <p class="quote smaller-text"></p>
@@ -299,7 +298,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
             <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 4">
-                <h3>Wangy Wangy Web</h3>
+                <h3>Wangy Wangy Tools</h3>
                 <p class="smaller-text">Di balik setiap tawa, ada air mata yang tak terlihat. Di balik setiap keharuman, ada kesedihan yang mendalam. Selamat datang di dunia yang wangy, namun fana.</p>
                 <div class="button-container">
                     <a href="https://wangy.floral.workers.dev/" class="main-button">Lihat</a>
@@ -309,8 +308,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 <p class="quote smaller-text"></p>
             </div>
 
-            <div class="contact-section">
-                <h5><b>Hubungi saya di bawah ini :</b></h5>
+            <div class="project-item contact-form-container">
+                <h5><b>Kontak Saya</b></h5>
                 <form action="https://formspree.io/f/xaylarpo" method="POST" id="my-form">
                     <div class="form-group">
                         <label for="firstName">First Name</label>
@@ -328,9 +327,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                         <label for="massage">Message</label>
                         <textarea name="massage" id="massage" cols="30" rows="10" required></textarea>
                     </div>
-                    <button type="submit">SEND MESSAGE</button>
+                    <button type="submit" class="submit-button">SEND MESSAGE</button>
                 </form>
-                <div id="status"></div>
             </div>
         </div>
     </main>
@@ -393,56 +391,21 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         function initializeQuotes() {
             const projectBoxes = document.querySelectorAll('.project-item');
             projectBoxes.forEach(box => {
-                showRandomQuote(box);
+                // Skip the contact form container for quote initialization
+                if (!box.classList.contains('contact-form-container')) {
+                  showRandomQuote(box);
 
-                const quoteButton = box.querySelector('.quote-button');
-                quoteButton.addEventListener('click', () => showRandomQuote(box));
+                  const quoteButton = box.querySelector('.quote-button');
+                  quoteButton.addEventListener('click', () => showRandomQuote(box));
 
-                const mainButton = box.querySelector('.main-button');
-                mainButton.addEventListener('click', () => showMainButtonQuote(box));
-
-            });
-        }
-
-
-        // Formspree form submission
-        const form = document.getElementById("my-form");
-        const status = document.getElementById("status");
-
-        async function handleSubmit(event) {
-          event.preventDefault();
-          const data = new FormData(event.target);
-
-          try {
-            const response = await fetch(event.target.action, {
-              method: form.method,
-              body: data,
-              headers: {
-                  'Accept': 'application/json'
-              }
-            });
-
-            if (response.ok) {
-              status.innerHTML = "Thanks for your submission!";
-              form.reset()
-            } else {
-                const responseData = await response.json();
-                if (Object.hasOwn(responseData, 'errors')) {
-                  status.innerHTML = responseData["errors"].map(error => error["message"]).join(", ")
-                } else {
-                  status.innerHTML = "Oops! There was a problem submitting your form"
+                  const mainButton = box.querySelector('.main-button');
+                  mainButton.addEventListener('click', () => showMainButtonQuote(box));
                 }
-            }
 
-          } catch (error) {
-            status.innerHTML = "Oops! There was a problem submitting your form";
-          }
+            });
         }
-
-        form.addEventListener("submit", handleSubmit)
 
         document.addEventListener('DOMContentLoaded', initializeQuotes);
     </script>
 </body>
 </html>
-

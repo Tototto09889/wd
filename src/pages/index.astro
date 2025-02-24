@@ -10,7 +10,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
-       /* --- Box-sizing (PENTING!) --- */
+        /* --- Box-sizing (PENTING!) --- */
         *,
         *::before,
         *::after {
@@ -65,42 +65,36 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             text-align: center;
         }
 
-      /* Style untuk Tombol Utama (di dalam <a>) */
+      /* Style untuk Tombol Utama */
         .project-box .main-button {
-            background-color: #007bff;
+            background-color: #28a745;
             color: white;
             border: none;
             padding: 0.5rem 1rem;
             border-radius: 0.25rem;
             cursor: pointer;
             font-size: 0.9rem;
-            text-decoration: none;
-            display: inline-block;  /* Penting agar sejajar */
-            margin: 0;           /* Hapus margin */
-            text-align: center;    /* Text alignment */
+            display: inline-block;
+            margin: 0;
+            text-align: center;
             transition: background-color 0.2s ease-in-out;
         }
 
+        /* Style untuk Tombol Utama Proyek 1 (dengan link) */
+        .project-box:first-child .main-button {
+          text-decoration: none; /* Hapus garis bawah untuk link */
+        }
 
         .project-box .main-button:hover {
-            background-color: #0056b3;
+            background-color: #218838;
         }
-        .project-box a{
-            text-decoration: none;
-        }
-
 
         .project-box .quote {
             font-style: italic;
             color: #888;
             margin-top: 0.75rem;
             text-align: center;
-            /* display: none;  <-- Hapus ini */
         }
-
-        /* .project-box .quote.show {
-            display: block;
-        }  <-- Tidak perlu lagi */
 
         .project-box img {
             width: 100%;
@@ -123,12 +117,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             cursor: pointer;
             font-size: 0.75rem;
             transition: background-color 0.2s ease-in-out;
-            margin: 0; /*reset margin*/
+            margin: 0;
         }
 
         .quote-button:hover {
             background-color: #5a6268;
         }
+
         /* Container untuk tombol */
         .button-container {
             display: flex;
@@ -209,98 +204,128 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         <div class="project-container">
             <div class="project-box">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 1">
-                <h3>Proyek 1: Daftar Indeks Web Novel dan Light Novel Jepang</h3>
+                <h3>Daftar Indeks Web Novel dan Light Novel Jepang</h3>
                 <p>Di sini, di antara rak-rak digital yang sunyi, tersimpan kisah-kisah yang menanti untuk ditemukan.  Seperti kenangan yang memudar, mereka menunggu sentuhanmu.</p>
                 <div class="button-container">
-                    <a href="/indeks"><button class="main-button">Lihat Indeks</button></a>
-                    <button class="quote-button">Quote Lain</button>  {/* Ubah teks tombol */}
+                    <a href="https://wispy-dream.floral.workers.dev/blog/" class="main-button">Lihat Indeks</a>
+                    <button class="quote-button">Quote Lain</button>
                 </div>
-                <p class="quote"></p> {/* Kosongkan teks awal */}
+                <p class="quote"></p>
             </div>
             <div class="project-box">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 2">
-                <h3>Proyek 2: Postingan Web Novel dan Light Novel Terbaru</h3>
+                <h3>Postingan Web Novel dan Light Novel Terbaru</h3>
                 <p>Seperti embun pagi yang segera lenyap, cerita-cerita baru ini hadir sesaat, menawarkan keindahan yang fana.  Nikmatilah sebelum mereka menghilang.</p>
                  <div class="button-container">
-                    <a href="/terbaru"><button class="main-button">Lihat Postingan</button></a>
-                    <button class="quote-button">Quote Lain</button> {/* Ubah teks tombol */}
+                    <button class="main-button">Lihat Postingan</button>
+                    <button class="quote-button">Quote Lain</button>
                 </div>
-                <p class="quote"></p>  {/* Kosongkan teks awal */}
+                <p class="quote"></p>
             </div>
             <div class="project-box">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 3">
-                <h3>Proyek 3: Web Download untuk Proyek Sebelumnya</h3>
+                <h3>Web Download untuk Proyek Sebelumnya</h3>
                 <p>Simpanlah serpihan-serpihan kisah ini, seperti menyimpan kenangan dalam botol, berharap suatu saat nanti bisa membukanya kembali dan merasakan kehangatannya.</p>
                 <div class="button-container">
-                    <a href="/download"><button class="main-button">Kunjungi</button></a>
-                    <button class="quote-button">Quote Lain</button> {/* Ubah teks tombol */}
+                   <button class="main-button">Kunjungi</button>
+                    <button class="quote-button">Quote Lain</button>
                 </div>
-                <p class="quote"></p> {/* Kosongkan teks awal */}
+                <p class="quote"></p>
             </div>
             <div class="project-box">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 4">
-                <h3>Proyek 4: Wangy Wangy Web</h3>
+                <h3>Wangy Wangy Web</h3>
                 <p>Di balik setiap tawa, ada air mata yang tak terlihat. Di balik setiap keharuman, ada kesedihan yang mendalam. Selamat datang di dunia yang wangy, namun fana.</p>
                 <div class="button-container">
-                    <a  href="/wangy"><button class="main-button">Kunjungi</button></a>
-                    <button class="quote-button">Quote Lain</button> {/* Ubah teks tombol */}
+                    <button class="main-button">Kunjungi</button>
+                    <button class="quote-button">Quote Lain</button>
                 </div>
-                <p class="quote"></p>  {/* Kosongkan teks awal */}
+                <p class="quote"></p>
             </div>
         </div>
     </main>
     <Footer />
     <script>
-        // Array untuk menyimpan quote-quote sedih (tambahkan lebih banyak)
-        const quotes = [
-          [
-            "Rindu itu berat, tapi lebih berat lagi kalau rindunya sama orang yang salah.",
-            "Kadang, yang paling menyakitkan bukanlah perpisahan, tapi kenyataan bahwa kita tak akan pernah bisa kembali.",
-            "Seperti senja, indah namun hanya sesaat.  Begitulah kenangan tentangmu.",
-          ],
-          [
-            "Cinta itu kayak kopi, awalnya pahit, tapi kalau dinikmati pelan-pelan, terasa manisnya...meski akhirnya tetap habis juga.",
-            "Hujan mengingatkanku padamu, pada air mata yang jatuh, dan pada janji yang tak pernah ditepati.",
-            "Ada luka yang tak terlihat, ada rindu yang tak terucap, ada cinta yang tak terbalas.",
-          ],
-          [
-             "Mungkin aku hanya sebatas file .zip di hatimu, yang suatu saat nanti akan kau ekstrak lalu kau lupakan.",
-             "Seperti mendownload file yang corrupt, harapanku padamu sia-sia.",
-             "Aku ini ibarat link download yang mati, tak bisa lagi kau akses.",
-          ],
-          [
-            "Wangy itu fana, seperti sinyal wifi yang hilang timbul.",
-            "Bahagia itu kayak kuota internet, cepet banget habisnya.",
-            "Aku tanpamu bagaikan handphone lowbat, lemah tak berdaya.",
-          ]
+       // Array untuk quote tombol "Quote Lain"
+       const quotes = [
+         [
+           "Rindu itu berat, tapi lebih berat lagi kalau rindunya sama orang yang salah.",
+           "Kadang, yang paling menyakitkan bukanlah perpisahan, tapi kenyataan bahwa kita tak akan pernah bisa kembali.",
+           "Seperti senja, indah namun hanya sesaat.  Begitulah kenangan tentangmu.",
+         ],
+         [
+           "Cinta itu kayak kopi, awalnya pahit, tapi kalau dinikmati pelan-pelan, terasa manisnya...meski akhirnya tetap habis juga.",
+           "Hujan mengingatkanku padamu, pada air mata yang jatuh, dan pada janji yang tak pernah ditepati.",
+           "Ada luka yang tak terlihat, ada rindu yang tak terucap, ada cinta yang tak terbalas.",
+         ],
+         [
+            "Mungkin aku hanya sebatas file .zip di hatimu, yang suatu saat nanti akan kau ekstrak lalu kau lupakan.",
+            "Seperti mendownload file yang corrupt, harapanku padamu sia-sia.",
+            "Aku ini ibarat link download yang mati, tak bisa lagi kau akses.",
+         ],
+         [
+           "Wangy itu fana, seperti sinyal wifi yang hilang timbul.",
+           "Bahagia itu kayak kuota internet, cepet banget habisnya.",
+           "Aku tanpamu bagaikan handphone lowbat, lemah tak berdaya.",
+         ]
 
-        ];
+       ];
 
+       // Array untuk quote tombol utama (hijau)
+       const mainButtonQuotes = [
+           "Bayar dulu, Boss! Gak ada yang gratis di dunia ini, kecuali kentut.",
+           "Mau lihat? Duitnya mana? Receh pun jadi, asal jangan daun!",
+           "Klik ini = siap-siap rogoh kocek! Gak bayar, gak sayang~",
+           "Tombol ajaib! Sekali klik, dompet langsung nangis. Tapi worth it, kok!",
+           "Penasaran? Bayar dulu, baru lanjut! Gak mahal, kok, cuma seharga kenangan mantan.",
+           "Ini tombol premium, Bos! Khusus buat yang berduit. Yang kere, minggir dulu!",
+           "Jangan klik kalau gak kuat iman! Bisa bikin ketagihan bayar.",
+           "Sekali klik, langsung auto transfer! Tenang, gak bakal nyesel.",
+           "Tombol ini lebih mahal dari harga dirimu. Eh, tapi boong, ding!",
+           "Gratis? Yakin? Coba cek saldo dulu, gih!",
+           "Dompetmu menjerit? Itu tandanya kamu harus klik tombol ini!",
+           "Klik dengan bijak, ya! Ingat, ada tagihan yang menanti.",
+       ];
 
-        // Fungsi untuk menampilkan quote acak
-        function showRandomQuote(projectBox) { // <- Terima projectBox sebagai argumen
+        // Fungsi untuk menampilkan quote acak untuk tombol "Quote Lain"
+        function showRandomQuote(projectBox) {
             const quoteElement = projectBox.querySelector('.quote');
             const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
             const randomIndex = Math.floor(Math.random() * quotes[projectIndex].length);
-
             quoteElement.textContent = quotes[projectIndex][randomIndex];
-            // Tidak perlu lagi .classList.add('show')
         }
 
-        // Fungsi untuk inisialisasi (dipanggil saat halaman dimuat)
+        // Fungsi untuk menampilkan popup quote pada tombol utama (hijau)
+        function showMainButtonQuote(projectBox) {
+            const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
+             // Cek apakah ini box pertama
+            if (projectIndex > 0) {
+                const randomIndex = Math.floor(Math.random() * mainButtonQuotes.length);
+                alert(mainButtonQuotes[randomIndex]);
+            } //jika box pertama tidak melakukan apa - apa
+        }
+
+        // Fungsi untuk inisialisasi
         function initializeQuotes() {
             const projectBoxes = document.querySelectorAll('.project-box');
             projectBoxes.forEach(box => {
-                showRandomQuote(box); // Panggil showRandomQuote untuk setiap kotak
+                showRandomQuote(box);
 
-                // Tambahkan event listener ke tombol "Quote Lain"
                 const quoteButton = box.querySelector('.quote-button');
-                quoteButton.addEventListener('click', () => showRandomQuote(box)); // Panggil showRandomQuote saat tombol diklik
+                quoteButton.addEventListener('click', () => showRandomQuote(box));
+
+                // Tambahkan event listener ke tombol utama
+                const mainButton = box.querySelector('.main-button');
+
+                // Cek apakah mainButton ada di dalam <a> (hanya untuk proyek 1)
+                if (mainButton.parentElement.tagName === 'A') {
+                    // Jika ya, jangan tambahkan event listener untuk popup
+                } else {
+                   mainButton.addEventListener('click', () => showMainButtonQuote(box));
+                }
             });
         }
 
-
-        // Panggil initializeQuotes saat halaman selesai dimuat
         document.addEventListener('DOMContentLoaded', initializeQuotes);
 
     </script>

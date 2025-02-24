@@ -45,7 +45,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             max-width: var(--box-max-width);
             margin-left: auto;
             margin-right: auto;
-            /* position: relative;  Sudah tidak diperlukan */
         }
 
         .project-box:hover {
@@ -86,24 +85,22 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         .project-box .main-button:hover {
             background-color: #0056b3;
         }
-
         .project-box a{
-            text-decoration: none; /*Hapus underline*/
-            /* display: block;  <-- Tidak perlu lagi */
-            /* text-align: center; <-- Tidak perlu lagi */
+            text-decoration: none;
         }
+
 
         .project-box .quote {
             font-style: italic;
             color: #888;
             margin-top: 0.75rem;
             text-align: center;
-            display: none;
+            /* display: none;  <-- Hapus ini */
         }
 
-        .project-box .quote.show {
+        /* .project-box .quote.show {
             display: block;
-        }
+        }  <-- Tidak perlu lagi */
 
         .project-box img {
             width: 100%;
@@ -125,9 +122,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             border-radius: 0.25rem;
             cursor: pointer;
             font-size: 0.75rem;
-           /* position: absolute;  <-- Tidak perlu lagi */
-           /* bottom: 0.5rem;    <-- Tidak perlu lagi */
-           /* right: 0.5rem;   <-- Tidak perlu lagi */
             transition: background-color 0.2s ease-in-out;
             margin: 0; /*reset margin*/
         }
@@ -137,10 +131,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         }
         /* Container untuk tombol */
         .button-container {
-            display: flex;            /* Gunakan Flexbox */
-            justify-content: space-between; /* Sebarkan item */
-            align-items: center;      /* Pusatkan vertikal */
-            margin-top: 1rem;     /* Beri jarak dari konten di atasnya */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
         }
 
         /* --- Welcome Text Styles --- */
@@ -219,9 +213,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 <p>Di sini, di antara rak-rak digital yang sunyi, tersimpan kisah-kisah yang menanti untuk ditemukan.  Seperti kenangan yang memudar, mereka menunggu sentuhanmu.</p>
                 <div class="button-container">
                     <a href="/indeks"><button class="main-button">Lihat Indeks</button></a>
-                    <button class="quote-button">Quote Sedih</button>
+                    <button class="quote-button">Quote Lain</button>  {/* Ubah teks tombol */}
                 </div>
-                <p class="quote">"Setiap judul adalah pintu menuju dunia yang tak pernah kembali, meninggalkan jejak kerinduan di hati."</p>
+                <p class="quote"></p> {/* Kosongkan teks awal */}
             </div>
             <div class="project-box">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 2">
@@ -229,19 +223,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 <p>Seperti embun pagi yang segera lenyap, cerita-cerita baru ini hadir sesaat, menawarkan keindahan yang fana.  Nikmatilah sebelum mereka menghilang.</p>
                  <div class="button-container">
                     <a href="/terbaru"><button class="main-button">Lihat Postingan</button></a>
-                    <button class="quote-button">Quote Sedih</button>
+                    <button class="quote-button">Quote Lain</button> {/* Ubah teks tombol */}
                 </div>
-                <p class="quote">"Dalam setiap kata yang baru, ada harapan yang layu, dan kesedihan yang tumbuh perlahan."</p>
+                <p class="quote"></p>  {/* Kosongkan teks awal */}
             </div>
             <div class="project-box">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 3">
                 <h3>Proyek 3: Web Download untuk Proyek Sebelumnya</h3>
                 <p>Simpanlah serpihan-serpihan kisah ini, seperti menyimpan kenangan dalam botol, berharap suatu saat nanti bisa membukanya kembali dan merasakan kehangatannya.</p>
                 <div class="button-container">
-                    <a href="/download"><button class="main-button">Halaman Download</button></a>
-                    <button class="quote-button">Quote Sedih</button>
+                    <a href="/download"><button class="main-button">Kunjungi</button></a>
+                    <button class="quote-button">Quote Lain</button> {/* Ubah teks tombol */}
                 </div>
-                <p class="quote">"Karena tak semua yang hilang bisa ditemukan kembali, simpanlah selagi bisa."</p>
+                <p class="quote"></p> {/* Kosongkan teks awal */}
             </div>
             <div class="project-box">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 4">
@@ -249,9 +243,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 <p>Di balik setiap tawa, ada air mata yang tak terlihat. Di balik setiap keharuman, ada kesedihan yang mendalam. Selamat datang di dunia yang wangy, namun fana.</p>
                 <div class="button-container">
                     <a  href="/wangy"><button class="main-button">Kunjungi</button></a>
-                    <button class="quote-button">Quote Sedih</button>
+                    <button class="quote-button">Quote Lain</button> {/* Ubah teks tombol */}
                 </div>
-                <p class="quote">"Wangy, seperti bunga yang mekar di musim gugur, indah namun menyiratkan perpisahan."</p>
+                <p class="quote"></p>  {/* Kosongkan teks awal */}
             </div>
         </div>
     </main>
@@ -284,21 +278,30 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 
         // Fungsi untuk menampilkan quote acak
-        function showRandomQuote(event) {
-            const projectBox = event.target.closest('.project-box'); // Temukan .project-box terdekat
-            const quoteElement = projectBox.querySelector('.quote');  // Cari elemen .quote di dalam .project-box itu
-            const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox); //index element
-            const randomIndex = Math.floor(Math.random() * quotes[projectIndex].length); // Acak indeks quote
+        function showRandomQuote(projectBox) { // <- Terima projectBox sebagai argumen
+            const quoteElement = projectBox.querySelector('.quote');
+            const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
+            const randomIndex = Math.floor(Math.random() * quotes[projectIndex].length);
 
-            quoteElement.textContent = quotes[projectIndex][randomIndex]; // Set teks quote
-            quoteElement.classList.add('show');                    // Tampilkan quote
+            quoteElement.textContent = quotes[projectIndex][randomIndex];
+            // Tidak perlu lagi .classList.add('show')
         }
 
-        // Tambahkan event listener ke semua tombol "Quote Sedih"
-        const quoteButtons = document.querySelectorAll('.quote-button');
-        quoteButtons.forEach(button => {
-            button.addEventListener('click', showRandomQuote);
-        });
+        // Fungsi untuk inisialisasi (dipanggil saat halaman dimuat)
+        function initializeQuotes() {
+            const projectBoxes = document.querySelectorAll('.project-box');
+            projectBoxes.forEach(box => {
+                showRandomQuote(box); // Panggil showRandomQuote untuk setiap kotak
+
+                // Tambahkan event listener ke tombol "Quote Lain"
+                const quoteButton = box.querySelector('.quote-button');
+                quoteButton.addEventListener('click', () => showRandomQuote(box)); // Panggil showRandomQuote saat tombol diklik
+            });
+        }
+
+
+        // Panggil initializeQuotes saat halaman selesai dimuat
+        document.addEventListener('DOMContentLoaded', initializeQuotes);
 
     </script>
 </body>

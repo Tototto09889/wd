@@ -128,7 +128,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             margin-top: 1rem;
         }
 
-        .welcome-section {
+       .welcome-section {
             text-align: center;
             margin-bottom: 2rem;
             padding: 1rem;
@@ -136,7 +136,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             border-radius: 0.5rem;
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
             width: 97%; /* Lebar kotak welcome untuk mobile */
-            max-width: 500px;
+            max-width: 500px; /* Lebar maksimum untuk mobile */
             margin-left: auto;
             margin-right: auto;
         }
@@ -164,10 +164,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             }
 
             .project-item {
-                width: calc(50% - 1rem); /* Tetap 50% pada desktop */
+                width: calc(50% - 1rem);
             }
-             .welcome-section{
-                grid-column: 1 / -1;
+            /* Style untuk welcome section di desktop */
+            .welcome-section {
+                grid-column: 1 / -1; /* welcome section menggunakan seluruh lebar */
+                width: auto; /* Hapus width */
+                max-width: none; /* Hapus max-width */
+                margin-left: 1rem;  /* Margin kiri */
+                margin-right: 1rem; /* Margin kanan */
+
             }
         }
     </style>

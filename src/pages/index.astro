@@ -10,14 +10,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
-        /* --- Box-sizing (PENTING!) --- */
-        *,
-        *::before,
-        *::after {
+        *, *::before, *::after {
           box-sizing: border-box;
         }
 
-        /* --- General Styles --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -37,16 +33,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             border-radius: 0.5rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
             margin-bottom: 1rem;
-            width: 90%;
+            width: 95%; /* Lebar kotak proyek untuk mobile */
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
             position: relative;
-        }
-
-        .project-item:hover {
-            /* Hapus efek hover jika tidak perlu */
-            /* transform: translateY(-5px); */
         }
 
         .project-item h3 {
@@ -57,15 +48,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             text-align: center;
         }
 
-        .project-item p {
+      .smaller-text {
+            font-size: 0.85rem;
             color: #555;
             text-align: center;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-bottom: 0.5rem; /* Kurangi margin-bottom */
+            overflow-wrap: break-word;
+            line-height: 1.4;
+        }
+
+        .smaller-text.quote {
+            font-style: italic;
         }
 
         .project-item .main-button {
@@ -78,7 +70,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             font-size: 1rem;
             display: block;
             width: 100%;
-            margin: 0.5rem 0; /* Margin atas-bawah */
+            margin: 0.5rem 0;
             text-align: center;
             text-decoration: none;
             transition: background-color: 0.2s ease-in-out;
@@ -88,23 +80,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             background-color: #218838;
         }
 
-        /* GARIS PEMBATAS */
         .project-item .button-divider {
             width: 100%;
-            height: 1px; /* Tebal garis */
-            background-color: #ccc; /* Warna garis */
-            margin: 0.5rem 0; /* Margin atas-bawah */
+            height: 1px;
+            background-color: #ccc;
+            margin: 0.5rem 0;
         }
 
-
         .project-item .quote {
-            font-style: italic;
-            color: #888;
-            margin-top: 0.75rem; /* Margin di atas quote */
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            /* Hapus padding dan border dari sini */
+          margin-top: 0.75rem;
+          text-align: center;
+          position: relative;
+          z-index: 1;
         }
 
         .project-item img {
@@ -137,7 +124,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             background-color: #5a6268;
         }
 
-        /* Hapus padding-bottom dari sini */
         .button-container {
             margin-top: 1rem;
         }
@@ -149,7 +135,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             background-color: #f0f8ff;
             border-radius: 0.5rem;
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-            width: 90%;
+            width: 97%; /* Lebar kotak welcome untuk mobile */
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
@@ -157,25 +143,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
         .welcome-section h3 {
             font-size: 2rem;
-            color: #28a745;
+            color: #495057;
             margin-bottom: 0.5rem;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .welcome-section p {
-            font-size: 1rem;
-            color: #666;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 1.1rem;
+            color: #6c757d;
+            line-height: 1.5;
+            font-style: italic;
         }
 
-
-        @media (min-width: 768px) {
+       @media (min-width: 768px) {
             .project-container {
                 display: flex;
                 flex-wrap: wrap;
@@ -184,7 +164,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             }
 
             .project-item {
-                width: calc(50% - 1rem);
+                width: calc(50% - 1rem); /* Tetap 50% pada desktop */
             }
              .welcome-section{
                 grid-column: 1 / -1;
@@ -196,63 +176,62 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <Header />
     <main>
         <div class="welcome-section">
-            <h3>Selamat Datang, Kawan2!</h3>
-            <p>"Siap-siap ngakak, karena di sini proyeknya lebih kocak dari stand-up comedy! Jangan kaget kalau tiba-tiba komputermu bisa ngerap sendiri, ya!"</p>
+          <h3>Selamat Datang... di Ambang Sunyi</h3>
+          <p>"Di sini, di mana kode-kode usang berbisik tentang mimpi yang terlupakan, kita bertemu dalam ketidakpastian.  Apakah ini pelarian, ataukah hanya lorong menuju kehampaan yang lebih dalam?  Jejak-jejak digital ini, akankah menuntun kita pada secercah harapan, atau justru menjerumuskan kita dalam ketakutan akan masa depan yang tak teraba?"</p>
         </div>
 
         <div class="project-container">
             <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 1">
                 <h3>Daftar Indeks Web Novel dan Light Novel Jepang</h3>
-                <p>Di sini, di antara rak-rak digital yang sunyi, tersimpan kisah-kisah yang menanti untuk ditemukan.  Seperti kenangan yang memudar, mereka menunggu sentuhanmu.</p>
+                <p class="smaller-text">Di sini, di antara rak-rak digital yang sunyi, tersimpan kisah-kisah yang menanti untuk ditemukan.  Seperti kenangan yang memudar, mereka menunggu sentuhanmu.</p>
                 <div class="button-container">
                     <a href="https://wispy-dream.floral.workers.dev/list/" class="main-button">Lihat</a>
                     <button class="quote-button">Quote Lain</button>
                 </div>
-                <div class="button-divider"></div> {/* Tambahkan elemen ini */}
-                <p class="quote"></p>
+                <div class="button-divider"></div>
+                <p class="quote smaller-text"> </p>
             </div>
 
             <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 2">
                 <h3>Postingan Web Novel dan Light Novel Terbaru</h3>
-                <p>Seperti embun pagi yang segera lenyap, cerita-cerita baru ini hadir sesaat, menawarkan keindahan yang fana.  Nikmatilah sebelum mereka menghilang.</p>
+                <p class="smaller-text">Seperti embun pagi yang segera lenyap, cerita-cerita baru ini hadir sesaat, menawarkan keindahan yang fana.  Nikmatilah sebelum mereka menghilang.</p>
                 <div class="button-container">
                     <a href="https://wispy-dream.floral.workers.dev/blog/" class="main-button">Lihat</a>
                     <button class="quote-button">Quote Lain</button>
                 </div>
-                <div class="button-divider"></div> {/* Tambahkan elemen ini */}
-                <p class="quote"></p>
+                <div class="button-divider"></div>
+                <p class="quote smaller-text"></p>
             </div>
 
             <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 3">
                 <h3>Web Download</h3>
-                <p>Simpanlah serpihan-serpihan kisah ini, seperti menyimpan kenangan dalam botol, berharap suatu saat nanti bisa membukanya kembali dan merasakan kehangatannya.</p>
+                <p class="smaller-text">Simpanlah serpihan-serpihan kisah ini, seperti menyimpan kenangan dalam botol, berharap suatu saat nanti bisa membukanya kembali dan merasakan kehangatannya.</p>
                 <div class="button-container">
                     <button class="main-button">Kunjungi</button>
                     <button class="quote-button">Quote Lain</button>
                 </div>
-                <div class="button-divider"></div> {/* Tambahkan elemen ini */}
-                <p class="quote"></p>
+                <div class="button-divider"></div>
+                <p class="quote smaller-text"></p>
             </div>
 
             <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 4">
                 <h3>Wangy Wangy Web</h3>
-                <p>Di balik setiap tawa, ada air mata yang tak terlihat. Di balik setiap keharuman, ada kesedihan yang mendalam. Selamat datang di dunia yang wangy, namun fana.</p>
+                <p class="smaller-text">Di balik setiap tawa, ada air mata yang tak terlihat. Di balik setiap keharuman, ada kesedihan yang mendalam. Selamat datang di dunia yang wangy, namun fana.</p>
                 <div class="button-container">
                     <a href="https://wangy.floral.workers.dev/" class="main-button">Lihat</a>
                     <button class="quote-button">Quote Lain</button>
                 </div>
-                <div class="button-divider"></div> {/* Tambahkan elemen ini */}
-                <p class="quote"></p>
+                <div class="button-divider"></div>
+                <p class="quote smaller-text"></p>
             </div>
         </div>
     </main>
     <Footer />
      <script>
-      // Array untuk quote tombol "Quote Lain"
        const quotes = [
          [
            "Rindu itu berat, tapi lebih berat lagi kalau rindunya sama orang yang salah.",
@@ -277,7 +256,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
        ];
 
-       // Array untuk quote tombol utama (hijau)
        const mainButtonQuotes = [
            "Bayar dulu, Boss! Gak ada yang gratis di dunia ini, kecuali kentut.",
            "Mau lihat? Duitnya mana? Receh pun jadi, asal jangan daun!",
@@ -293,7 +271,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
            "Klik dengan bijak, ya! Ingat, ada tagihan yang menanti.",
        ];
 
-        // Fungsi untuk menampilkan quote acak untuk tombol "Quote Lain"
         function showRandomQuote(projectBox) {
             const quoteElement = projectBox.querySelector('.quote');
             const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
@@ -301,18 +278,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             quoteElement.textContent = quotes[projectIndex][randomIndex];
         }
 
-        // Fungsi untuk menampilkan popup quote pada tombol utama (hijau)
         function showMainButtonQuote(projectBox) {
             const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
-            // HANYA tampilkan pop-up jika projectIndex adalah 2
             if (projectIndex === 2) {
                 const randomIndex = Math.floor(Math.random() * mainButtonQuotes.length);
                 alert(mainButtonQuotes[randomIndex]);
             }
         }
 
-
-        // Fungsi untuk inisialisasi
         function initializeQuotes() {
             const projectBoxes = document.querySelectorAll('.project-item');
             projectBoxes.forEach(box => {
@@ -321,10 +294,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 const quoteButton = box.querySelector('.quote-button');
                 quoteButton.addEventListener('click', () => showRandomQuote(box));
 
-                // Tambahkan event listener ke tombol utama
                 const mainButton = box.querySelector('.main-button');
-
-                //Karena semua tombol utama bukan lagi link, maka event listener popup quote ditambahkan ke semua box project
                 mainButton.addEventListener('click', () => showMainButtonQuote(box));
 
             });

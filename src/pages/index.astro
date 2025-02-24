@@ -14,7 +14,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         .project-container {
             display: flex;
             flex-direction: column; /* Susun item secara vertikal */
-            /* flex-wrap: nowrap;  <-- Tidak perlu lagi */
             gap: 20px;
             margin-top: 40px;
         }
@@ -24,21 +23,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            /* flex: 0 0 auto;  <-- Tidak perlu lagi */
-            width: 100%; /* Lebar penuh di mobile */
-            /* Hapus perhitungan lebar dinamis */
+            width: 90%;  /* Lebar relatif, misal 90% */
+            max-width: 500px; /* Lebar maksimum absolut, misal 500px */
+            margin-left: auto; /* Pusatkan kotak */
+            margin-right: auto; /* Pusatkan kotak */
         }
+
 
         /* --- Desktop Styles (Grid) --- */
         @media (min-width: 768px) {
             .project-container {
                 display: grid;
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                /* gap: 20px; */  /* Bisa di sini atau di atas */
             }
-/*             .project-box {
-                width: auto; 
-            } */ /* tidak perlu di atur karena sudah otomatis */
         }
 
               /* Style standar, di luar media query */
@@ -75,7 +72,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <Header />
     <main>
         <h3>Selamat datang!</h3>
-        <div class="project-container">  {/* Hapus style inline */}
+        <div class="project-container">
             <div class="project-box">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 1">
                 <h3>Proyek 1: Light Novel dan Web Novel Jepang</h3>

@@ -26,77 +26,88 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         }
 
         .project-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
             margin-top: 2rem;
             padding: 1rem;
         }
 
-        .project-box {
+        .project-item {
             background-color: white;
             border: 1px solid #dee2e6;
             padding: 1.5rem;
             border-radius: 0.5rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease-in-out;
-             /* Gunakan variabel CSS */
-            width: var(--box-width);
-            max-width: var(--box-max-width);
+            margin-bottom: 1rem;
+            width: 90%;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
         }
 
-        .project-box:hover {
-            transform: translateY(-5px);
+        .project-item:hover {
+            /* Hapus efek hover jika tidak perlu */
+            /* transform: translateY(-5px); */
         }
 
-        .project-box h3 {
+        .project-item h3 {
             margin-top: 0;
             font-size: 1.25rem;
             color: #0056b3;
             margin-bottom: 0.5rem;
-             text-align: center;
-        }
-
-        .project-box p {
-            margin-bottom: 1rem;
-            color: #555;
             text-align: center;
         }
 
-      /* Style untuk Tombol Utama */
-        .project-box .main-button {
+        .project-item p {
+            color: #555;
+            text-align: center;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.5rem; /* Kurangi margin-bottom */
+        }
+
+        .project-item .main-button {
             background-color: #28a745;
             color: white;
             border: none;
             padding: 0.5rem 1rem;
             border-radius: 0.25rem;
             cursor: pointer;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin: 0;
+            font-size: 1rem;
+            display: block;
+            width: 100%;
+            margin: 0.5rem 0; /* Margin atas-bawah */
             text-align: center;
-            transition: background-color 0.2s ease-in-out;
+            text-decoration: none;
+            transition: background-color: 0.2s ease-in-out;
         }
 
-        /* Style untuk Tombol Utama Proyek 1 (dengan link) */
-        .project-box:first-child .main-button {
-          text-decoration: none; /* Hapus garis bawah untuk link */
-        }
-
-        .project-box .main-button:hover {
+        .project-item .main-button:hover {
             background-color: #218838;
         }
 
-        .project-box .quote {
-            font-style: italic;
-            color: #888;
-            margin-top: 0.75rem;
-            text-align: center;
+        /* GARIS PEMBATAS */
+        .project-item .button-divider {
+            width: 100%;
+            height: 1px; /* Tebal garis */
+            background-color: #ccc; /* Warna garis */
+            margin: 0.5rem 0; /* Margin atas-bawah */
         }
 
-        .project-box img {
+
+        .project-item .quote {
+            font-style: italic;
+            color: #888;
+            margin-top: 0.75rem; /* Margin di atas quote */
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            /* Hapus padding dan border dari sini */
+        }
+
+        .project-item img {
             width: 100%;
             max-width: 100%;
             height: auto;
@@ -107,7 +118,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             aspect-ratio: 16 / 9;
         }
 
-        /* --- Tombol Quote --- */
         .quote-button {
             background-color: #6c757d;
             color: white;
@@ -116,23 +126,22 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             border-radius: 0.25rem;
             cursor: pointer;
             font-size: 0.75rem;
-            transition: background-color 0.2s ease-in-out;
-            margin: 0;
+            transition: background-color: 0.2s ease-in-out;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            z-index: 2;
         }
 
         .quote-button:hover {
             background-color: #5a6268;
         }
 
-        /* Container untuk tombol */
+        /* Hapus padding-bottom dari sini */
         .button-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-top: 1rem;
         }
 
-        /* --- Welcome Text Styles --- */
         .welcome-section {
             text-align: center;
             margin-bottom: 2rem;
@@ -140,54 +149,44 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             background-color: #f0f8ff;
             border-radius: 0.5rem;
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-            width: var(--box-width);
-            max-width: var(--box-max-width);
+            width: 90%;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .welcome-section h3 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #28a745;
             margin-bottom: 0.5rem;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        .welcome-section h3.mobile {
-            font-size: 2rem;
-        }
-
         .welcome-section p {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #666;
             line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .welcome-section p.mobile {
-            font-size: 1rem;
-        }
 
-        /* --- Mobile Styles --- */
-        @media (max-width: 767px) {
-            :root {
-              --box-width: 95%;
-              --box-max-width: none;
-            }
-        }
-
-        /* --- Desktop Styles --- */
         @media (min-width: 768px) {
-            :root {
-                --box-width: auto;
-                --box-max-width: none;
-              }
             .project-container {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 1.5rem;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
             }
-            .welcome-section{
+
+            .project-item {
+                width: calc(50% - 1rem);
+            }
+             .welcome-section{
                 grid-column: 1 / -1;
             }
         }
@@ -197,12 +196,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <Header />
     <main>
         <div class="welcome-section">
-            <h3 class="mobile">Selamat Datang, Kawan2!</h3>
-            <p class="mobile">"Siap-siap ngakak, karena di sini proyeknya lebih kocak dari stand-up comedy! Jangan kaget kalau tiba-tiba komputermu bisa ngerap sendiri, ya!"</p>
+            <h3>Selamat Datang, Kawan2!</h3>
+            <p>"Siap-siap ngakak, karena di sini proyeknya lebih kocak dari stand-up comedy! Jangan kaget kalau tiba-tiba komputermu bisa ngerap sendiri, ya!"</p>
         </div>
 
         <div class="project-container">
-            <div class="project-box">
+            <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 1">
                 <h3>Daftar Indeks Web Novel dan Light Novel Jepang</h3>
                 <p>Di sini, di antara rak-rak digital yang sunyi, tersimpan kisah-kisah yang menanti untuk ditemukan.  Seperti kenangan yang memudar, mereka menunggu sentuhanmu.</p>
@@ -210,43 +209,50 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                     <a href="https://wispy-dream.floral.workers.dev/list/" class="main-button">Lihat</a>
                     <button class="quote-button">Quote Lain</button>
                 </div>
+                <div class="button-divider"></div> {/* Tambahkan elemen ini */}
                 <p class="quote"></p>
             </div>
-            <div class="project-box">
+
+            <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 2">
                 <h3>Postingan Web Novel dan Light Novel Terbaru</h3>
                 <p>Seperti embun pagi yang segera lenyap, cerita-cerita baru ini hadir sesaat, menawarkan keindahan yang fana.  Nikmatilah sebelum mereka menghilang.</p>
-                 <div class="button-container">
-                 <a href="https://wispy-dream.floral.workers.dev/blog/" class="main-button">Lihat</a>
+                <div class="button-container">
+                    <a href="https://wispy-dream.floral.workers.dev/blog/" class="main-button">Lihat</a>
                     <button class="quote-button">Quote Lain</button>
                 </div>
+                <div class="button-divider"></div> {/* Tambahkan elemen ini */}
                 <p class="quote"></p>
             </div>
-            <div class="project-box">
+
+            <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 3">
                 <h3>Web Download</h3>
                 <p>Simpanlah serpihan-serpihan kisah ini, seperti menyimpan kenangan dalam botol, berharap suatu saat nanti bisa membukanya kembali dan merasakan kehangatannya.</p>
                 <div class="button-container">
-                   <button class="main-button">Kunjungi</button>
+                    <button class="main-button">Kunjungi</button>
                     <button class="quote-button">Quote Lain</button>
                 </div>
+                <div class="button-divider"></div> {/* Tambahkan elemen ini */}
                 <p class="quote"></p>
             </div>
-            <div class="project-box">
+
+            <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 4">
                 <h3>Wangy Wangy Web</h3>
                 <p>Di balik setiap tawa, ada air mata yang tak terlihat. Di balik setiap keharuman, ada kesedihan yang mendalam. Selamat datang di dunia yang wangy, namun fana.</p>
                 <div class="button-container">
-                       <a href="https://wangy.floral.workers.dev/" class="main-button">Lihat</a>
+                    <a href="https://wangy.floral.workers.dev/" class="main-button">Lihat</a>
                     <button class="quote-button">Quote Lain</button>
                 </div>
+                <div class="button-divider"></div> {/* Tambahkan elemen ini */}
                 <p class="quote"></p>
             </div>
         </div>
     </main>
     <Footer />
-    <script>
-       // Array untuk quote tombol "Quote Lain"
+     <script>
+      // Array untuk quote tombol "Quote Lain"
        const quotes = [
          [
            "Rindu itu berat, tapi lebih berat lagi kalau rindunya sama orang yang salah.",
@@ -298,16 +304,17 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         // Fungsi untuk menampilkan popup quote pada tombol utama (hijau)
         function showMainButtonQuote(projectBox) {
             const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
-             // Cek apakah ini box pertama
-            if (projectIndex > 0) {
+            // HANYA tampilkan pop-up jika projectIndex adalah 2
+            if (projectIndex === 2) {
                 const randomIndex = Math.floor(Math.random() * mainButtonQuotes.length);
                 alert(mainButtonQuotes[randomIndex]);
-            } //jika box pertama tidak melakukan apa - apa
+            }
         }
+
 
         // Fungsi untuk inisialisasi
         function initializeQuotes() {
-            const projectBoxes = document.querySelectorAll('.project-box');
+            const projectBoxes = document.querySelectorAll('.project-item');
             projectBoxes.forEach(box => {
                 showRandomQuote(box);
 
@@ -317,17 +324,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 // Tambahkan event listener ke tombol utama
                 const mainButton = box.querySelector('.main-button');
 
-                // Cek apakah mainButton ada di dalam <a> (hanya untuk proyek 1)
-                if (mainButton.parentElement.tagName === 'A') {
-                    // Jika ya, jangan tambahkan event listener untuk popup
-                } else {
-                   mainButton.addEventListener('click', () => showMainButtonQuote(box));
-                }
+                //Karena semua tombol utama bukan lagi link, maka event listener popup quote ditambahkan ke semua box project
+                mainButton.addEventListener('click', () => showMainButtonQuote(box));
+
             });
         }
 
         document.addEventListener('DOMContentLoaded', initializeQuotes);
-
     </script>
 </body>
 </html>

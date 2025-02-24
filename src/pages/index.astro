@@ -40,6 +40,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             border-radius: 0.5rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease-in-out;
+             /* Gunakan variabel CSS */
+            width: var(--box-width);
+            max-width: var(--box-max-width);
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .project-box:hover {
@@ -66,7 +71,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             border-radius: 0.25rem;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: background-color 0.2s ease-in-out;
+            transition: background-color: 0.2s ease-in-out;
         }
 
         .project-box button:hover {
@@ -95,6 +100,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             background-color: #f0f8ff;
             border-radius: 0.5rem;
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+            /* Gunakan variabel CSS yang sama */
+            width: var(--box-width);
+            max-width: var(--box-max-width);
+            margin-left: auto; /* Pusatkan */
+            margin-right: auto;/* Pusatkan */
         }
 
         .welcome-section h3 {
@@ -113,12 +123,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
         /* --- Mobile Styles --- */
         @media (max-width: 767px) {
-            .project-box {
-                width: 95%; /* Sesuaikan setelah menambahkan box-sizing */
-                max-width: none;
-                margin-left: auto;
-                margin-right: auto;
+            :root { /* Definisikan variabel di sini */
+              --box-width: 95%;
+              --box-max-width: none;
             }
+
            .welcome-section h3 {
                font-size: 2rem;
             }
@@ -129,10 +138,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
         /* --- Desktop Styles --- */
         @media (min-width: 768px) {
+          :root { /* Definisikan variabel yang berbeda untuk desktop */
+            --box-width: auto; /* Biarkan grid yang mengatur */
+            --box-max-width: none;/* Biarkan grid yang mengatur */
+
+          }
             .project-container {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 1.5rem;
+            }
+            .welcome-section{
+                grid-column: 1 / -1; /* Welcome section span seluruh grid */
             }
         }
     </style>

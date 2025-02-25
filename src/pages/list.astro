@@ -14,9 +14,7 @@ import Layout from '../layouts/BlogPost.astro';
 <html>
 <head>
   <title>Daftar Judul A-Z</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <style>
-    /* ... (CSS Kamu, dengan penyesuaian di bawah) ... */
-
+  <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f4f4;
@@ -58,20 +56,22 @@ import Layout from '../layouts/BlogPost.astro';
 
     }
 
-    /* Ganti tombol icon dengan tombol tulisan */
     #search-button {
-        padding: 8px 16px;  /* Padding yang sesuai */
-        background-color: #0056b3;
-        color: white;
+        padding: 0;
+        background-color: transparent;
         border: none;
-        border-radius: 4px;
         cursor: pointer;
-        font-size: 14px;
-        margin-left: 5px; /* Beri sedikit jarak dari input */
+        margin-left: -30px;
+        z-index: 2;
+        position: relative;
     }
-
-    #search-button:hover {
-       background-color: #003e80; /* Warna sedikit lebih gelap saat hover */
+    /* Style the icon */
+    #search-button i {
+        font-size: 18px;
+        color: #0056b3;
+    }
+    #search-button:hover i{
+       color: #003e80;
     }
 
 
@@ -152,32 +152,30 @@ import Layout from '../layouts/BlogPost.astro';
 
         #search-button {
             border-radius: 4px;
-            /* margin-left: -28px; Sesuaikan di mobile*/
-            padding: 6px 12px; /* Padding lebih kecil di mobile */
+             margin-left: -28px; /*Sesuaikan di mobile*/
         }
         #main-title{
           font-size: 1.8em; /*sedikit perkecil di layar kecil*/
         }
-        /* #search-button i{  Tidak perlu lagi karena bukan icon
+        #search-button i{
             font-size: 16px;
-        } */
+        }
     }
   </style>
-    </head>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
 <body>
   <div id="daftar-az">
-    <h1 id="main-title">Daftar Judul A-Z</h1>
     <form id="search-form">
       <input type="text" id="search-input" placeholder="Cari judul...">
-       <button type="submit" id="search-button">Cari</button>  </form>
+       <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
+    </form>
 
     <div id="judul-container"></div>
      <p id="no-results">Tidak ada hasil yang ditemukan.</p>
   </div>
 
   <script>
-    // ... (JavaScript Kamu tidak berubah) ...
-
     const judulList = [
       "86",
       "fremd tourche",
@@ -436,3 +434,6 @@ import Layout from '../layouts/BlogPost.astro';
   </script>
 </body>
 </html>
+
+
+        

@@ -35,14 +35,14 @@ import Layout from '../layouts/BlogPost.astro';
 
     /* Styling untuk form pencarian */
     #search-form {
-      margin-bottom: 10px; /* Kurangi margin-bottom */
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
-      /* Lebar dan pusatkan form, sama seperti #letter-buttons */
-      width: 50%;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
+      width: 50%; /* Atur lebar form (misalnya, 50%) */
+      max-width: 400px; /* Batasi lebar maksimum */
+      margin-left: auto; /* Pusatkan form */
+      margin-right: auto; /* Pusatkan form */
+
     }
 
     #search-input {
@@ -52,10 +52,11 @@ import Layout from '../layouts/BlogPost.astro';
       border-radius: 4px;
       font-size: 14px;
       margin-right: 0;
-      width: 100%;
+      width: 100%; /* Lebar input 100% dari container form */
+
     }
 
-   #search-button {
+    #search-button {
         padding: 0;
         background-color: transparent;
         border: none;
@@ -73,42 +74,6 @@ import Layout from '../layouts/BlogPost.astro';
        color: #003e80;
     }
 
-    /* Tombol A-Z */
-    #letter-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 20px;
-      /* Samakan lebar dan pusatkan */
-      width: 50%;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .letter-button {
-      background-color: #0056b3;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      margin: 3px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.2s ease;
-      text-decoration: none;
-    }
-
-    .letter-button:hover {
-      background-color: #003e80;
-    }
-
-    .letter-button.other-button{
-        background-color: #6c757d;
-    }
-    .letter-button.other-button:hover{
-        background-color: #5a6268;
-    }
 
     .letter-section {
       margin-bottom: 25px;
@@ -123,12 +88,11 @@ import Layout from '../layouts/BlogPost.astro';
       display: inline-block;
       padding-bottom: 5px;
     }
-
      /*Judul List Judul*/
      #main-title {
         text-align: center;
         color: #0056b3;
-        margin-bottom: 20px; /* Kurangi margin-bottom */
+        margin-bottom: 30px;
         font-size: 2.5em;
         font-weight: bold;
       }
@@ -165,7 +129,7 @@ import Layout from '../layouts/BlogPost.astro';
       color: #777;
       font-style: italic;
       margin-top: 10px;
-      display: none;
+      display: none; /* Sembunyikan secara default */
     }
      /*Media Query*/
      @media (max-width: 768px) {
@@ -174,8 +138,8 @@ import Layout from '../layouts/BlogPost.astro';
             margin: 20px;
         }
         #search-form{
-            width: 95%;
-            max-width: none;
+            width: 95%; /* Lebih lebar di mobile */
+            max-width: none; /* Hilangkan max-width */
             align-items: flex-start;
         }
          #search-input {
@@ -188,22 +152,13 @@ import Layout from '../layouts/BlogPost.astro';
 
         #search-button {
             border-radius: 4px;
-             margin-left: -28px;
+             margin-left: -28px; /*Sesuaikan di mobile*/
         }
         #main-title{
-          font-size: 1.8em;
+          font-size: 1.8em; /*sedikit perkecil di layar kecil*/
         }
         #search-button i{
             font-size: 16px;
-        }
-        .letter-button{
-            font-size: 12px;
-            padding: 4px 8px;
-        }
-         /* Sesuaikan tombol A-Z di mobile */
-        #letter-buttons {
-          width: 95%;
-          max-width: none;
         }
     }
   </style>
@@ -216,8 +171,6 @@ import Layout from '../layouts/BlogPost.astro';
       <input type="text" id="search-input" placeholder="Cari judul...">
        <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
     </form>
-
-    <div id="letter-buttons"></div>
 
     <div id="judul-container"></div>
      <p id="no-results">Tidak ada hasil yang ditemukan.</p>
@@ -372,8 +325,6 @@ import Layout from '../layouts/BlogPost.astro';
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
     const noResultsMessage = document.getElementById('no-results');
-    const letterButtonsContainer = document.getElementById('letter-buttons');
-
 
     // Fungsi untuk membuat URL yang valid
     function buatURL(judul) {
@@ -387,7 +338,8 @@ import Layout from '../layouts/BlogPost.astro';
 
      // Fungsi untuk membuat dan menampilkan daftar judul
     function tampilkanDaftar(judulListUntukDitampilkan) {
-        daftarContainer.innerHTML = '';
+        daftarContainer.innerHTML = ''; // Kosongkan kontainer
+        //Sembunyikan pesan "tidak ditemukan"
         noResultsMessage.style.display = 'none';
 
         const judulPerHuruf = {};
@@ -405,13 +357,11 @@ import Layout from '../layouts/BlogPost.astro';
             }
         });
 
-        //Other Section
         if (judulPerHuruf['Other'].length > 0) {
             const otherSection = document.createElement('div');
             otherSection.classList.add('letter-section');
             const heading = document.createElement('h5');
             heading.textContent = "Other";
-            heading.id = "other-section";
             otherSection.appendChild(heading);
 
             judulPerHuruf['Other'].forEach(judul => {
@@ -426,17 +376,15 @@ import Layout from '../layouts/BlogPost.astro';
             daftarContainer.appendChild(otherSection);
         }
     // --- Tampilkan Bagian A-z
-       for (let i = 65; i <= 90; i++) {
+        for (let i = 65; i <= 90; i++) {
             const huruf = String.fromCharCode(i);
             const judulDiHurufIni = judulPerHuruf[huruf];
             if(judulDiHurufIni.length > 0){
                 const letterSection = document.createElement("div");
                 letterSection.classList.add("letter-section");
 
-                // Tambahkan id unik ke setiap heading huruf
                 const heading = document.createElement("h5");
                 heading.textContent = huruf;
-                heading.id = `letter-section-${huruf}`; // ID unik, misalnya: "letter-section-A"
                 letterSection.appendChild(heading);
 
                 judulDiHurufIni.forEach((judul) => {
@@ -456,29 +404,15 @@ import Layout from '../layouts/BlogPost.astro';
             noResultsMessage.style.display = 'block';
         }
     }
-  // --- Membuat Tombol A-Z ---
-    function buatTombolAZ() {
-        for (let i = 65; i <= 90; i++) {
-            const huruf = String.fromCharCode(i);
-            const button = document.createElement("a"); // Gunakan elemen <a>
-            button.classList.add("letter-button");
-            button.textContent = huruf;
-            button.href = `#letter-section-${huruf}`; // Link ke heading yang sesuai
-            letterButtonsContainer.appendChild(button);
-        }
-        //Tombol untuk "Other"
-         const otherButton = document.createElement("a");
-         otherButton.classList.add("letter-button", "other-button");
-         otherButton.textContent = "Other";
-         otherButton.href = "#other-section";
-         letterButtonsContainer.appendChild(otherButton);
-    }
+
+    // Tampilkan daftar awal
+    tampilkanDaftar(judulList);
+
 
     // --- Event Listener untuk Form Pencarian ---
-      searchForm.addEventListener('submit', function(event) {
+    searchForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const kataKunci = searchInput.value.toLowerCase();
-
         const judulYangCocok = judulList.filter(judul => {
           const judulLowercase = judul.toLowerCase();
           const url = buatURL(judul);
@@ -498,16 +432,9 @@ import Layout from '../layouts/BlogPost.astro';
         tampilkanDaftar(judulYangCocok);
     });
 
-    // --- Panggil fungsi-fungsi yang diperlukan saat halaman dimuat ---
-    buatTombolAZ(); // Buat tombol A-Z *sebelum* menampilkan daftar
-    tampilkanDaftar(judulList); // Tampilkan daftar
-
   </script>
 </body>
 </html>
 
 
-
-
-
-
+        

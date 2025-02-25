@@ -26,18 +26,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             padding: 1rem;
         }
 
-        /* Hapus .project-item yang membungkus contact-form-container */
         .project-item {
             background-color: white;
             border: 1px solid #dee2e6;
             padding: 1.5rem;
             border-radius: 0.5rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-            /* Hapus margin-bottom, diatur oleh projects-wrapper */
-            /* width, max-width, margin diatur oleh projects-wrapper */
             position: relative;
         }
-      /* ... (sisa gaya .project-item, .smaller-text, dll. tidak berubah) ... */
 
         .project-item h3 {
             margin-top: 0;
@@ -131,7 +127,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         .projects-wrapper {
             background-color: #e9ecef;
             border: 1px solid #dee2e6;
-            padding: 1.5rem;
+            padding: 1.5rem; /* Padding di semua sisi (mobile dan desktop) */
             border-radius: 0.5rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
@@ -155,7 +151,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             margin-right: auto;
         }
 
-        .welcome-section h3, .contact-form-container h3 { /* Perbaikan: target h3 di dalam contact-form */
+        .welcome-section h3, .contact-form-container h3 {
             font-size: 2rem;
             color: #495057;
             margin-bottom: 0.5rem;
@@ -227,7 +223,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             width: 100%;
             text-align: center;
             text-decoration: none;
-            transition: background-color 0.2s ease-in-out;
+            transition: background-color: 0.2s ease-in-out;
         }
 
         .contact-form-container .submit-button:hover {
@@ -239,17 +235,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             .projects-wrapper {
                display: grid;
                grid-template-columns: repeat(2, 1fr);
-               gap: 1rem;
+               gap: 1.5rem;  /* Jarak antar item di desktop */
                 width: auto;
                max-width: none;
                margin-left: 1rem;
                margin-right: 1rem;
             }
             .project-item {
-                width: auto; /* Reset lebar */
+                width: auto;
                 max-width: none;
                 margin-left: unset;
                 margin-right: unset;
+                margin-bottom: 0; /* Hapus margin-bottom dari project-item */
             }
 
             /* Gaya untuk welcome section dan kotak kontak di desktop */
@@ -267,11 +264,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 justify-content: center;
 
             }
-
-            /* Hapus margin-bottom dari project-item di dalam grid */
-           .projects-wrapper .project-item{
-                margin-bottom: 0;
-           }
         }
     </style>
 </head>
@@ -301,7 +293,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 <h3>Postingan Web Novel dan Light Novel Terbaru</h3>
                 <p class="smaller-text">Seperti embun pagi yang segera lenyap, cerita-cerita baru ini hadir sesaat, menawarkan keindahan yang fana.  Nikmatilah sebelum mereka menghilang.</p>
                 <div class="button-container">
-                    <a href="https://wispy-dream.floral.workers.dev/blog/" class="main-button">Lihat</a>
+                                        <a href="https://wispy-dream.floral.workers.dev/blog/" class="main-button">Lihat</a>
                     <button class="quote-button">Quote Lain</button>
                 </div>
                 <div class="button-divider"></div>
@@ -371,7 +363,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
          [
             "Mungkin aku hanya sebatas file .zip di hatimu, yang suatu saat nanti akan kau ekstrak lalu kau lupakan.",
             "Seperti mendownload file yang corrupt, harapanku padamu sia-sia.",
-                        "Aku ini ibarat link download yang mati, tak bisa lagi kau akses.",
+            "Aku ini ibarat link download yang mati, tak bisa lagi kau akses.",
          ],
          [
            "Wangy itu fana, seperti sinyal wifi yang hilang timbul.",

@@ -123,11 +123,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             margin-top: 1rem;
         }
 
-        /* Style untuk kotak yang menampung semua proyek */
+       /* Style untuk kotak yang menampung semua proyek */
         .projects-wrapper {
             background-color: #e9ecef;
             border: 1px solid #dee2e6;
-            padding: 1.5rem; /* Padding di semua sisi (mobile dan desktop) */
+            padding: 1.5rem; /* Padding atas, kiri, kanan */
+            padding-bottom: 0; /*  Padding bawah di-set 0 dulu */
             border-radius: 0.5rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
@@ -136,6 +137,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             margin-left: auto;
             margin-right: auto;
         }
+        .projects-wrapper .project-item:not(:last-child){
+            margin-bottom: 1rem;
+        }
+
 
         /* Gaya untuk welcome section dan contact form container */
        .welcome-section, .contact-form-container {
@@ -195,7 +200,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             border-radius: 0.25rem;
             font-size: 1rem;
             font-family: inherit;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            transition: border-color 0.15s ease-in-out, box-shadow: 0.15s ease-in-out;
         }
 
         .contact-form-container .form-group textarea {
@@ -246,7 +251,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 max-width: none;
                 margin-left: unset;
                 margin-right: unset;
-                margin-bottom: 0; /* Hapus margin-bottom dari project-item */
+                margin-bottom: 0;  /* Pastikan tidak ada margin-bottom di project item */
             }
 
             /* Gaya untuk welcome section dan kotak kontak di desktop */
@@ -293,7 +298,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 <h3>Postingan Web Novel dan Light Novel Terbaru</h3>
                 <p class="smaller-text">Seperti embun pagi yang segera lenyap, cerita-cerita baru ini hadir sesaat, menawarkan keindahan yang fana.  Nikmatilah sebelum mereka menghilang.</p>
                 <div class="button-container">
-                                        <a href="https://wispy-dream.floral.workers.dev/blog/" class="main-button">Lihat</a>
+                    <a href="https://wispy-dream.floral.workers.dev/blog/" class="main-button">Lihat</a>
                     <button class="quote-button">Quote Lain</button>
                 </div>
                 <div class="button-divider"></div>
@@ -374,7 +379,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
        ];
 
        const mainButtonQuotes = [
-           "Bayar dulu, Boss! Gak ada yang gratis di dunia ini, kecuali kentut.",
+                  "Bayar dulu, Boss! Gak ada yang gratis di dunia ini, kecuali kentut.",
            "Mau lihat? Duitnya mana? Receh pun jadi, asal jangan daun!",
            "Klik ini = siap-siap rogoh kocek! Gak bayar, gak sayang~",
            "Tombol ajaib! Sekali klik, dompet langsung nangis. Tapi worth it, kok!",

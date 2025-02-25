@@ -1,155 +1,58 @@
----
-// src/pages/blog/[...slug].astro
-import { type CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
-
-export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  const paths = [];
-
-  for (const post of posts) {
-    // Perbaiki di sini: Cek apakah post.id ada dan valid
-    if (post.id && typeof post.id === 'string' && post.id.trim() !== '') {
-      // Path untuk postingan utama
-      paths.push({
-        params: { slug: post.id },
-        props: { post, subSection: null }, // Tandai sebagai postingan utama
-      });
-
-      // Cek sub-bagian
-      const contentDir = path.resolve(import.meta.dir, '../../content/blog');
-      const subSectionDir = path.join(contentDir, post.id);
-
-      try {
-        const files = readdirSync(subSectionDir);
-        const subSections = files.filter((file) => file.endsWith('.md'));
-
-        for (const subSection of subSections) {
-          // Perbaiki di sini juga: Pastikan subSection valid
-          const subSlug = subSection.replace(/\.md$/, '');
-          if (subSlug && typeof subSlug === 'string' && subSlug.trim() !== '') {
-            paths.push({
-              params: { slug: `${post.id}/${subSlug}` },
-              props: { post, subSection: subSlug },
-            });
-          }
-        }
-      } catch (err) {
-        // Direktori sub-bagian tidak ada (tidak apa-apa)
-      }
-    } // <-- Tutup kurung kurawal untuk if (post.id)
-  }
-
-  return paths;
-}
-
-type Props = {
-    post: CollectionEntry<'blog'>;
-    subSection: string | null;
-};
-
-const { post, subSection } = Astro.props;
-
-let finalContent;
-let finalTitle;
-let finalDescription;
-let finalPubDate;
-let finalUpdatedDate;
-let finalHeroImage;
-
-if (subSection) {
-    // --- Logika untuk Sub-bagian ---
-    const filePath = path.resolve(import.meta.dir, `../../content/blog/${post.id}/${subSection}.md`);
-    const fileContent = readFileSync(filePath, 'utf-8');
-    const frontmatterMatch = fileContent.match(/^---\n([\s\S]*?)\n---/);
-
-    let frontmatter: any = {};
-    if (frontmatterMatch) {
-        const frontmatterStr = frontmatterMatch[1];
-        frontmatterStr.split('\n').forEach((line) => {
-            const [key, ...valueParts] = line.split(':').map((s) => s.trim());
-            if (key) {
-                const value = valueParts.join(':').replace(/['"]+/g, '');
-                frontmatter[key] = value;
-            }
-        });
-    }
-    finalTitle = frontmatter.title || subSection;
-    finalDescription = frontmatter.description || post.data.description; // Ambil dari parent
-    finalPubDate = frontmatter.pubDate || post.data.pubDate;
-    finalUpdatedDate = frontmatter.updatedDate || post.data.updatedDate;
-    finalHeroImage = frontmatter.heroImage || post.data.heroImage;
-    const { Content } = await post.render();
-    finalContent = Content;
-
-
-} else {
-    // --- Logika untuk Postingan Utama ---
-    finalTitle = post.data.title;
-    finalDescription = post.data.description;
-    finalPubDate = post.data.pubDate;
-    finalUpdatedDate = post.data.updatedDate;
-    finalHeroImage = post.data.heroImage;
-    const { Content } = await post.render();
-    finalContent = Content;
-}
----
-
-<BlogPost
-  title={finalTitle}
-  description={finalDescription}
-  pubDate={finalPubDate}
-  updatedDate={finalUpdatedDate}
-  heroImage={finalHeroImage}
->
-    {/* Navigasi Sub-bagian (HANYA di postingan utama) */}
-    {!subSection && (
-        <nav>
-        <ul>
-            {
-            ( () => {
-                const contentDir = path.resolve(import.meta.dir, '../../content/blog');
-                const subSectionDir = path.join(contentDir, post.id);
-                let subSections = [];
-                try{
-                    const files = readdirSync(subSectionDir);
-                    subSections = files.filter(file => file.endsWith('.md'))
-                    .map(file => {
-                        const filePath = path.join(subSectionDir, file);
-                        const content = readFileSync(filePath, 'utf-8');
-                        const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-
-                        let title = path.basename(file, '.md'); // Default title
-                        if(frontmatterMatch){
-                            const frontmatter = frontmatterMatch[1];
-                            const titleMatch = frontmatter.match(/title:\s*(.+)/);
-                            if(titleMatch) {
-                                title = titleMatch[1].trim().replace(/['"]+/g, '');
-                            }
-                        }
-                        return {
-                        slug: file.replace(/\.md$/, ''),
-                        title: title
-                        }
-                    });
-                    return subSections.map((sub) => (
-                        <li>
-                        <a href={`/blog/${post.id}/${sub.slug}`}>{sub.title}</a>
-                        </li>
-                    ))
-                } catch(error){
-                    return null;
-                }
-
-            })()
-
-            }
-
-        </ul>
-        </nav>
-    )}
-    {/* --- Konten --- */}
-    <finalContent />
-</BlogPost>
+--- a/src/pages/blog/[...slug].astro
++++ b/src/pages/blog/[...slug].astro
+@@ -10,10 +10,20 @@
+   const paths = [];
+ 
+   for (const post of posts) {
++    // 1. Validasi post.id: Harus string, tidak kosong, dan tidak hanya spasi.
++    if (!post.id || typeof post.id !== 'string' || !post.id.trim()) {
++      console.warn(`[getStaticPaths] Skipping invalid post (empty or invalid id):`, post); // Log peringatan
++      continue; // Lewati postingan ini
++    }
++
++    // 2. Pastikan post.id TIDAK mengandung garis miring (/). Ini HANYA untuk postingan utama.
++    if (post.id.includes('/')) {
++      continue; // Lewati sub-bagian di sini; akan ditangani di loop dalam
++    }
++
+     // Path untuk postingan utama
+     paths.push({
+       params: { slug: post.id },
+-      props: { post, subSection: null }, // Tandai sebagai postingan utama
+     });
+ 
+     // Cek sub-bagian
+@@ -23,19 +33,23 @@
+     try {
+       const files = readdirSync(subSectionDir);
+       const subSections = files.filter((file) => file.endsWith('.md'));
+-
+       for (const subSection of subSections) {
+-        // Path untuk sub-bagian
+-        paths.push({
+-          params: { slug: `${post.id}/${subSection.replace(/\.md$/, '')}` },
+-          props: { post, subSection: subSection.replace(/\.md$/, '') },
+-        });
+-      }
++          // 3. Validasi nama file sub-bagian: Harus .md dan slug-nya valid.
++          if (!file.endsWith('.md')) {
++            continue; // Lewati file non-Markdown
++          }
++          const subSlug = subSection.replace(/\.md$/, '');
++          if (!subSlug || typeof subSlug !== 'string' || !subSlug.trim()) {
++            console.warn(`[getStaticPaths] Skipping invalid sub-section file (empty or invalid slug): ${post.id}/${file}`);
++            continue; // Lewati file dengan slug tidak valid
++          }
++          paths.push({
++            params: { slug: `${post.id}/${subSlug}` },
++            props: { post, subSection: subSlug },
++          });
++        }
+     } catch (err) {
+-      // Direktori sub-bagian tidak ada (tidak apa-apa)
+-    }
+-  }
+-
++      if (err.code !== 'ENOENT') {
+         return paths;
+ }

@@ -26,19 +26,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             padding: 1rem;
         }
 
+        /* Hapus .project-item yang membungkus contact-form-container */
         .project-item {
             background-color: white;
             border: 1px solid #dee2e6;
             padding: 1.5rem;
             border-radius: 0.5rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-            margin-bottom: 1rem;
-            width: 95%; /* Lebar kotak proyek untuk mobile */
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            /* Hapus margin-bottom, diatur oleh projects-wrapper */
+            /* width, max-width, margin diatur oleh projects-wrapper */
             position: relative;
         }
+      /* ... (sisa gaya .project-item, .smaller-text, dll. tidak berubah) ... */
 
         .project-item h3 {
             margin-top: 0;
@@ -128,20 +127,35 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             margin-top: 1rem;
         }
 
-       .welcome-section {
+        /* Style untuk kotak yang menampung semua proyek */
+        .projects-wrapper {
+            background-color: #e9ecef;
+            border: 1px solid #dee2e6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            width: 97%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Gaya untuk welcome section dan contact form container */
+       .welcome-section, .contact-form-container {
             text-align: center;
             margin-bottom: 2rem;
             padding: 1rem;
             background-color: #f0f8ff;
             border-radius: 0.5rem;
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-            width: 97%; /* Lebar kotak welcome untuk mobile */
-            max-width: 500px; /* Lebar maksimum untuk mobile */
+            width: 97%;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .welcome-section h3 {
+        .welcome-section h3, .contact-form-container h3 { /* Perbaikan: target h3 di dalam contact-form */
             font-size: 2rem;
             color: #495057;
             margin-bottom: 0.5rem;
@@ -155,11 +169,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             font-style: italic;
         }
 
-         /* Formulir Kontak (Terintegrasi) */
-        .contact-form-container {
-            /* Mewarisi semua gaya .project-item */
-        }
-        .contact-form-container h5 {
+          .contact-form-container h5 {
             text-align: center;
             margin-bottom: 1rem;
             font-size: 1.5rem;
@@ -171,26 +181,25 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         }
 
         .contact-form-container .form-group {
-            margin-bottom: 1rem; /* Spasi antar field */
+            margin-bottom: 1rem;
         }
 
         .contact-form-container .form-group label {
-            display: block; /* Label di atas input */
+            display: block;
             margin-bottom: 0.25rem;
             color: #495057;
         }
 
-        /* Gaya untuk input dan textarea (seperti .main-button) */
         .contact-form-container .form-group input[type="text"],
         .contact-form-container .form-group input[type="email"],
         .contact-form-container .form-group textarea {
             width: 100%;
-            padding: 0.5rem 1rem; /* Padding yang sama dengan .main-button */
-            border: 1px solid #ced4da; /* Border yang sedikit berbeda */
-            border-radius: 0.25rem; /* Border radius yang sama */
-            font-size: 1rem;      /* Ukuran font yang sama */
-            font-family: inherit; /* Font yang sama dengan body */
-             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Transisi */
+            padding: 0.5rem 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
         }
 
         .contact-form-container .form-group textarea {
@@ -198,19 +207,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             min-height: 100px;
         }
 
-        /* Fokus state untuk input */
         .contact-form-container .form-group input[type="text"]:focus,
         .contact-form-container .form-group input[type="email"]:focus,
         .contact-form-container .form-group textarea:focus {
-            border-color: #80bdff; /* Warna border saat fokus */
+            border-color: #80bdff;
             outline: 0;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Efek shadow */
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
 
-
-        /* Tombol Kirim (menggunakan gaya .main-button) */
         .contact-form-container .submit-button {
-            background-color: #28a745; /* Warna hijau yang sama */
+            background-color: #28a745;
             color: white;
             border: none;
             padding: 0.5rem 1rem;
@@ -220,35 +226,52 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             display: block;
             width: 100%;
             text-align: center;
-            text-decoration: none; /* Menghilangkan underline jika ada */
+            text-decoration: none;
             transition: background-color 0.2s ease-in-out;
         }
 
         .contact-form-container .submit-button:hover {
-            background-color: #218838; /* Warna hijau lebih gelap saat hover */
+            background-color: #218838;
         }
 
+
        @media (min-width: 768px) {
-            .project-container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-
-            .project-item, .contact-form-container {
-                width: calc(50% - 1rem);
-            }
-
-            /* Style untuk welcome section di desktop */
-            .welcome-section {
-                grid-column: 1 / -1;
+            .projects-wrapper {
+               display: grid;
+               grid-template-columns: repeat(2, 1fr);
+               gap: 1rem;
                 width: auto;
+               max-width: none;
+               margin-left: 1rem;
+               margin-right: 1rem;
+            }
+            .project-item {
+                width: auto; /* Reset lebar */
+                max-width: none;
+                margin-left: unset;
+                margin-right: unset;
+            }
+
+            /* Gaya untuk welcome section dan kotak kontak di desktop */
+            .welcome-section, .contact-form-container {
+                grid-column: 1 / -1; /* Bentangkan selebar grid */
+                 width: auto;
                 max-width: none;
                 margin-left: 1rem;
                 margin-right: 1rem;
+            }
+
+             .project-container{
+                 display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
 
             }
+
+            /* Hapus margin-bottom dari project-item di dalam grid */
+           .projects-wrapper .project-item{
+                margin-bottom: 0;
+           }
         }
     </style>
 </head>
@@ -260,7 +283,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
           <p>"Di sini, di mana kode-kode usang berbisik tentang mimpi yang terlupakan, kita bertemu dalam ketidakpastian.  Apakah ini pelarian, ataukah hanya lorong menuju kehampaan yang lebih dalam?  Jejak-jejak digital ini, akankah menuntun kita pada secercah harapan, atau justru menjerumuskan kita dalam ketakutan akan masa depan yang tak teraba?"</p>
         </div>
 
-        <div class="project-container">
+        <div class="projects-wrapper">
             <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 1">
                 <h3>Daftar Indeks Web Novel dan Light Novel Jepang</h3>
@@ -298,7 +321,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
             <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 4">
-                <h3>Wangy Wangy Tools</h3>
+                <h3>Wangy Wangy Web</h3>
                 <p class="smaller-text">Di balik setiap tawa, ada air mata yang tak terlihat. Di balik setiap keharuman, ada kesedihan yang mendalam. Selamat datang di dunia yang wangy, namun fana.</p>
                 <div class="button-container">
                     <a href="https://wangy.floral.workers.dev/" class="main-button">Lihat</a>
@@ -307,30 +330,30 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 <div class="button-divider"></div>
                 <p class="quote smaller-text"></p>
             </div>
-
-            <div class="project-item contact-form-container">
-                <h5><b>Kontak Saya</b></h5>
-                <form action="https://formspree.io/f/xaylarpo" method="POST" id="my-form">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="massage">Message</label>
-                        <textarea name="massage" id="massage" cols="30" rows="10" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">SEND MESSAGE</button>
-                </form>
-            </div>
         </div>
+        <div class="contact-form-container">
+             <h5><b>Hubungi saya di bawah ini :</b></h5>
+            <form action="https://formspree.io/f/xaylarpo" method="POST" id="my-form">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="massage">Message</label>
+                    <textarea name="massage" id="massage" cols="30" rows="10" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">SEND MESSAGE</button>
+            </form>
+        </div>
+
     </main>
     <Footer />
      <script>
@@ -348,7 +371,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
          [
             "Mungkin aku hanya sebatas file .zip di hatimu, yang suatu saat nanti akan kau ekstrak lalu kau lupakan.",
             "Seperti mendownload file yang corrupt, harapanku padamu sia-sia.",
-            "Aku ini ibarat link download yang mati, tak bisa lagi kau akses.",
+                        "Aku ini ibarat link download yang mati, tak bisa lagi kau akses.",
          ],
          [
            "Wangy itu fana, seperti sinyal wifi yang hilang timbul.",
@@ -376,13 +399,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         function showRandomQuote(projectBox) {
             const quoteElement = projectBox.querySelector('.quote');
             const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
-            const randomIndex = Math.floor(Math.random() * quotes[projectIndex].length);
-            quoteElement.textContent = quotes[projectIndex][randomIndex];
+             // Periksa apakah projectBox ada di dalam projects-wrapper sebelum mengakses quotes
+            if (projectBox.closest('.projects-wrapper')) {
+              const randomIndex = Math.floor(Math.random() * quotes[projectIndex].length);
+              quoteElement.textContent = quotes[projectIndex][randomIndex];
+            }
+
         }
 
         function showMainButtonQuote(projectBox) {
             const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
-            if (projectIndex === 2) {
+
+            if (projectIndex === 2  && projectBox.closest('.projects-wrapper')) {
                 const randomIndex = Math.floor(Math.random() * mainButtonQuotes.length);
                 alert(mainButtonQuotes[randomIndex]);
             }
@@ -391,17 +419,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         function initializeQuotes() {
             const projectBoxes = document.querySelectorAll('.project-item');
             projectBoxes.forEach(box => {
-                // Skip the contact form container for quote initialization
-                if (!box.classList.contains('contact-form-container')) {
                   showRandomQuote(box);
 
                   const quoteButton = box.querySelector('.quote-button');
-                  quoteButton.addEventListener('click', () => showRandomQuote(box));
+                  if(quoteButton){
+                    quoteButton.addEventListener('click', () => showRandomQuote(box));
+                  }
+
 
                   const mainButton = box.querySelector('.main-button');
-                  mainButton.addEventListener('click', () => showMainButtonQuote(box));
-                }
-
+                  if(mainButton){
+                    mainButton.addEventListener('click', () => showMainButtonQuote(box));
+                  }
             });
         }
 
@@ -409,3 +438,4 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     </script>
 </body>
 </html>
+

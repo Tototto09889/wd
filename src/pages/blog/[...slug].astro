@@ -10,38 +10,44 @@ export async function getStaticPaths() {
   const paths = [];
 
   for (const post of posts) {
-    // Path untuk postingan utama
-    paths.push({
-      params: { slug: post.id },
-      props: { post, subSection: null }, // Tandai sebagai postingan utama
-    });
+    // Perbaiki di sini: Cek apakah post.id ada dan valid
+    if (post.id && typeof post.id === 'string' && post.id.trim() !== '') {
+      // Path untuk postingan utama
+      paths.push({
+        params: { slug: post.id },
+        props: { post, subSection: null }, // Tandai sebagai postingan utama
+      });
 
-    // Cek sub-bagian
-    const contentDir = path.resolve(import.meta.dir, '../../content/blog');
-    const subSectionDir = path.join(contentDir, post.id); //post.id sebagai folder
+      // Cek sub-bagian
+      const contentDir = path.resolve(import.meta.dir, '../../content/blog');
+      const subSectionDir = path.join(contentDir, post.id);
 
-    try {
-      const files = readdirSync(subSectionDir);
-      const subSections = files.filter((file) => file.endsWith('.md'));
+      try {
+        const files = readdirSync(subSectionDir);
+        const subSections = files.filter((file) => file.endsWith('.md'));
 
-      for (const subSection of subSections) {
-        // Path untuk sub-bagian
-        paths.push({
-          params: { slug: `${post.id}/${subSection.replace(/\.md$/, '')}` },
-          props: { post, subSection: subSection.replace(/\.md$/, '') },
-        });
+        for (const subSection of subSections) {
+          // Perbaiki di sini juga: Pastikan subSection valid
+          const subSlug = subSection.replace(/\.md$/, '');
+          if (subSlug && typeof subSlug === 'string' && subSlug.trim() !== '') {
+            paths.push({
+              params: { slug: `${post.id}/${subSlug}` },
+              props: { post, subSection: subSlug },
+            });
+          }
+        }
+      } catch (err) {
+        // Direktori sub-bagian tidak ada (tidak apa-apa)
       }
-    } catch (err) {
-      // Direktori sub-bagian tidak ada (tidak apa-apa)
-    }
+    } // <-- Tutup kurung kurawal untuk if (post.id)
   }
 
   return paths;
 }
 
 type Props = {
-  post: CollectionEntry<'blog'>;
-  subSection: string | null; // Tambahkan tipe untuk subSection
+    post: CollectionEntry<'blog'>;
+    subSection: string | null;
 };
 
 const { post, subSection } = Astro.props;
@@ -54,42 +60,40 @@ let finalUpdatedDate;
 let finalHeroImage;
 
 if (subSection) {
-  // --- Logika untuk Sub-bagian ---
-  const filePath = path.resolve(import.meta.dir, `../../content/blog/${post.id}/${subSection}.md`);
-  const fileContent = readFileSync(filePath, 'utf-8');
-  const frontmatterMatch = fileContent.match(/^---\n([\s\S]*?)\n---/);
+    // --- Logika untuk Sub-bagian ---
+    const filePath = path.resolve(import.meta.dir, `../../content/blog/${post.id}/${subSection}.md`);
+    const fileContent = readFileSync(filePath, 'utf-8');
+    const frontmatterMatch = fileContent.match(/^---\n([\s\S]*?)\n---/);
 
-  let frontmatter: any = {};
-  if (frontmatterMatch) {
-    const frontmatterStr = frontmatterMatch[1];
-    frontmatterStr.split('\n').forEach((line) => {
-      const [key, ...valueParts] = line.split(':').map((s) => s.trim());
-      if (key) {
-        const value = valueParts.join(':').replace(/['"]+/g, '');
-        frontmatter[key] = value;
-      }
-    });
-  }
-  finalTitle = frontmatter.title || subSection;
-  finalDescription = frontmatter.description || post.data.description; // Ambil dari parent
-  finalPubDate = frontmatter.pubDate || post.data.pubDate;
-  finalUpdatedDate = frontmatter.updatedDate || post.data.updatedDate;
-  finalHeroImage = frontmatter.heroImage || post.data.heroImage;
-
-
-  const { Content } = await post.render(); // Render Postingan Utama, untuk sub section
-  finalContent = Content;
+    let frontmatter: any = {};
+    if (frontmatterMatch) {
+        const frontmatterStr = frontmatterMatch[1];
+        frontmatterStr.split('\n').forEach((line) => {
+            const [key, ...valueParts] = line.split(':').map((s) => s.trim());
+            if (key) {
+                const value = valueParts.join(':').replace(/['"]+/g, '');
+                frontmatter[key] = value;
+            }
+        });
+    }
+    finalTitle = frontmatter.title || subSection;
+    finalDescription = frontmatter.description || post.data.description; // Ambil dari parent
+    finalPubDate = frontmatter.pubDate || post.data.pubDate;
+    finalUpdatedDate = frontmatter.updatedDate || post.data.updatedDate;
+    finalHeroImage = frontmatter.heroImage || post.data.heroImage;
+    const { Content } = await post.render();
+    finalContent = Content;
 
 
 } else {
-  // --- Logika untuk Postingan Utama ---
-  finalTitle = post.data.title;
-  finalDescription = post.data.description;
-  finalPubDate = post.data.pubDate;
-  finalUpdatedDate = post.data.updatedDate;
-  finalHeroImage = post.data.heroImage;
-  const { Content } = await post.render();
-  finalContent = Content;
+    // --- Logika untuk Postingan Utama ---
+    finalTitle = post.data.title;
+    finalDescription = post.data.description;
+    finalPubDate = post.data.pubDate;
+    finalUpdatedDate = post.data.updatedDate;
+    finalHeroImage = post.data.heroImage;
+    const { Content } = await post.render();
+    finalContent = Content;
 }
 ---
 
@@ -100,52 +104,52 @@ if (subSection) {
   updatedDate={finalUpdatedDate}
   heroImage={finalHeroImage}
 >
-  {/* Navigasi Sub-bagian (HANYA di postingan utama) */}
-  {!subSection && (
-     <nav>
-      <ul>
-        {
-          ( () => { //IIFE
-            const contentDir = path.resolve(import.meta.dir, '../../content/blog');
-            const subSectionDir = path.join(contentDir, post.id);
-            let subSections = [];
-            try{
-                const files = readdirSync(subSectionDir);
-                subSections = files.filter(file => file.endsWith('.md'))
-                .map(file => {
-                  const filePath = path.join(subSectionDir, file);
-                  const content = readFileSync(filePath, 'utf-8');
-                  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    {/* Navigasi Sub-bagian (HANYA di postingan utama) */}
+    {!subSection && (
+        <nav>
+        <ul>
+            {
+            ( () => {
+                const contentDir = path.resolve(import.meta.dir, '../../content/blog');
+                const subSectionDir = path.join(contentDir, post.id);
+                let subSections = [];
+                try{
+                    const files = readdirSync(subSectionDir);
+                    subSections = files.filter(file => file.endsWith('.md'))
+                    .map(file => {
+                        const filePath = path.join(subSectionDir, file);
+                        const content = readFileSync(filePath, 'utf-8');
+                        const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
 
-                  let title = path.basename(file, '.md'); // Default title
-                  if(frontmatterMatch){
-                      const frontmatter = frontmatterMatch[1];
-                      const titleMatch = frontmatter.match(/title:\s*(.+)/);
-                      if(titleMatch) {
-                        title = titleMatch[1].trim().replace(/['"]+/g, '');
-                      }
-                  }
-                  return {
-                    slug: file.replace(/\.md$/, ''),
-                    title: title
-                  }
-                });
-                return subSections.map((sub) => (
-                    <li>
-                      <a href={`/blog/${post.id}/${sub.slug}`}>{sub.title}</a>
-                    </li>
-                  ))
-            } catch(error){
-                return null; //Tidak ada sub section
+                        let title = path.basename(file, '.md'); // Default title
+                        if(frontmatterMatch){
+                            const frontmatter = frontmatterMatch[1];
+                            const titleMatch = frontmatter.match(/title:\s*(.+)/);
+                            if(titleMatch) {
+                                title = titleMatch[1].trim().replace(/['"]+/g, '');
+                            }
+                        }
+                        return {
+                        slug: file.replace(/\.md$/, ''),
+                        title: title
+                        }
+                    });
+                    return subSections.map((sub) => (
+                        <li>
+                        <a href={`/blog/${post.id}/${sub.slug}`}>{sub.title}</a>
+                        </li>
+                    ))
+                } catch(error){
+                    return null;
+                }
+
+            })()
+
             }
 
-          })()
-
-        }
-
-      </ul>
-    </nav>
-  )}
+        </ul>
+        </nav>
+    )}
     {/* --- Konten --- */}
-  <finalContent />
+    <finalContent />
 </BlogPost>

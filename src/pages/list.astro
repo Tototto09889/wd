@@ -1,3 +1,4 @@
+Coba matching kan ini agar lebih fit dengan tampilan hp dan desktop
 ---
 import Layout from '../layouts/BlogPost.astro';
 ---
@@ -8,329 +9,400 @@ import Layout from '../layouts/BlogPost.astro';
 	pubDate={new Date('August 08 2021')}
 	heroImage="/blog-placeholder-about.jpg"
 >
-<main id="daftar-az">
-    <form id="search-form" aria-label="Formulir Pencarian Judul">
-      <div class="input-group">
-        <input type="text" id="search-input" placeholder="Cari judul..." autocomplete="off">
-        <button type="button" id="search-button" aria-label="Cari">
-          <i class="fas fa-search" aria-hidden="true"></i>
-        </button>
-      </div>
-    </form>
+</layout>
 
-    <ul id="judul-container"></ul>
-     <p id="no-results" hidden>Tidak ada hasil yang ditemukan.</p>
-</main>
-</Layout>
-
-<style>
-  :root {
-    --primary-color: #0056b3;
-    --primary-color-hover: #003e80;
-    --background-color: #f4f4f4;
-    --text-color: #333;
-    --border-color: #ccc;
-  }
-
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-  }
-
-  #daftar-az {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-
-  #main-title {
-    text-align: center;
-    color: var(--primary-color);
-    margin-bottom: 30px;
-    font-size: 2.5rem;
-    font-weight: bold;
-  }
-
-  #search-form {
-    margin-bottom: 20px;
-  }
-
-  .input-group {
-    position: relative; /* Penting untuk positioning absolute icon */
-    width: 100%;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex; /* Untuk menyelaraskan input dan tombol */
-
-  }
-
-  #search-input {
-    padding: 8px;
-    padding-left: 30px; /* Space untuk icon */
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 1rem;
-    width: 100%;
-    box-sizing: border-box; /* Include padding dan border dalam width */
-  }
-
-
-  #search-button {
-    position: absolute; /* Posisikan icon di dalam input */
-    top: 50%;
-    left: 8px;
-    transform: translateY(-50%); /* Pusatkan vertikal */
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0; /* Hapus padding bawaan */
-    display: flex; /* Agar icon terpusat */
-    align-items: center; /* Pusatkan vertikal */
-    justify-content: center; /* Pusatkan horizontal */
-
-  }
-
-  #search-button i {
-    font-size: 1rem;
-    color: var(--primary-color);
-  }
-
-  #search-button:hover i {
-    color: var(--primary-color-hover);
-  }
-
-  .letter-section {
-    margin-bottom: 25px;
-  }
-
-  .letter-section h5 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-    color: var(--primary-color);
-    font-weight: bold;
-    border-bottom: 2px solid var(--primary-color);
-    display: inline-block;
-    padding-bottom: 5px;
-  }
-
-  #judul-container {
-      list-style: none; /* Hapus bullet bawaan */
-      padding: 0;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Daftar Judul A-Z</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
       margin: 0;
-  }
-    /* Gaya untuk daftar judul (opsional, jika ingin 2 kolom) */
-    @media (min-width: 600px) {
-        #judul-container {
-            columns: 2; /* 2 kolom */
-            column-gap: 2rem;
-        }
+      padding: 0;
     }
-  .judul-item {
-      /* Gaya bullet point kustom */
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6"><circle cx="3" cy="3" r="2" fill="%230056b3"/></svg>');
-    background-repeat: no-repeat;
-    background-position: left center;
-    padding-left: 15px;
-    margin-bottom: 0.25em; /* Jarak antar item */
-    break-inside: avoid-column; /* Hindari pemotongan item di antara kolom */
-  }
 
-  .judul-item a {
-    text-decoration: none;
-    color: var(--text-color);
-    display: block;
-    padding: 6px 0;
-     padding-left: 0px; /* Reset padding */
-    transition: color 0.2s ease, background-color 0.2s ease;
-  }
-
-  .judul-item a:hover {
-    color: var(--primary-color-hover);
-    background-color: #e9ecef;
-    text-decoration: underline;
-  }
-
-  #no-results {
-    color: #777;
-    font-style: italic;
-    margin-top: 10px;
-  }
-
-  /* Media Query */
-  @media (max-width: 768px) {
     #daftar-az {
-      padding: 15px;
-      margin: 20px;
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    .input-group {
-      max-width: none; /* Hilangkan max-width di mobile */
+    /* Styling untuk form pencarian */
+    #search-form {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      width: 50%; /* Atur lebar form (misalnya, 50%) */
+      max-width: 400px; /* Batasi lebar maksimum */
+      margin-left: auto; /* Pusatkan form */
+      margin-right: auto; /* Pusatkan form */
+
     }
 
     #search-input {
-      font-size: 0.875rem;
-      padding: 6px;
-      padding-left: 28px;
-    }
-      #search-button i {
-        font-size: 0.875rem;
-    }
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-right: 0;
+      width: 100%; /* Lebar input 100% dari container form */
 
-    #main-title {
-      font-size: 1.8rem;
     }
 
-  }
-</style>
+    #search-button {
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        margin-left: -30px;
+        z-index: 2;
+        position: relative;
+    }
+    /* Style the icon */
+    #search-button i {
+        font-size: 18px;
+        color: #0056b3;
+    }
+    #search-button:hover i{
+       color: #003e80;
+    }
 
-<script>
+
+    .letter-section {
+      margin-bottom: 25px;
+    }
+
+    .letter-section h5 {
+      font-size: 1.4em;
+      margin-bottom: 8px;
+      color: #0056b3;
+      font-weight: bold;
+      border-bottom: 2px solid #0056b3;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+     /*Judul List Judul*/
+     #main-title {
+        text-align: center;
+        color: #0056b3;
+        margin-bottom: 30px;
+        font-size: 2.5em;
+        font-weight: bold;
+      }
+
+    .judul-item {
+      margin-left: 25px;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6"><circle cx="3" cy="3" r="2" fill="%230056b3"/></svg>');
+      background-repeat: no-repeat;
+      background-position: left center;
+      padding-left: 15px;
+
+    }
+    /* Sembunyikan item yang tidak cocok dengan pencarian */
+    .judul-item.hidden {
+        display: none;
+    }
+
+    .judul-item a {
+      text-decoration: none;
+      color: #333;
+      display: block;
+      padding: 6px 0;
+      transition: color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .judul-item a:hover {
+      color: #0056b3;
+      background-color: #e9ecef;
+      text-decoration:underline;
+    }
+
+    /* Pesan "Tidak ditemukan" */
+    #no-results {
+      color: #777;
+      font-style: italic;
+      margin-top: 10px;
+      display: none; /* Sembunyikan secara default */
+    }
+     /*Media Query*/
+     @media (max-width: 768px) {
+        #daftar-az{
+            padding: 15px;
+            margin: 20px;
+        }
+        #search-form{
+            width: 95%; /* Lebih lebar di mobile */
+            max-width: none; /* Hilangkan max-width */
+            align-items: flex-start;
+        }
+         #search-input {
+            border-radius: 4px;
+            margin-right: 0;
+            padding: 6px;
+            font-size: 14px;
+
+        }
+
+        #search-button {
+            border-radius: 4px;
+             margin-left: -28px; /*Sesuaikan di mobile*/
+        }
+        #main-title{
+          font-size: 1.8em; /*sedikit perkecil di layar kecil*/
+        }
+        #search-button i{
+            font-size: 16px;
+        }
+    }
+  </style>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <div id="daftar-az">
+    <h2 id="main-title">List Judul</h2>
+    <form id="search-form">
+      <input type="text" id="search-input" placeholder="Cari judul...">
+       <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
+    </form>
+
+    <div id="judul-container"></div>
+     <p id="no-results">Tidak ada hasil yang ditemukan.</p>
+  </div>
+
+  <script>
     const judulList = [
-      "86", "fremd tourche", "Arifureta", "Berserk of gluttony", "Classroom of the elite", "Date alive",
-      "Death mage", "Death march", "Evil lord", "Garbage Brave: Yuusha No Fukushuu Monogatari", "Genius prince",
-      "Hai to gensou no grimgar", "Hikawa-sensei Otakare", "Hikikomari Kyuuketsuki No Monmon",
-      "I Got a Cheat Skill in Another World", "Inkya no Boku ni Batsu Game de Kokuhaku Shite",
-      "Isekai Maou to Shoukan Shoujo Dorei Majutsu", "Isesuma", "Kage no Jitsuryokusha ni Naritakute",
-      "Konosuba", "Kumo desu ga nani ka", "Kurasu No Daikiraina Joshi To Kekkon Suru", "Liar liar",
-      "Maou Gakuen no Hangyakusha", "MKNR", "Mushoku tensei", "No game no life", "Omiai shitakunakatta",
-      "Oregairu", "Otonari asobi", "Otonari no tenshi-sama", "Overlord", "Rein of the seven spellblades",
-      "Roshidere", "Saijaku muhai no bahamut", "Seiken Gakuin no Maken Tsukai", "Seirei gensou",
-      "Seirei Tsukai no Blade Dance", "Shiranai Uchi ni Kachigumi Jinsei", "Silver cross and vampire",
-      "Sono mono nochi", "Summoned slaughter", "Tantei Wa Mou, Shindeiru", "Tensura",
-      "The world of otome games", "Tsuki ga Michibiku Isekai Douchuu", "Ankoku Kishi",
-      "10 nen goshi no HikiNiito o Yamete", "Battle divas", "Bofuri", "Boku no kanojo sensei",
-      "Choppiri Toshiue Demo Kanojo Ni Shite Kuremasu Ka?",
-      "Clearing an Isekai with the Zero-Believers Goddess – The Weakest Mage among the Classmates", "Danmachi",
-      "Dokuzetsu Kuudere Bishoujo", "Dongeon battle royal", "Dungeon defense", "Ectas online", "Ero manga sensei",
-      "Frame Failure", "Free Life Fantasy Online (FLFO)", "Fushi no Kami", "Gakusen toshi asterisk",
-      "Genjitsu Shugi Yuusha no Oukoku Saikenki", "Gimai seikatsu", "Goblin slayer", "Hachinen tte",
-      "Hataraku Maou Sama", "Hige wo soru",
-      "Houkago no Seijo-san ga Toutoi dake ja Nai Koto wo Ore wa Shitteiru", "HsDxD",
-      "I Woke Up Piloting the Strongest Starship, so I Became a Space Mercenary", "Imouto sae ireba",
-      "In The Land of Leadale", "Incubus Banishment", "Infinite Dendrogram", "Instant death",
-      "Is it tough being a friend?", "Isekai Mahou wa Okureteru", "Isekai wa Heiwa deshita",
-      "Jaku chara tomozaki kun", "Kami wa Game ni Ueteiru",
-      "Kawaii Onnanoko ni Kouryaku Sareru no Wa Suki desu ka?",
-      "Kawaikereba Hentai demo Suki ni Natte Kuremasu ka?",
-      "Kimi to Boku no Saigo no Senjo, Aruiha Sekai ga Hajimaru Seisen", "Kokoro connect",
-      "Kokugensou wo Item Cheat de Ikinuku Arc 1 - The Rise in the World of Business", "Koujo Denka no Kateikyoushi",
-      "Kuma kuma bear", "Kuro no Shoukanshi", "Lazy dungeon", "Level 99 villainous Daughter", "Log horizon",
-      "Magic gems gourmet", "Majo no tabitabi", "Mamahaha no Tsurego", "Maou Gakuin no Futekigousha",
-      "Maou ni Natta node, Dungeon Tsukutte Jingai Musume to Honobono Suru",
-      "Mapping The Trash-Tier Skill That Got Me Into a Top-Tier Party",
-      "Megami no Yuusha wo Taosu Gesu na Houhou The Dirty Way to Destroy the Goddess's Heroes", "Mondaiji tachi",
-      "Musume Janakute Mama ga Suki nano", "My Gift LVL 9999 Unlimited Gacha", "Nee-chan wa chuunibyou",
-      "Nidome no Yuusha wa Fukushuu no Michi wo Warai Ayumu", "Orc Harem", "Ore dake irerukakushi dungeon",
-      "Ore no Iinazuki", "Re zero", "Rokudenashi Majutsu Koushi to Akashic Records",
-      "Ryoushin no Shakkin wo Katagawari_shite Morau Jouken wa Nihonichi",
-      "Saikyou Degarashi Ouji no An’yaku Teii Arasoi Munou wo Enjiru SS Rank Ouji wa Koui Keishou-sen wo Kage kara Shihai Suru",
-      "Saikyou no Shien Shoku Wajutsushi deAru Ore", "SAO", "Seishun wa butayaro",
-      "Sekai Saikou no Ansatsusha, Isekai Kizoku ni Tensei suru",       "Sentouin, Hakenshimasu!", "Sevens", "Shijou Saikyou no Daimaou Murabito A ni Tensei Suru",
-      "Shimotsuki san wa Mob ga Suki", "Shinigami ni Sodaterareta Shoujo wa Shikkoku no Ken dan Mune ni Idaku",
-      "Shinmai Maou no Keiyakusha", "Solo leveling", "Spy Room", "Strike the blood", "Tensei kizoku",
-      "Tensei Ōjo to Tensai Reijō no Mahō Kakumei", "The Greatest Magicmaster's Retirement Plan",
-      "The new gate", "The rising of shield hero", "The Unexplored Summon Blood-Sign",
-      "Together With The Dark Knight", "Tomodachi no Imouto ga Ore ni dake Uzai", "Uchi no musume",
-      "Ultimate Antihero", "Unnamed Memory", "Watashi murimur",
-      "Watashi, Nōryoku wa Heikinchi de tte Itta yo ne!", "Yujou senki", "Yumemiru Danshi wa Genjitsushugisha",
-      "Yuusha ni Horobosareru"
+      "86",
+      "fremd tourche",
+      "Arifureta",
+      "Berserk of gluttony",
+      "Classroom of the elite",
+      "Date alive",
+      "Death mage",
+      "Death march",
+      "Evil lord",
+      "Garbage Brave: Yuusha No Fukushuu Monogatari",
+      "Genius prince",
+      "Hai to gensou no grimgar",
+      "Hikawa-sensei Otakare",
+      "Hikikomari Kyuuketsuki No Monmon",
+      "I Got a Cheat Skill in Another World",
+      "Inkya no Boku ni Batsu Game de Kokuhaku Shite",
+      "Isekai Maou to Shoukan Shoujo Dorei Majutsu",
+      "Isesuma",
+      "Kage no Jitsuryokusha ni Naritakute",
+      "Konosuba",
+      "Kumo desu ga nani ka",
+      "Kurasu No Daikiraina Joshi To Kekkon Suru",
+      "Liar liar",
+      "Maou Gakuen no Hangyakusha",
+      "MKNR",
+      "Mushoku tensei",
+      "No game no life",
+      "Omiai shitakunakatta",
+      "Oregairu",
+      "Otonari asobi",
+      "Otonari no tenshi-sama",
+      "Overlord",
+      "Rein of the seven spellblades",
+      "Roshidere",
+      "Saijaku muhai no bahamut",
+      "Seiken Gakuin no Maken Tsukai",
+      "Seirei gensou",
+      "Seirei Tsukai no Blade Dance",
+      "Shiranai Uchi ni Kachigumi Jinsei",
+      "Silver cross and vampire",
+      "Sono mono nochi",
+      "Summoned slaughter",
+      "Tantei Wa Mou, Shindeiru",
+      "Tensura",
+      "The world of otome games",
+      "Tsuki ga Michibiku Isekai Douchuu",
+        "Ankoku Kishi",
+        "10 nen goshi no HikiNiito o Yamete",
+        "Battle divas",
+        "Bofuri",
+        "Boku no kanojo sensei",
+        "Choppiri Toshiue Demo Kanojo Ni Shite Kuremasu Ka?",
+        "Clearing an Isekai with the Zero-Believers Goddess – The Weakest Mage among the Classmates",
+        "Danmachi",
+        "Dokuzetsu Kuudere Bishoujo",
+        "Dongeon battle royal",
+        "Dungeon defense",
+        "Ectas online",
+        "Ero manga sensei",
+        "Frame Failure",
+        "Free Life Fantasy Online (FLFO)",
+        "Fushi no Kami",
+        "Gakusen toshi asterisk",
+        "Genjitsu Shugi Yuusha no Oukoku Saikenki",
+        "Gimai seikatsu",
+        "Goblin slayer",
+        "Hachinen tte",
+        "Hataraku Maou Sama",
+        "Hige wo soru",
+        "Houkago no Seijo-san ga Toutoi dake ja Nai Koto wo Ore wa Shitteiru",
+        "HsDxD",
+        "I Woke Up Piloting the Strongest Starship, so I Became a Space Mercenary",
+        "Imouto sae ireba",
+        "In The Land of Leadale",
+        "Incubus Banishment",
+        "Infinite Dendrogram",
+        "Instant death",
+        "Is it tough being a friend?",
+        "Isekai Mahou wa Okureteru",
+        "Isekai wa Heiwa deshita",
+        "Jaku chara tomozaki kun",
+        "Kami wa Game ni Ueteiru",
+        "Kawaii Onnanoko ni Kouryaku Sareru no Wa Suki desu ka?",
+        "Kawaikereba Hentai demo Suki ni Natte Kuremasu ka?",
+        "Kimi to Boku no Saigo no Senjo, Aruiha Sekai ga Hajimaru Seisen",
+        "Kokoro connect",
+        "Kokugensou wo Item Cheat de Ikinuku Arc 1 - The Rise in the World of Business",
+        "Koujo Denka no Kateikyoushi",
+        "Kuma kuma bear",
+        "Kuro no Shoukanshi",
+        "Lazy dungeon",
+        "Level 99 villainous Daughter",
+        "Log horizon",
+        "Magic gems gourmet",
+        "Majo no tabitabi",
+        "Mamahaha no Tsurego",
+        "Maou Gakuin no Futekigousha",
+        "Maou ni Natta node, Dungeon Tsukutte Jingai Musume to Honobono Suru",
+        "Mapping The Trash-Tier Skill That Got Me Into a Top-Tier Party",
+        "Megami no Yuusha wo Taosu Gesu na Houhou The Dirty Way to Destroy the Goddess's Heroes",
+        "Mondaiji tachi",
+        "Musume Janakute Mama ga Suki nano",
+        "My Gift LVL 9999 Unlimited Gacha",
+        "Nee-chan wa chuunibyou",
+        "Nidome no Yuusha wa Fukushuu no Michi wo Warai Ayumu",
+        "Orc Harem",
+        "Ore dake irerukakushi dungeon",
+        "Ore no Iinazuki",
+        "Re zero",
+        "Rokudenashi Majutsu Koushi to Akashic Records",
+        "Ryoushin no Shakkin wo Katagawari_shite Morau Jouken wa Nihonichi",
+        "Saikyou Degarashi Ouji no An’yaku Teii Arasoi Munou wo Enjiru SS Rank Ouji wa Koui Keishou-sen wo Kage kara Shihai Suru",
+        "Saikyou no Shien Shoku Wajutsushi deAru Ore",
+        "SAO",
+        "Seishun wa butayaro",
+        "Sekai Saikou no Ansatsusha, Isekai Kizoku ni Tensei suru",
+        "Sentouin, Hakenshimasu!",
+        "Sevens",
+        "Shijou Saikyou no Daimaou Murabito A ni Tensei Suru",
+        "Shimotsuki san wa Mob ga Suki",
+        "Shinigami ni Sodaterareta Shoujo wa Shikkoku no Ken dan Mune ni Idaku",
+        "Shinmai Maou no Keiyakusha",
+        "Solo leveling",
+        "Spy Room",
+        "Strike the blood",
+        "Tensei kizoku",
+        "Tensei Ōjo to Tensai Reijō no Mahō Kakumei",
+        "The Greatest Magicmaster's Retirement Plan",
+        "The new gate",
+        "The rising of shield hero",
+        "The Unexplored Summon Blood-Sign",
+        "Together With The Dark Knight",
+        "Tomodachi no Imouto ga Ore ni dake Uzai",
+        "Uchi no musume",
+        "Ultimate Antihero",
+        "Unnamed Memory",
+        "Watashi murimur",
+        "Watashi, Nōryoku wa Heikinchi de tte Itta yo ne!",
+        "Yujou senki",
+        "Yumemiru Danshi wa Genjitsushugisha",
+        "Yuusha ni Horobosareru"
     ];
 
     const daftarContainer = document.getElementById('judul-container');
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
     const noResultsMessage = document.getElementById('no-results');
-    const urlCache = new Map(); // Cache untuk URL yang sudah dibuat
 
-
+    // Fungsi untuk membuat URL yang valid
     function buatURL(judul) {
-        // Periksa apakah URL sudah ada di cache
-        if (urlCache.has(judul)) {
-            return urlCache.get(judul);
-        }
-
-        let url = judul.toLowerCase();
-        url = url.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Hapus diakritik
-        url = url.replace(/[^a-z0-9]+/g, '-');   // Ganti karakter non-alfanumerik dengan '-'
-        url = url.replace(/^-+|-+$/g, '');      // Hapus '-' di awal dan akhir
-        urlCache.set(judul, url); // Simpan ke cache
-        return url;
+      let url = judul.toLowerCase();
+      url = url.replace(/ /g, '-');
+      url = url.replace(/[^a-z0-9-]/g, '');
+      url = url.replace(/-+/g, '-');
+      url = url.replace(/^-+|-+$/g, '');
+      return url;
     }
 
-
+     // Fungsi untuk membuat dan menampilkan daftar judul
     function tampilkanDaftar(judulListUntukDitampilkan) {
         daftarContainer.innerHTML = ''; // Kosongkan kontainer
-        noResultsMessage.hidden = true; // Sembunyikan pesan "tidak ditemukan"
+        //Sembunyikan pesan "tidak ditemukan"
+        noResultsMessage.style.display = 'none';
 
         const judulPerHuruf = {};
-        // Inisialisasi dari A-Z dan Other
         for (let i = 65; i <= 90; i++) {
-            judulPerHuruf[String.fromCharCode(i)] = [];
+        judulPerHuruf[String.fromCharCode(i)] = [];
         }
         judulPerHuruf['Other'] = [];
 
-        // Kelompokkan judul berdasarkan huruf pertama
-        for (const judul of judulListUntukDitampilkan) {
+        judulListUntukDitampilkan.forEach(judul => {
             const hurufPertama = judul.charAt(0).toUpperCase();
-            if (/[A-Z]/.test(hurufPertama)) {
+            if (judulPerHuruf[hurufPertama]) {
                 judulPerHuruf[hurufPertama].push(judul);
             } else {
                 judulPerHuruf['Other'].push(judul);
             }
-        }
+        });
 
-        // Fungsi untuk membuat elemen daftar
-        function buatDaftar(judulArray, container) {
-            const ul = document.createElement('ul');
-            ul.classList.add('judul-list'); // Tambahkan class untuk styling (opsional)
-
-            for (const judul of judulArray) {
-                const li = document.createElement('li');
-                li.classList.add('judul-item');
-                const a = document.createElement('a');
-                a.href = `/blog/${buatURL(judul)}`; // URL yang sudah di-cache
-                a.textContent = judul;
-                li.appendChild(a);
-                ul.appendChild(li);
-            }
-            container.appendChild(ul);
-        }
-
-
-        // Tampilkan bagian "Other" dulu, jika ada
         if (judulPerHuruf['Other'].length > 0) {
-            const otherSection = document.createElement('section');
+            const otherSection = document.createElement('div');
             otherSection.classList.add('letter-section');
             const heading = document.createElement('h5');
-            heading.textContent = 'Other';
+            heading.textContent = "Other";
             otherSection.appendChild(heading);
-            buatDaftar(judulPerHuruf['Other'], otherSection);
+
+            judulPerHuruf['Other'].forEach(judul => {
+                const judulItem = document.createElement("div");
+                judulItem.classList.add("judul-item");
+                const link = document.createElement("a");
+                link.href = `https://wispy-dream.floral.workers.dev/blog/${buatURL(judul)}`;
+                link.textContent = judul;
+                judulItem.appendChild(link);
+                otherSection.appendChild(judulItem);
+            });
             daftarContainer.appendChild(otherSection);
         }
-
-        // Tampilkan bagian A-Z
+    // --- Tampilkan Bagian A-z
         for (let i = 65; i <= 90; i++) {
             const huruf = String.fromCharCode(i);
-            if (judulPerHuruf[huruf].length > 0) {
-                const letterSection = document.createElement('section');
-                letterSection.classList.add('letter-section');
-                const heading = document.createElement('h5');
+            const judulDiHurufIni = judulPerHuruf[huruf];
+            if(judulDiHurufIni.length > 0){
+                const letterSection = document.createElement("div");
+                letterSection.classList.add("letter-section");
+
+                const heading = document.createElement("h5");
                 heading.textContent = huruf;
                 letterSection.appendChild(heading);
-                buatDaftar(judulPerHuruf[huruf], letterSection);
+
+                judulDiHurufIni.forEach((judul) => {
+                    const judulItem = document.createElement("div");
+                    judulItem.classList.add("judul-item");
+                    const link = document.createElement("a");
+                    link.href = `https://wispy-dream.floral.workers.dev/blog/${buatURL(judul)}`;
+                    link.textContent = judul;
+                    judulItem.appendChild(link);
+                    letterSection.appendChild(judulItem);
+                });
                 daftarContainer.appendChild(letterSection);
             }
         }
-
+         // Jika tidak ada hasil pencarian, tampilkan pesan
         if (judulListUntukDitampilkan.length === 0) {
-            noResultsMessage.hidden = false; // Tampilkan pesan jika tidak ada hasil
+            noResultsMessage.style.display = 'block';
         }
     }
 
@@ -338,38 +410,32 @@ import Layout from '../layouts/BlogPost.astro';
     tampilkanDaftar(judulList);
 
 
-    // Debouncing function
-    function debounce(func, delay) {
-        let timeoutId;
-        return function(...args) {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                func.apply(this, args);
-            }, delay);
-        };
-    }
+    // --- Event Listener untuk Form Pencarian ---
+    searchForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const kataKunci = searchInput.value.toLowerCase();
+        const judulYangCocok = judulList.filter(judul => {
+          const judulLowercase = judul.toLowerCase();
+          const url = buatURL(judul);
+          return judulLowercase.includes(kataKunci) || url.includes(kataKunci);
+        });
+        tampilkanDaftar(judulYangCocok);
+    });
 
-    // Event listener untuk pencarian (dengan debouncing)
-    searchInput.addEventListener('input', debounce(() => {
+    // Event listener untuk input (real-time search)
+    searchInput.addEventListener('input', function() {
         const kataKunci = searchInput.value.toLowerCase();
         const judulYangCocok = judulList.filter(judul => {
             const judulLowercase = judul.toLowerCase();
-            return judulLowercase.includes(kataKunci) || buatURL(judul).includes(kataKunci);
+            const url = buatURL(judul);
+            return judulLowercase.includes(kataKunci) || url.includes(kataKunci);
         });
         tampilkanDaftar(judulYangCocok);
-    }, 300)); // Delay 300ms
-
-    // Event delegation untuk klik pada tautan judul
-    daftarContainer.addEventListener('click', (event) => {
-        if (event.target.tagName === 'A') {
-            // Lakukan sesuatu jika tautan di-klik (opsional)
-            // Misalnya, navigasi ke halaman detail judul
-            // console.log('Judul diklik:', event.target.textContent);
-        }
     });
 
-    searchForm.addEventListener("submit", (e) => {
-      e.preventDefault(); //Cegah form submit
-    });
-</script>
+  </script>
+</body>
+</html>
 
+
+        

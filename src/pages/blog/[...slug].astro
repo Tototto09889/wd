@@ -9,52 +9,62 @@ export async function getStaticPaths() {
   const posts = await getCollection('blog');
   const paths = [];
 
+  console.log('[getStaticPaths] All posts (from getCollection):', posts); // LOG 1: Semua postingan
+
   for (const post of posts) {
-    // 1. Validasi post.id: Harus string, tidak kosong, dan tidak hanya spasi.
+    console.log('[getStaticPaths] Processing post:', post); // LOG 2: Postingan saat ini
+
     if (!post.id || typeof post.id !== 'string' || !post.id.trim()) {
-      console.warn(`[getStaticPaths] Skipping invalid post (empty or invalid id):`, post); // Log peringatan
-      continue; // Lewati postingan ini
+      console.warn(`[getStaticPaths] Skipping invalid post (empty or invalid id):`, post);
+      continue;
     }
 
-    // 2. Pastikan post.id TIDAK mengandung garis miring (/). Ini HANYA untuk postingan utama.
     if (post.id.includes('/')) {
-      continue; // Lewati sub-bagian di sini; akan ditangani di loop dalam
+      console.warn(`[getStaticPaths] Skipping sub-section in main loop:`, post); // Seharusnya tidak ada
+      continue;
     }
 
-    // Path untuk postingan utama
+
     paths.push({
       params: { slug: post.id },
       props: { post, subSection: null },
     });
 
-    // Cek sub-bagian
+
     const contentDir = path.resolve(import.meta.dir, '../../content/blog');
     const subSectionDir = path.join(contentDir, post.id);
 
-    try {
-      const files = readdirSync(subSectionDir);
-      const subSections = files.filter((file) => file.endsWith('.md'));
 
-      for (const subSection of subSections) {
-        // 3. Validasi nama file sub-bagian: Harus .md dan slug-nya valid.
-        const subSlug = subSection.replace(/\.md$/, '');
+    try { // Tambahkan try...catch di SEKITAR pembacaan direktori
+      const files = readdirSync(subSectionDir);
+      console.log(`[getStaticPaths] Files in sub-section directory (${subSectionDir}):`, files); // LOG 3
+
+      for (const file of files) {
+        if (!file.endsWith('.md')) {
+          console.warn(`[getStaticPaths] Skipping non-Markdown file: ${post.id}/${file}`);
+          continue;
+        }
+        const subSlug = file.replace(/\.md$/, '');
         if (!subSlug || typeof subSlug !== 'string' || !subSlug.trim()) {
           console.warn(`[getStaticPaths] Skipping invalid sub-section file (empty or invalid slug): ${post.id}/${file}`);
-          continue; // Lewati file dengan slug tidak valid
+          continue;
         }
 
+        console.log(`[getStaticPaths] Adding path for sub-section: ${post.id}/${subSlug}`); // LOG 4
         paths.push({
           params: { slug: `${post.id}/${subSlug}` },
           props: { post, subSection: subSlug },
         });
       }
     } catch (err) {
-      if (err.code !== 'ENOENT') { // Log error HANYA jika BUKAN karena folder tidak ada
+      // HANYA log jika BUKAN error karena direktori tidak ada
+      if (err.code !== 'ENOENT') {
         console.error(`[getStaticPaths] Error reading sub-section directory for ${post.id}:`, err);
       }
     }
   }
 
+  console.log('[getStaticPaths] Generated paths:', paths); // LOG 5: Semua path yang dihasilkan
   return paths;
 }
 
@@ -72,7 +82,6 @@ let finalDescription;
 let finalPubDate;
 let finalUpdatedDate;
 let finalHeroImage;
-
 
 if (subSection) {
     // --- Logika untuk Sub-bagian ---

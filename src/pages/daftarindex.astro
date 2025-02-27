@@ -1,0 +1,94 @@
+---
+// src/pages/daftarindex.astro
+import BlogPost from '../layouts/BlogPost.astro'; // Ganti BaseLayout ke BlogPost
+import { getCollection } from 'astro:content';
+
+// ... (kode lainnya tetap sama) ...
+
+const allPosts = await getCollection('blog');
+
+const sortedPosts = allPosts.sort((a, b) => {
+  const titleA = a.data.title.toLowerCase();
+  const titleB = b.data.title.toLowerCase();
+  if (titleA < titleB) return -1;
+  if (titleA > titleB) return 1;
+  return 0;
+});
+
+const postsByLetter = sortedPosts.reduce((acc, post) => {
+  const firstLetter = post.data.title[0].toUpperCase();
+  if (!acc[firstLetter]) {
+    acc[firstLetter] = [];
+  }
+  acc[firstLetter].push(post);
+  return acc;
+}, {});
+
+---
+
+<BlogPost {...Astro.props}> {/*Tidak bisa begini, BlogPost perlu properti dari frontmatter*/}
+    <main>
+      <h1>Indeks Postingan (A-Z)</h1>
+
+        {Object.keys(postsByLetter).sort().map((letter) => (
+          <section>
+              <h5>{letter}</h5>
+              <ul>
+                  {postsByLetter[letter].map((post) =>(
+                      <li>
+                        <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                      </li>
+                  ))}
+              </ul>
+          </section>
+        ))}
+    </main>
+
+</BlogPost>
+
+<style>
+    /* ... (CSS tetap sama) ... */
+     main {
+        width: 95%;
+        max-width: 800px; /* Sesuaikan */
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    section {
+        margin-bottom: 2rem; /* Spasi antar bagian (huruf) */
+    }
+
+    h5 { /* Style untuk huruf (h5) */
+        font-size: 1.5rem; /* Ukuran yang lebih kecil dari h2 */
+        margin-bottom: 0.5rem;
+        color: #333;
+        font-weight: bold; /* Tebalkan */
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+         margin-bottom: 0.25rem; /* Spasi antar postingan (lebih kecil) */
+        padding-left: 0.5rem;
+      /*  border-left: 3px solid #007bff;  Garis vertikal (opsional) */
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        transition: color 0.2s ease;
+    }
+
+    a:hover {
+        color: #0056b3;
+    }
+</style>

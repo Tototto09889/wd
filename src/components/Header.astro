@@ -1,16 +1,7 @@
+Tambahkan menu cari pada dropdown menu
+
 ---
-// src/components/Header.astro
 import { SITE_TITLE } from '../consts';
-import { getCollection } from 'astro:content';
-
-const allPosts = await getCollection('blog');
-
-const allPostsJSON = JSON.stringify(allPosts.map(post => ({
-    title: post.data.title,
-    slug: post.slug,
-    description: post.data.description,
-})));
-
 ---
 
 <header>
@@ -26,100 +17,33 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
         <a href="/">Beranda</a>
         <a href="/blog">Postingan</a>
         <a href="/list">List Novel</a>
-        <a href="/indexpostingan">Indeks A-Z</a>
         <a href="/disclaimer">Disclaimer</a>
         <a href="/about">Tentang</a>
-        <div class="search-container-dropdown">
-          <input type="text" id="search-input-header" placeholder="Cari..."  />
-          <button class="search-button" onclick="handleSearch()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-          <ul id="search-results" class="search-results-list"></ul>
-        </div>
       </div>
     </div>
   </nav>
 </header>
-
 <script>
-  /* Toggle dropdown */
+  /* Toggle between showing and hiding the dropdown content */
   function myFunction() {
-    console.log('Fungsi terpanggil'); // Cek apakah fungsi terpanggil
     document.getElementById("myDropdown").classList.toggle("show");
-     const searchInput = document.getElementById('search-input-header');
-    if (document.getElementById("myDropdown").classList.contains("show")) {
-        searchInput.focus(); // Fokus ke input saat dropdown terbuka
-    }
   }
 
+  // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
-     if (!event.target.matches('.dropbtn') && !event.target.closest('.search-container-dropdown')) { // Perubahan di sini
+    if (!event.target.matches('.dropbtn')) {
       var dropdowns = document.getElementsByClassName("dropdown-content");
-      for (var i = 0; i < dropdowns.length; i++) {
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
         if (openDropdown.classList.contains('show')) {
           openDropdown.classList.remove('show');
         }
       }
-       document.getElementById('search-results').style.display = 'none';// Hilangkan hasil pencarian
     }
   }
-
-    // Data postingan
-  const posts = JSON.parse(allPostsJSON);
-
-  function searchPosts(searchTerm) {
-      const resultsList = document.getElementById('search-results');
-      resultsList.innerHTML = '';
-
-      const term = searchTerm.toLowerCase();
-
-        if (term.trim() === "") {
-            resultsList.style.display = 'none';
-            return;
-        }
-
-        const filteredPosts = posts.filter(post => post.title.toLowerCase().includes(term));
-
-        if (filteredPosts.length > 0) {
-            filteredPosts.forEach(post => {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = `/blog/${post.id}`;
-                link.textContent = post.title;
-                listItem.appendChild(link);
-                resultsList.appendChild(listItem);
-            });
-            resultsList.style.display = 'block';
-        } else {
-            const listItem = document.createElement('li');
-            listItem.textContent = 'Tidak ditemukan';
-            resultsList.appendChild(listItem);
-             resultsList.style.display = 'block';
-        }
-  }
-
-// Pindahkan event listener ke sini, dan gunakan keyup
-  document.getElementById('search-input-header').addEventListener('keyup', function(event) {
-      searchPosts(this.value);
-       if (event.key === 'Enter') {
-        handleSearch(); // Panggil handleSearch() jika Enter ditekan
-    }
-  });
-    function handleSearch() {
-        const searchTerm = document.getElementById('search-input-header').value;
-         if (searchTerm.trim() !== "") {
-            window.location.href = `/list?search=${encodeURIComponent(searchTerm)}`;
-        }
-    }
-
 </script>
-
 <style>
- /* ... (CSS Anda yang sudah ada, PERIKSA ULANG) ... */
   header {
     margin: 0;
     padding: 0 1em;
@@ -170,13 +94,13 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
   }
     /* Dropdown Content */
   .dropdown-content {
-    display: none;  /* HARUS disembunyikan secara default */
-    position: absolute; /* HARUS absolute */
+    display: none;
+    position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;  /* Pastikan z-index cukup tinggi */
-    right: 0;
+    z-index: 1;
+    right: 0; /* Align dropdown content to the right edge of button*/
   }
 
   .dropdown-content a {
@@ -188,73 +112,10 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
 
   .dropdown-content a:hover {background-color: #f1f1f1}
 
-  /* .dropdown:hover .dropdown-content {  Hapus ini, dikontrol oleh JS
+  .dropdown:hover .dropdown-content {
     display: block;
-  } */
+  }
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
 
-  /* Show the dropdown menu */
-  .show {
-    display:block; /* Ini yang membuat dropdown muncul */
-  }
-    /* Style untuk input pencarian di dalam dropdown */
-  .search-container-dropdown {
-    padding: 0.5rem; /* Beri sedikit padding */
-    border-bottom: 1px solid #ddd;
-     display: flex; /* Gunakan flexbox */
-    align-items: center; /* Pusatkan vertikal */
-  }
-
-  .search-container-dropdown input {
-     flex-grow: 1; /* Input akan mengisi ruang yang tersedia */
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-     border-top-right-radius: 0; /* Hilangkan radius di kanan */
-    border-bottom-right-radius: 0;
-  }
-
-  .search-button {
-     background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5rem;
-    cursor: pointer;
-     border-radius: 4px;
-    border-top-left-radius: 0; /* Hilangkan radius di kiri */
-    border-bottom-left-radius: 0;
-     display: flex; /* Pusatkan ikon di dalam tombol */
-    align-items: center;
-    justify-content: center;
-  }
-   .search-button svg {
-        margin: 0; /* Hilangkan margin default */
-    }
-  .search-button:hover {
-    background-color: #0056b3;
-  }
-    /* Style untuk daftar hasil pencarian */
-  .search-results-list {
-    list-style: none;
-    padding: 0;
-    margin: 0; /* Tambahkan ini */
-  }
-
-  .search-results-list li {
-    padding: 0.5rem;
-    border-bottom: 1px solid #eee;
-  }
-    .search-results-list li a{
-        display: block; /* Agar link mengisi seluruh lebar list item */
-        color: #333;
-        text-decoration: none;
-    }
-
-  .search-results-list li:last-child {
-    border-bottom: none; /* Hilangkan border pada item terakhir */
-  }
-  .search-results-list{
-    display: none;
-     max-height: 200px; /* Batasi tinggi maksimum */
-    overflow-y: auto;  /* Tambahkan scrollbar jika perlu */
-  }
 </style>

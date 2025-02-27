@@ -1,0 +1,28 @@
+---
+// src/layouts/BaseLayout.astro
+import Header from '../components/Header.astro'; // Jika ada
+import Footer from '../components/Footer.astro'; // Jika ada
+import BaseHead from '../components/BaseHead.astro'; // Jika ada
+interface Props {
+    title: string;
+    description?: string; // description opsional
+}
+
+const { title, description } = Astro.props;
+---
+<html lang="en">
+    <head>
+        <BaseHead title={title} description={description ? description : title} />
+        <style>
+            /* CSS global bisa ditaruh di sini, atau di BaseHead */
+            body {
+                font-family: sans-serif; /* Contoh */
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <slot /> {/* Di sinilah konten dari setiap halaman akan dimasukkan */}
+        <Footer />
+    </body>
+</html>

@@ -30,9 +30,8 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
         <a href="/disclaimer">Disclaimer</a>
         <a href="/about">Tentang</a>
         <div class="search-container-dropdown">
-          <input type="text" id="search-input-header" placeholder="Cari..."  /> {/* Hapus oninput */ }
-          <button class="search-button" onclick="handleSearch()"> {/* Tambahkan tombol */}
-            {/* Icon kaca pembesar (SVG) */}
+          <input type="text" id="search-input-header" placeholder="Cari..."  />
+          <button class="search-button" onclick="handleSearch()">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -48,15 +47,16 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
 <script>
   /* Toggle dropdown */
   function myFunction() {
+    console.log('Fungsi terpanggil'); // Cek apakah fungsi terpanggil
     document.getElementById("myDropdown").classList.toggle("show");
-    const searchInput = document.getElementById('search-input-header');
+     const searchInput = document.getElementById('search-input-header');
     if (document.getElementById("myDropdown").classList.contains("show")) {
         searchInput.focus(); // Fokus ke input saat dropdown terbuka
     }
   }
 
   window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn') && !event.target.closest('.search-container-dropdown')) { // Perubahan di sini
+     if (!event.target.matches('.dropbtn') && !event.target.closest('.search-container-dropdown')) { // Perubahan di sini
       var dropdowns = document.getElementsByClassName("dropdown-content");
       for (var i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
@@ -115,11 +115,12 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
             window.location.href = `/list?search=${encodeURIComponent(searchTerm)}`;
         }
     }
+
 </script>
 
 <style>
-/* ... (CSS yang sudah ada) ... */
- header {
+ /* ... (CSS Anda yang sudah ada, PERIKSA ULANG) ... */
+  header {
     margin: 0;
     padding: 0 1em;
     background: white;
@@ -169,13 +170,13 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
   }
     /* Dropdown Content */
   .dropdown-content {
-    display: none;
-    position: absolute;
+    display: none;  /* HARUS disembunyikan secara default */
+    position: absolute; /* HARUS absolute */
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    right: 0; /* Align dropdown content to the right edge of button*/
+    z-index: 1;  /* Pastikan z-index cukup tinggi */
+    right: 0;
   }
 
   .dropdown-content a {
@@ -187,22 +188,24 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
 
   .dropdown-content a:hover {background-color: #f1f1f1}
 
-  /* .dropdown:hover .dropdown-content { // Hapus ini
+  /* .dropdown:hover .dropdown-content {  Hapus ini, dikontrol oleh JS
     display: block;
   } */
 
-  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-  .show {display:block;}
-
+  /* Show the dropdown menu */
+  .show {
+    display:block; /* Ini yang membuat dropdown muncul */
+  }
+    /* Style untuk input pencarian di dalam dropdown */
   .search-container-dropdown {
-    padding: 0.5rem;
+    padding: 0.5rem; /* Beri sedikit padding */
     border-bottom: 1px solid #ddd;
-    display: flex; /* Gunakan flexbox */
+     display: flex; /* Gunakan flexbox */
     align-items: center; /* Pusatkan vertikal */
   }
 
   .search-container-dropdown input {
-    flex-grow: 1; /* Input akan mengisi ruang yang tersedia */
+     flex-grow: 1; /* Input akan mengisi ruang yang tersedia */
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -211,12 +214,12 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
   }
 
   .search-button {
-    background-color: #007bff;
+     background-color: #007bff;
     color: white;
     border: none;
     padding: 0.5rem;
     cursor: pointer;
-    border-radius: 4px;
+     border-radius: 4px;
     border-top-left-radius: 0; /* Hilangkan radius di kiri */
     border-bottom-left-radius: 0;
      display: flex; /* Pusatkan ikon di dalam tombol */
@@ -226,7 +229,6 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
    .search-button svg {
         margin: 0; /* Hilangkan margin default */
     }
-
   .search-button:hover {
     background-color: #0056b3;
   }
@@ -252,7 +254,7 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
   }
   .search-results-list{
     display: none;
-    max-height: 200px; /* Batasi tinggi maksimum */
+     max-height: 200px; /* Batasi tinggi maksimum */
     overflow-y: auto;  /* Tambahkan scrollbar jika perlu */
   }
 </style>

@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import RecentPosts from '../components/RecentPosts.astro'; // Impor
 ---
 
 <!doctype html>
@@ -10,6 +11,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
+        /* ... (CSS Anda yang asli dari index.astro, TIDAK PERLU DIUBAH) ... */
         *, *::before, *::after {
           box-sizing: border-box;
         }
@@ -221,7 +223,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             width: 100%;
             text-align: center;
             text-decoration: none; /* Menghilangkan underline jika ada */
-            transition: background-color 0.2s ease-in-out;
+            transition: background-color: 0.2s ease-in-out;
         }
 
         .contact-form-container .submit-button:hover {
@@ -257,10 +259,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <main>
         <div class="welcome-section">
           <h3>Selamat Datang... di Ambang Sunyi</h3>
-          <p>"Di sini, di mana kode-kode usang berbisik tentang mimpi yang terlupakan, kita bertemu dalam ketidakpastian.  Apakah ini pelarian, ataukah hanya lorong menuju kehampaan yang lebih dalam?  Jejak-jejak digital ini, akankah menuntun kita pada secercah harapan, atau justru menjerumuskan kita dalam ketakutan akan masa depan yang tak teraba?"</p>
+          <p>"Di sini, di mana kode-kode usang ..."</p>
         </div>
 
+        <RecentPosts /> {/* Tambahkan ini */}
+
         <div class="project-container">
+          {/* ... (Konten proyek Anda, TIDAK PERLU DIUBAH) ... */}
             <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 1">
                 <h3>Daftar Indeks Web Novel dan Light Novel Jepang</h3>
@@ -331,9 +336,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
                 </form>
             </div>
         </div>
+        <a href="/blog">Lihat Semua Postingan</a>
     </main>
     <Footer />
      <script>
+        /* ... (script Anda yang sudah ada, TIDAK PERLU DIUBAH) ... */
        const quotes = [
          [
            "Rindu itu berat, tapi lebih berat lagi kalau rindunya sama orang yang salah.",
@@ -353,7 +360,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
          [
            "Wangy itu fana, seperti sinyal wifi yang hilang timbul.",
            "Bahagia itu kayak kuota internet, cepet banget habisnya.",
-           "Aku tanpamu bagaikan handphone lowbat, lemah tak berdaya.",
+                      "Aku tanpamu bagaikan handphone lowbat, lemah tak berdaya.",
          ]
 
        ];
@@ -409,3 +416,4 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     </script>
 </body>
 </html>
+

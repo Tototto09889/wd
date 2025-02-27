@@ -1,16 +1,13 @@
 ---
 // src/components/Header.astro
 import { SITE_TITLE } from '../consts';
-import { getCollection } from 'astro:content'; // Impor getCollection
+import { getCollection } from 'astro:content';
 
-// Ambil semua postingan di sini (di Header.astro)
 const allPosts = await getCollection('blog');
 
-// JSON.stringify() di sini.  Ini PENTING!
 const allPostsJSON = JSON.stringify(allPosts.map(post => ({
     title: post.data.title,
-    slug: post.id,
-    // Tambahkan data lain yang mungkin ingin Anda tampilkan di hasil pencarian, misalnya deskripsi
+    slug: post.slug,
     description: post.data.description,
 })));
 
@@ -29,11 +26,19 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
         <a href="/">Beranda</a>
         <a href="/blog">Postingan</a>
         <a href="/list">List Novel</a>
+        <a href="/indexpostingan">Indeks A-Z</a>
         <a href="/disclaimer">Disclaimer</a>
         <a href="/about">Tentang</a>
         <div class="search-container-dropdown">
-          <input type="text" id="search-input-header" placeholder="Cari..." oninput="searchPosts(this.value)" />
-          <ul id="search-results" class="search-results-list"></ul> {/* Tambahkan ul untuk hasil */}
+          <input type="text" id="search-input-header" placeholder="Cari..."  /> {/* Hapus oninput */ }
+          <button class="search-button" onclick="handleSearch()"> {/* Tambahkan tombol */}
+            {/* Icon kaca pembesar (SVG) */}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <ul id="search-results" class="search-results-list"></ul>
         </div>
       </div>
     </div>
@@ -44,10 +49,14 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
   /* Toggle dropdown */
   function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
+    const searchInput = document.getElementById('search-input-header');
+    if (document.getElementById("myDropdown").classList.contains("show")) {
+        searchInput.focus(); // Fokus ke input saat dropdown terbuka
+    }
   }
 
   window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
+    if (!event.target.matches('.dropbtn') && !event.target.closest('.search-container-dropdown')) { // Perubahan di sini
       var dropdowns = document.getElementsByClassName("dropdown-content");
       for (var i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
@@ -55,20 +64,21 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
           openDropdown.classList.remove('show');
         }
       }
+       document.getElementById('search-results').style.display = 'none';// Hilangkan hasil pencarian
     }
   }
 
-  // Data postingan (dari server, di-parse dari JSON)
-  const posts = JSON.parse(JSON.stringify(<Fragment set:html={allPostsJSON} />));
+    // Data postingan
+  const posts = JSON.parse(allPostsJSON);
 
-    function searchPosts(searchTerm) {
-        const resultsList = document.getElementById('search-results');
-        resultsList.innerHTML = ''; // Kosongkan hasil sebelumnya
+  function searchPosts(searchTerm) {
+      const resultsList = document.getElementById('search-results');
+      resultsList.innerHTML = '';
 
-        const term = searchTerm.toLowerCase();
+      const term = searchTerm.toLowerCase();
 
         if (term.trim() === "") {
-            resultsList.style.display = 'none'; // Sembunyikan jika input kosong
+            resultsList.style.display = 'none';
             return;
         }
 
@@ -83,18 +93,33 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
                 listItem.appendChild(link);
                 resultsList.appendChild(listItem);
             });
-            resultsList.style.display = 'block'; // Tampilkan daftar hasil
+            resultsList.style.display = 'block';
         } else {
-            resultsList.style.display = 'none'; // Sembunyikan jika tidak ada hasil
+            const listItem = document.createElement('li');
+            listItem.textContent = 'Tidak ditemukan';
+            resultsList.appendChild(listItem);
+             resultsList.style.display = 'block';
         }
-}
+  }
 
-// Event listener di-attach langsung di HTML (oninput)
+// Pindahkan event listener ke sini, dan gunakan keyup
+  document.getElementById('search-input-header').addEventListener('keyup', function(event) {
+      searchPosts(this.value);
+       if (event.key === 'Enter') {
+        handleSearch(); // Panggil handleSearch() jika Enter ditekan
+    }
+  });
+    function handleSearch() {
+        const searchTerm = document.getElementById('search-input-header').value;
+         if (searchTerm.trim() !== "") {
+            window.location.href = `/list?search=${encodeURIComponent(searchTerm)}`;
+        }
+    }
 </script>
 
 <style>
-  /* ... (CSS Anda yang sudah ada) ... */
-  header {
+/* ... (CSS yang sudah ada) ... */
+ header {
     margin: 0;
     padding: 0 1em;
     background: white;
@@ -162,25 +187,50 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
 
   .dropdown-content a:hover {background-color: #f1f1f1}
 
-  .dropdown:hover .dropdown-content {
+  /* .dropdown:hover .dropdown-content { // Hapus ini
     display: block;
-  }
+  } */
+
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
-    /* Style untuk input pencarian di dalam dropdown */
+
   .search-container-dropdown {
-    padding: 0.5rem; /* Beri sedikit padding */
+    padding: 0.5rem;
     border-bottom: 1px solid #ddd;
+    display: flex; /* Gunakan flexbox */
+    align-items: center; /* Pusatkan vertikal */
   }
 
   .search-container-dropdown input {
-    width: 100%; /* Isi seluruh lebar dropdown */
+    flex-grow: 1; /* Input akan mengisi ruang yang tersedia */
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+     border-top-right-radius: 0; /* Hilangkan radius di kanan */
+    border-bottom-right-radius: 0;
   }
 
-  /* Style untuk daftar hasil pencarian */
+  .search-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    border-top-left-radius: 0; /* Hilangkan radius di kiri */
+    border-bottom-left-radius: 0;
+     display: flex; /* Pusatkan ikon di dalam tombol */
+    align-items: center;
+    justify-content: center;
+  }
+   .search-button svg {
+        margin: 0; /* Hilangkan margin default */
+    }
+
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+    /* Style untuk daftar hasil pencarian */
   .search-results-list {
     list-style: none;
     padding: 0;
@@ -202,5 +252,7 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
   }
   .search-results-list{
     display: none;
+    max-height: 200px; /* Batasi tinggi maksimum */
+    overflow-y: auto;  /* Tambahkan scrollbar jika perlu */
   }
 </style>

@@ -78,7 +78,7 @@ const allPostsJSON = JSON.stringify(allPosts.map(post => ({
             filteredPosts.forEach(post => {
                 const listItem = document.createElement('li');
                 const link = document.createElement('a');
-                link.href = `/blog/${post.slug}`;
+                link.href = `/blog/${post.id}`;
                 link.textContent = post.title;
                 listItem.appendChild(link);
                 resultsList.appendChild(listItem);

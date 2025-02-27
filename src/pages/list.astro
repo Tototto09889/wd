@@ -28,9 +28,9 @@ const postsByLetter = sortedPosts.reduce((acc, post) => {
 
 <BaseLayout title="Indeks Postingan (A-Z)" description="Semua postingan, diurutkan berdasarkan abjad.">
     <main>
-      <h1>Indeks (A-Z)</h1>
+      <h5>Indeks Postingan (A-Z)</h5>
 
-      <div class="index-grid"> {/* Tambahkan div pembungkus */}
+      <div class="index-grid">
         {Object.keys(postsByLetter).sort().map((letter) => (
           <section>
               <h5>{letter}</h5> {/* Gunakan h5 untuk huruf */}
@@ -48,11 +48,22 @@ const postsByLetter = sortedPosts.reduce((acc, post) => {
 </BaseLayout>
 
 <style>
+    /* CSS Reset Sederhana */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: sans-serif; /* Contoh */
+    }
+
     main {
-        width: 95%;
-        max-width: 1200px; /* Lebar maksimum (sama dengan layout blog) */
+        width: 100%; /* Tetap 100% */
+        max-width: 100%; /* Hapus atau ubah max-width di sini */
         margin: 0 auto;
-        padding: 2rem;
+        padding: 1rem;
     }
 
     h1 {
@@ -62,13 +73,13 @@ const postsByLetter = sortedPosts.reduce((acc, post) => {
 
     .index-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Grid responsif */
-        gap: 2rem; /* Spasi antar item */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ganti auto-fill ke auto-fit */
+        gap: 1rem; /* Perkecil sedikit */
+        justify-content: center; /* Pusatkan grid */
     }
 
     section {
-        /* margin-bottom: 2rem;  Tidak diperlukan lagi karena ada gap */
-        break-inside: avoid; /* Hindari pemotongan section di antara kolom */
+        break-inside: avoid;
     }
 
     h5 {
@@ -86,7 +97,7 @@ const postsByLetter = sortedPosts.reduce((acc, post) => {
     li {
         margin-bottom: 0.25rem;
         padding-left: 0.5rem;
-        /* border-left: 3px solid #007bff;  Garis vertikal (opsional) */
+        /* border-left: 3px solid #007bff; */
     }
 
     a {
@@ -97,5 +108,16 @@ const postsByLetter = sortedPosts.reduce((acc, post) => {
 
     a:hover {
         color: #0056b3;
+    }
+
+     /* Khusus Mobile */
+    @media (max-width: 768px) {
+        main {
+            padding: 0.5rem; /* Padding lebih kecil di mobile */
+        }
+        .index-grid {
+            gap: 0.5rem;  /* Spasi antar item lebih kecil di mobile */
+             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /*Perkecil ukuran di mobile*/
+        }
     }
 </style>

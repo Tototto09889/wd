@@ -1,0 +1,89 @@
+---
+// src/pages/tesaj.astro
+import BaseLayout from '../layouts/BaseLayout.astro'; // Ganti dengan layout Anda
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+
+const sortedPosts = allPosts.sort((a, b) => {
+  const titleA = a.data.title.toLowerCase();
+  const titleB = b.data.title.toLowerCase();
+  if (titleA < titleB) return -1;
+  if (titleA > titleB) return 1;
+  return 0;
+});
+
+const postsByLetter = sortedPosts.reduce((acc, post) => {
+  const firstLetter = post.data.title[0].toUpperCase();
+  if (!acc[firstLetter]) {
+    acc[firstLetter] = [];
+  }
+  acc[firstLetter].push(post);
+  return acc;
+}, {});
+---
+
+<BaseLayout title="Indeks Postingan (A-Z)" description="Daftar postingan diurutkan berdasarkan abjad.">
+  <main>
+    <h1>Indeks Postingan (A-Z)</h1>
+
+    {Object.keys(postsByLetter).sort().map((letter) => (
+      <section>
+        <h5>{letter}</h5> {/* Gunakan h5 untuk huruf */}
+        <ul>
+          {postsByLetter[letter].map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </main>
+</BaseLayout>
+
+<style>
+    main {
+        width: 95%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    section {
+        margin-bottom: 2rem; /* Spasi antar bagian (huruf) */
+    }
+
+    h5 { /* Style untuk huruf (h5) */
+        font-size: 1.5rem; /* Ukuran yang lebih kecil dari h2 */
+        margin-bottom: 0.5rem;
+        color: #333;
+        font-weight: bold; /* Tebalkan */
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 0.25rem; /* Spasi antar postingan (lebih kecil) */
+        padding-left: 0.5rem;
+      /*  border-left: 3px solid #007bff;  Garis vertikal (opsional) */
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        transition: color 0.2s ease;
+    }
+
+    a:hover {
+        color: #0056b3;
+    }
+</style>

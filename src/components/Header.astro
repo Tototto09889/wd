@@ -1,4 +1,5 @@
 ---
+// src/components/Header.astro
 import { SITE_TITLE } from '../consts';
 ---
 
@@ -17,10 +18,14 @@ import { SITE_TITLE } from '../consts';
         <a href="/list">List Novel</a>
         <a href="/disclaimer">Disclaimer</a>
         <a href="/about">Tentang</a>
+        <div class="search-container-dropdown">
+          <input type="text" id="search-input-header" placeholder="Cari..." onkeyup="handleSearch(event)" />
+        </div>
       </div>
     </div>
   </nav>
 </header>
+
 <script>
   /* Toggle between showing and hiding the dropdown content */
   function myFunction() {
@@ -40,9 +45,21 @@ import { SITE_TITLE } from '../consts';
       }
     }
   }
+
+  function handleSearch(event) {
+    if (event.key === 'Enter') { // Hanya proses jika tombol Enter ditekan
+      const searchTerm = event.target.value;
+      if (searchTerm.trim() !== "") { // Pastikan input tidak kosong
+        // Redirect ke halaman indexpostingan dengan query parameter
+        window.location.href = `/list?search=${encodeURIComponent(searchTerm)}`;
+      }
+    }
+  }
 </script>
+
 <style>
-  header {
+  /* ... (CSS Anda yang sudah ada, tidak ada perubahan di sini) ... */
+    header {
     margin: 0;
     padding: 0 1em;
     background: white;
@@ -115,5 +132,16 @@ import { SITE_TITLE } from '../consts';
   }
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
+    /* Style untuk input pencarian di dalam dropdown */
+  .search-container-dropdown {
+    padding: 0.5rem; /* Beri sedikit padding */
+    border-bottom: 1px solid #ddd; /* Garis bawah (opsional) */
+  }
 
+  .search-container-dropdown input {
+    width: 100%; /* Isi seluruh lebar dropdown */
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
 </style>

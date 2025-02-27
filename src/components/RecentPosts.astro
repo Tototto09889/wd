@@ -21,7 +21,7 @@ const recentPosts = sortedPosts.slice(0, 3);
   <ul>
     {recentPosts.map((post) => (
       <li>
-        <a href={`/blog/${post.slug}/`}>{post.data.title}</a> {/* Tautan ke halaman postingan */}
+        <a href={`/blog/${post.id}/`}>{post.data.title}</a> {/* Tautan ke halaman postingan */}
         <p>{post.data.description}</p> {/* Deskripsi singkat */}
         <time datetime={post.data.pubDate.toISOString()}>
           <FormattedDate date={post.data.pubDate} /> {/* Tanggal, diformat */}

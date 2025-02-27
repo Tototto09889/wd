@@ -1,50 +1,46 @@
 ---
 // src/pages/daftarindex.astro
-import BlogPost from '../layouts/BlogPost.astro'; // Ganti BaseLayout ke BlogPost
+import BaseLayout from '../layouts/BaseLayout.astro'; // Gunakan BaseLayout
 import { getCollection } from 'astro:content';
 
-// ... (kode lainnya tetap sama) ...
+// ... (kode untuk mengambil dan memproses data postingan tetap sama) ...
+ const allPosts = await getCollection('blog');
 
-const allPosts = await getCollection('blog');
+    const sortedPosts = allPosts.sort((a, b) => {
+      const titleA = a.data.title.toLowerCase();
+      const titleB = b.data.title.toLowerCase();
+      if (titleA < titleB) return -1;
+      if (titleA > titleB) return 1;
+      return 0;
+    });
 
-const sortedPosts = allPosts.sort((a, b) => {
-  const titleA = a.data.title.toLowerCase();
-  const titleB = b.data.title.toLowerCase();
-  if (titleA < titleB) return -1;
-  if (titleA > titleB) return 1;
-  return 0;
-});
-
-const postsByLetter = sortedPosts.reduce((acc, post) => {
-  const firstLetter = post.data.title[0].toUpperCase();
-  if (!acc[firstLetter]) {
-    acc[firstLetter] = [];
-  }
-  acc[firstLetter].push(post);
-  return acc;
-}, {});
-
+    const postsByLetter = sortedPosts.reduce((acc, post) => {
+      const firstLetter = post.data.title[0].toUpperCase();
+      if (!acc[firstLetter]) {
+        acc[firstLetter] = [];
+      }
+      acc[firstLetter].push(post);
+      return acc;
+    }, {});
 ---
 
-<BlogPost {...Astro.props}> {/*Tidak bisa begini, BlogPost perlu properti dari frontmatter*/}
+<BaseLayout title="Indeks Postingan (A-Z)" description="Daftar postingan diurutkan berdasarkan abjad.">
     <main>
-      <h1>Indeks Postingan (A-Z)</h1>
-
-        {Object.keys(postsByLetter).sort().map((letter) => (
-          <section>
-              <h5>{letter}</h5>
-              <ul>
-                  {postsByLetter[letter].map((post) =>(
-                      <li>
-                        <a href={`/blog/${post.id}`}>{post.data.title}</a>
-                      </li>
-                  ))}
-              </ul>
-          </section>
-        ))}
+        <h1>Indeks Postingan (A-Z)</h1>
+         {Object.keys(postsByLetter).sort().map((letter) => (
+             <section>
+             <h5>{letter}</h5> {/* Judul untuk setiap huruf */}
+             <ul>
+                 {postsByLetter[letter].map((post) => (
+                     <li>
+                         <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+                     </li>
+                 ))}
+             </ul>
+             </section>
+         ))}
     </main>
-
-</BlogPost>
+</BaseLayout>
 
 <style>
     /* ... (CSS tetap sama) ... */

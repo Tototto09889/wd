@@ -1,30 +1,25 @@
 ---
 // src/components/RecentPosts.astro
 import { getCollection } from 'astro:content';
-import FormattedDate from './FormattedDate.astro'; // Pastikan path ini BENAR
+import FormattedDate from './FormattedDate.astro';
 
-// Ambil semua postingan dari koleksi 'blog'
 const allBlogPosts = await getCollection('blog');
-
-// Urutkan postingan dari yang terbaru ke terlama berdasarkan pubDate
 const sortedPosts = allBlogPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-// Ambil sejumlah postingan terbaru (misalnya, 3)
-// Anda bisa mengubah angka 3 ini sesuai kebutuhan
 const recentPosts = sortedPosts.slice(0, 3);
 ---
 
-<section>
-  <h2>Recent Posts</h2> {/* Judul bagian (bisa diubah/dihapus) */}
+<section> {/* Hapus recent-post-container */}
+  <h3>Recent Posts</h3> {/* Ubah dari h2 ke h3 agar konsisten */}
   <ul>
     {recentPosts.map((post) => (
       <li>
-        <a href={`/blog/${post.id}/`}>{post.data.title}</a> {/* Tautan ke halaman postingan */}
-        <p>{post.data.description}</p> {/* Deskripsi singkat */}
+        <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+        <p class="smaller-text">{post.data.description}</p> {/* Tambahkan class smaller-text */}
         <time datetime={post.data.pubDate.toISOString()}>
-          <FormattedDate date={post.data.pubDate} /> {/* Tanggal, diformat */}
+          <FormattedDate date={post.data.pubDate} />
         </time>
       </li>
     ))}
@@ -32,35 +27,6 @@ const recentPosts = sortedPosts.slice(0, 3);
 </section>
 
 <style>
-  /* Gaya CSS bawaan (bisa disesuaikan) */
-  ul {
-    list-style: none; /* Hilangkan bullet points */
-    padding: 0;      /* Hilangkan padding bawaan */
-  }
+  /* Hapus semua style bawaan, kita akan gunakan style dari .project-item */
 
-  li {
-    margin-bottom: 1rem; /* Spasi antar postingan */
-  }
-
-  a {
-    text-decoration: none; /* Hilangkan garis bawah tautan */
-    color: inherit;       /* Gunakan warna teks default (atau ganti) */
-  }
-
-  a:hover {
-    text-decoration: underline; /* Garis bawah saat hover (opsional) */
-  }
-
-  /* Opsi tambahan: Tambahkan gaya untuk judul, deskripsi, dll. */
-  /* Contoh: */
-  /*
-  h2 {
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
-  }
-
-  p {
-    color: #666;
-  }
-  */
 </style>

@@ -1,421 +1,434 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah diimpor
----
+ import BaseHead from '../components/BaseHead.astro';
+ import Header from '../components/Header.astro';
+ import Footer from '../components/Footer.astro';
+ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+ import RecentPosts from '../components/RecentPosts.astro'; // Impor
+ import Sidebar from '../components/Sidebar.astro'; //Impor sidebar
+ ---
 
-<!doctype html>
-<html lang="en">
-<head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style>
-        /* ... (CSS Anda yang sudah ada, TIDAK PERLU DIUBAH) ... */
-        *, *::before, *::after {
-          box-sizing: border-box;
-        }
+ <!doctype html>
+ <html lang="en">
+ <head>
+     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+     <style>
+         /* ... (CSS Anda yang sudah ada, TIDAK PERLU DIUBAH) ... */
+         *, *::before, *::after {
+           box-sizing: border-box;
+         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-        }
+         body {
+             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+             line-height: 1.6;
+             color: #333;
+             background-color: #f8f9fa;
+         }
+         .index-layout{
+             display: grid;
+             grid-template-columns: 3fr 1fr;
+             gap: 2rem;
+             width: 95%;
+             max-width: 1200px;
+             margin: auto;
+         }
 
-        .project-container {
-            margin-top: 2rem;
-            padding: 1rem;
-        }
+         .project-container {
+             margin-top: 2rem;
+             padding: 1rem;
+         }
 
-        .project-item {
-            background-color: white;
-            border: 1px solid #dee2e6;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-            margin-bottom: 1rem;
-            width: 95%; /* Lebar kotak proyek untuk mobile */
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-        }
+         .project-item {
+             background-color: white;
+             border: 1px solid #dee2e6;
+             padding: 1.5rem;
+             border-radius: 0.5rem;
+             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+             margin-bottom: 1rem;
+             width: 100%; /* Lebar kotak proyek untuk mobile */
+             max-width: 500px;
+             margin-left: auto;
+             margin-right: auto;
+             position: relative;
+         }
 
-        .project-item h3 {
-            margin-top: 0;
-            font-size: 1.25rem;
-            color: #0056b3;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
+         .project-item h3 {
+             margin-top: 0;
+             font-size: 1.25rem;
+             color: #0056b3;
+             margin-bottom: 0.5rem;
+             text-align: center;
+         }
 
-      .smaller-text {
-            font-size: 0.85rem;
-            color: #555;
-            text-align: center;
-            overflow-wrap: break-word;
-            line-height: 1.4;
-        }
+       .smaller-text {
+             font-size: 0.85rem;
+             color: #555;
+             text-align: center;
+             overflow-wrap: break-word;
+             line-height: 1.4;
+         }
 
-        .smaller-text.quote {
-            font-style: italic;
-        }
+         .smaller-text.quote {
+             font-style: italic;
+         }
 
-        .project-item .main-button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            font-size: 1rem;
-            display: block;
-            width: 100%;
-            margin: 0.5rem 0;
-            text-align: center;
-            text-decoration: none;
-            transition: background-color: 0.2s ease-in-out;
-        }
+         .project-item .main-button {
+             background-color: #28a745;
+             color: white;
+             border: none;
+             padding: 0.5rem 1rem;
+             border-radius: 0.25rem;
+             cursor: pointer;
+             font-size: 1rem;
+             display: block;
+             width: 100%;
+             margin: 0.5rem 0;
+             text-align: center;
+             text-decoration: none;
+             transition: background-color: 0.2s ease-in-out;
+         }
 
-        .project-item .main-button:hover {
-            background-color: #218838;
-        }
+         .project-item .main-button:hover {
+             background-color: #218838;
+         }
 
-        .project-item .button-divider {
-            width: 100%;
-            height: 1px;
-            background-color: #ccc;
-            margin: 0.5rem 0;
-        }
+         .project-item .button-divider {
+             width: 100%;
+             height: 1px;
+             background-color: #ccc;
+             margin: 0.5rem 0;
+         }
 
-        .project-item .quote {
-          margin-top: 0.75rem;
-          text-align: center;
-          position: relative;
-          z-index: 1;
-        }
+         .project-item .quote {
+           margin-top: 0.75rem;
+           text-align: center;
+           position: relative;
+           z-index: 1;
+         }
 
-        .project-item img {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.25rem;
-            margin-bottom: 1rem;
-            display: block;
-            object-fit: cover;
-            aspect-ratio: 16 / 9;
-        }
+         .project-item img {
+             width: 100%;
+             max-width: 100%;
+             height: auto;
+             border-radius: 0.25rem;
+             margin-bottom: 1rem;
+             display: block;
+             object-fit: cover;
+             aspect-ratio: 16 / 9;
+         }
 
-        .quote-button {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            font-size: 0.75rem;
-            transition: background-color: 0.2s ease-in-out;
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            z-index: 2;
-        }
+         .quote-button {
+             background-color: #6c757d;
+             color: white;
+             border: none;
+             padding: 0.25rem 0.5rem;
+             border-radius: 0.25rem;
+             cursor: pointer;
+             font-size: 0.75rem;
+             transition: background-color: 0.2s ease-in-out;
+             position: absolute;
+             bottom: 10px;
+             right: 10px;
+             z-index: 2;
+         }
 
-        .quote-button:hover {
-            background-color: #5a6268;
-        }
-
-        .button-container {
-            margin-top: 1rem;
-        }
-
-       .welcome-section {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background-color: #f0f8ff;
-            border-radius: 0.5rem;
-            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-            width: 97%; /* Lebar kotak welcome untuk mobile */
-            max-width: 500px; /* Lebar maksimum untuk mobile */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .welcome-section h3 {
-            font-size: 2rem;
-            color: #495057;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .welcome-section p {
-            font-size: 1.1rem;
-            color: #6c757d;
-            line-height: 1.5;
-            font-style: italic;
-        }
-
-         /* Formulir Kontak (Terintegrasi) */
-        .contact-form-container {
-            /* Mewarisi semua gaya .project-item */
-        }
-        .contact-form-container h5 {
-            text-align: center;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            color: #0056b3;
-        }
-
-        .contact-form-container b{
-            font-size: 1.7rem;
-        }
-
-        .contact-form-container .form-group {
-            margin-bottom: 1rem; /* Spasi antar field */
-        }
-
-        .contact-form-container .form-group label {
-            display: block; /* Label di atas input */
-            margin-bottom: 0.25rem;
-            color: #495057;
-        }
-
-        /* Gaya untuk input dan textarea (seperti .main-button) */
-        .contact-form-container .form-group input[type="text"],
-        .contact-form-container .form-group input[type="email"],
-        .contact-form-container .form-group textarea {
-            width: 100%;
-            padding: 0.5rem 1rem; /* Padding yang sama dengan .main-button */
-            border: 1px solid #ced4da; /* Border yang sedikit berbeda */
-            border-radius: 0.25rem; /* Border radius yang sama */
-            font-size: 1rem;      /* Ukuran font yang sama */
-            font-family: inherit; /* Font yang sama dengan body */
-             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Transisi */
-        }
-
-        .contact-form-container .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        /* Fokus state untuk input */
-        .contact-form-container .form-group input[type="text"]:focus,
-        .contact-form-container .form-group input[type="email"]:focus,
-        .contact-form-container .form-group textarea:focus {
-            border-color: #80bdff; /* Warna border saat fokus */
-            outline: 0;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Efek shadow */
-        }
-
-
-        /* Tombol Kirim (menggunakan gaya .main-button) */
-        .contact-form-container .submit-button {
-            background-color: #28a745; /* Warna hijau yang sama */
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            font-size: 1rem;
-            display: block;
-            width: 100%;
-            text-align: center;
-            text-decoration: none; /* Menghilangkan underline jika ada */
-            transition: background-color: 0.2s ease-in-out;
-        }
-
-        .contact-form-container .submit-button:hover {
-            background-color: #218838; /* Warna hijau lebih gelap saat hover */
-        }
-
-       @media (min-width: 768px) {
-            .project-container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
+         .quote-button:hover {
+                background-color: #5a6268;
             }
 
-            .project-item, .contact-form-container {
-                width: calc(50% - 1rem);
+            .button-container {
+                margin-top: 1rem;
             }
 
-            /* Style untuk welcome section di desktop */
-            .welcome-section {
-                grid-column: 1 / -1;
-                width: auto;
-                max-width: none;
-                margin-left: 1rem;
-                margin-right: 1rem;
-
+           .welcome-section {
+                text-align: center;
+                margin-bottom: 2rem;
+                padding: 1rem;
+                background-color: #f0f8ff;
+                border-radius: 0.5rem;
+                box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+                width: 100%; /* Lebar kotak welcome untuk mobile */
+                max-width: 500px; /* Lebar maksimum untuk mobile */
+                margin-left: auto;
+                margin-right: auto;
             }
-        }
-    </style>
-</head>
-<body>
-    <Header />
-    <main>
-        <div class="welcome-section">
-          <h3>Selamat Datang... di Ambang Sunyi</h3>
-          <p>"Di sini, di mana kode-kode usang ..."</p>
-        </div>
 
-        {/* Kotak untuk Recent Posts - MULAI */}
-        <div class="project-item">  {/* Gunakan class yang sama dengan kotak proyek */}
-            <RecentPosts />
-        </div>
-        {/* Kotak untuk Recent Posts - SELESAI */}
-
-        <div class="project-container">
-          {/* ... (Konten proyek Anda, TIDAK PERLU DIUBAH) ... */}
-            <div class="project-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 1">
-                <h3>Daftar Indeks Web Novel dan Light Novel Jepang</h3>
-                <p class="smaller-text">Di sini, di antara rak-rak digital yang sunyi, tersimpan kisah-kisah yang menanti untuk ditemukan.  Seperti kenangan yang memudar, mereka menunggu sentuhanmu.</p>
-                <div class="button-container">
-                    <a href="https://wispy-dream.floral.workers.dev/list/" class="main-button">Lihat</a>
-                    <button class="quote-button">Quote Lain</button>
-                </div>
-                <div class="button-divider"></div>
-                <p class="quote smaller-text"> </p>
-            </div>
-
-            <div class="project-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 2">
-                <h3>Postingan Web Novel dan Light Novel Terbaru</h3>
-                <p class="smaller-text">Seperti embun pagi yang segera lenyap, cerita-cerita baru ini hadir sesaat, menawarkan keindahan yang fana.  Nikmatilah sebelum mereka menghilang.</p>
-                <div class="button-container">
-                    <a href="https://wispy-dream.floral.workers.dev/blog/" class="main-button">Lihat</a>
-                    <button class="quote-button">Quote Lain</button>
-                </div>
-                <div class="button-divider"></div>
-                <p class="quote smaller-text"></p>
-            </div>
-
-            <div class="project-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 3">
-                <h3>Web Download</h3>
-                <p class="smaller-text">Simpanlah serpihan-serpihan kisah ini, seperti menyimpan kenangan dalam botol, berharap suatu saat nanti bisa membukanya kembali dan merasakan kehangatannya.</p>
-                <div class="button-container">
-                    <button class="main-button">Kunjungi</button>  <button class="quote-button">Quote Lain</button>
-                </div>
-                <div class="button-divider"></div>
-                <p class="quote smaller-text"></p>
-            </div>
-
-            <div class="project-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 4">
-                <h3>Wangy Wangy Web</h3>
-                <p class="smaller-text">Di balik setiap tawa, ada air mata yang tak terlihat. Di balik setiap keharuman, ada kesedihan yang mendalam. Selamat datang di dunia yang wangy, namun fana.</p>
-                <div class="button-container">
-                    <a href="https://wangy.floral.workers.dev/" class="main-button">Lihat</a>
-                    <button class="quote-button">Quote Lain</button>
-                </div>
-                <div class="button-divider"></div>
-                <p class="quote smaller-text"></p>
-            </div>
-
-            <div class="project-item contact-form-container">
-                <h5><b>Hubungi saya di bawah ini :</b></h5>
-                <form action="https://formspree.io/f/xaylarpo" method="POST" id="my-form">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="massage">Message</label>
-                        <textarea name="massage" id="massage" cols="30" rows="10" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">SEND MESSAGE</button>
-                </form>
-            </div>
-        </div>
-    </main>
-    <Footer />
-     <script>
-       const quotes = [
-         [
-           "Rindu itu berat, tapi lebih berat lagi kalau rindunya sama orang yang salah.",
-           "Kadang, yang paling menyakitkan bukanlah perpisahan, tapi kenyataan bahwa kita tak akan pernah bisa kembali.",
-           "Seperti senja, indah namun hanya sesaat.  Begitulah kenangan tentangmu.",
-         ],
-         [
-           "Cinta itu kayak kopi, awalnya pahit, tapi kalau dinikmati pelan-pelan, terasa manisnya...meski akhirnya tetap habis juga.",
-           "Hujan mengingatkanku padamu, pada air mata yang jatuh, dan pada janji yang tak pernah ditepati.",
-           "Ada luka yang tak terlihat, ada rindu yang tak terucap, ada cinta yang tak terbalas.",
-         ],
-         [
-            "Mungkin aku hanya sebatas file .zip di hatimu, yang suatu saat nanti akan kau ekstrak lalu kau lupakan.",
-            "Seperti mendownload file yang corrupt, harapanku padamu sia-sia.",
-            "Aku ini ibarat link download yang mati, tak bisa lagi kau akses.",
-         ],
-         [
-           "Wangy itu fana, seperti sinyal wifi yang hilang timbul.",
-           "Bahagia itu kayak kuota internet, cepet banget habisnya.",
-           "Aku tanpamu bagaikan handphone lowbat, lemah tak berdaya.",
-         ]
-
-       ];
-
-       const mainButtonQuotes = [
-           "Bayar dulu, Boss! Gak ada yang gratis di dunia ini, kecuali kentut.",
-           "Mau lihat? Duitnya mana? Receh pun jadi, asal jangan daun!",
-                      "Klik ini = siap-siap rogoh kocek! Gak bayar, gak sayang~",
-           "Tombol ajaib! Sekali klik, dompet langsung nangis. Tapi worth it, kok!",
-           "Penasaran? Bayar dulu, baru lanjut! Gak mahal, kok, cuma seharga kenangan mantan.",
-           "Ini tombol premium, Bos! Khusus buat yang berduit. Yang kere, minggir dulu!",
-           "Jangan klik kalau gak kuat iman! Bisa bikin ketagihan bayar.",
-           "Sekali klik, langsung auto transfer! Tenang, gak bakal nyesel.",
-           "Tombol ini lebih mahal dari harga dirimu. Eh, tapi boong, ding!",
-           "Gratis? Yakin? Coba cek saldo dulu, gih!",
-           "Dompetmu menjerit? Itu tandanya kamu harus klik tombol ini!",
-           "Klik dengan bijak, ya! Ingat, ada tagihan yang menanti.",
-       ];
-
-        function showRandomQuote(projectBox) {
-            const quoteElement = projectBox.querySelector('.quote');
-            const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
-            const randomIndex = Math.floor(Math.random() * quotes[projectIndex].length);
-            quoteElement.textContent = quotes[projectIndex][randomIndex];
-        }
-
-        function showMainButtonQuote(projectBox) {
-            const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
-            if (projectIndex === 2) {
-                const randomIndex = Math.floor(Math.random() * mainButtonQuotes.length);
-                alert(mainButtonQuotes[randomIndex]);
+            .welcome-section h3 {
+                font-size: 2rem;
+                color: #495057;
+                margin-bottom: 0.5rem;
+                font-weight: bold;
             }
-        }
 
-        function initializeQuotes() {
-            const projectBoxes = document.querySelectorAll('.project-item');
-            projectBoxes.forEach(box => {
-                // Skip the contact form container for quote initialization
-                if (!box.classList.contains('contact-form-container')) {
-                  showRandomQuote(box);
+            .welcome-section p {
+                font-size: 1.1rem;
+                color: #6c757d;
+                line-height: 1.5;
+                font-style: italic;
+            }
 
-                  const quoteButton = box.querySelector('.quote-button');
-                  quoteButton.addEventListener('click', () => showRandomQuote(box));
+             /* Formulir Kontak (Terintegrasi) */
+            .contact-form-container {
+                /* Mewarisi semua gaya .project-item */
+            }
+            .contact-form-container h5 {
+                text-align: center;
+                margin-bottom: 1rem;
+                font-size: 1.5rem;
+                color: #0056b3;
+            }
 
-                  const mainButton = box.querySelector('.main-button');
-                  mainButton.addEventListener('click', () => showMainButtonQuote(box));
+            .contact-form-container b{
+                font-size: 1.7rem;
+            }
+
+            .contact-form-container .form-group {
+                margin-bottom: 1rem; /* Spasi antar field */
+            }
+
+            .contact-form-container .form-group label {
+                display: block; /* Label di atas input */
+                margin-bottom: 0.25rem;
+                color: #495057;
+            }
+
+            /* Gaya untuk input dan textarea (seperti .main-button) */
+            .contact-form-container .form-group input[type="text"],
+            .contact-form-container .form-group input[type="email"],
+            .contact-form-container .form-group textarea {
+                width: 100%;
+                padding: 0.5rem 1rem; /* Padding yang sama dengan .main-button */
+                border: 1px solid #ced4da; /* Border yang sedikit berbeda */
+                border-radius: 0.25rem; /* Border radius yang sama */
+                font-size: 1rem;      /* Ukuran font yang sama */
+                font-family: inherit; /* Font yang sama dengan body */
+                 transition: border-color 0.15s ease-in-out, box-shadow: 0.15s ease-in-out; /* Transisi */
+            }
+
+            .contact-form-container .form-group textarea {
+                resize: vertical;
+                min-height: 100px;
+            }
+
+            /* Fokus state untuk input */
+            .contact-form-container .form-group input[type="text"]:focus,
+            .contact-form-container .form-group input[type="email"]:focus,
+            .contact-form-container .form-group textarea:focus {
+                border-color: #80bdff; /* Warna border saat fokus */
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Efek shadow */
+            }
+
+
+            /* Tombol Kirim (menggunakan gaya .main-button) */
+            .contact-form-container .submit-button {
+                background-color: #28a745; /* Warna hijau yang sama */
+                color: white;
+                border: none;
+                padding: 0.5rem 1rem;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                font-size: 1rem;
+                display: block;
+                width: 100%;
+                text-align: center;
+                text-decoration: none; /* Menghilangkan underline jika ada */
+                transition: background-color: 0.2s ease-in-out;
+            }
+
+            .contact-form-container .submit-button:hover {
+                background-color: #218838; /* Warna hijau lebih gelap saat hover */
+            }
+
+           @media (min-width: 768px) {
+                .project-container, .recent-posts-box {
+                    width: calc(50% - 1rem);
+                    margin-left: auto;
+                    margin-right: auto;
                 }
 
-            });
-        }
+                /* Style untuk welcome section di desktop */
+                .welcome-section {
+                    grid-column: 1 / -1;  /* Span all columns */
+                    width: auto;
+                    max-width: none;
+                    margin-left: 1rem;
+                    margin-right: 1rem;
 
-        document.addEventListener('DOMContentLoaded', initializeQuotes);
-    </script>
-</body>
-</html>
+                }
+                 .index-layout{
+                    grid-template-columns: 1fr; /* Satu kolom di mobile */
+                }
+            }
+            @media (max-width: 768px) {
+                .index-layout{
+                    grid-template-columns: 1fr; /* Satu kolom di mobile */
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <Header />
+        <div class = "index-layout">
+            <main>
+                <div class="welcome-section">
+                <h3>Selamat Datang... di Ambang Sunyi</h3>
+                <p>"Di sini, di mana kode-kode usang ..."</p>
+                </div>
 
+                {/* <RecentPosts />  Jangan gunakan ini lagi di sini */}
+
+                <div class="project-container">
+                {/* ... (Konten proyek Anda, TIDAK PERLU DIUBAH) ... */}
+                    <div class="project-item">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 1">
+                        <h3>Daftar Indeks Web Novel dan Light Novel Jepang</h3>
+                        <p class="smaller-text">Di sini, di antara rak-rak digital yang sunyi, tersimpan kisah-kisah yang menanti untuk ditemukan.  Seperti kenangan yang memudar, mereka menunggu sentuhanmu.</p>
+                        <div class="button-container">
+                            <a href="https://wispy-dream.floral.workers.dev/list/" class="main-button">Lihat</a>
+                            <button class="quote-button">Quote Lain</button>
+                        </div>
+                        <div class="button-divider"></div>
+                        <p class="quote smaller-text"> </p>
+                    </div>
+
+                    <div class="project-item">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 2">
+                        <h3>Postingan Web Novel dan Light Novel Terbaru</h3>
+                        <p class="smaller-text">Seperti embun pagi yang segera lenyap, cerita-cerita baru ini hadir sesaat, menawarkan keindahan yang fana.  Nikmatilah sebelum mereka menghilang.</p>
+                        <div class="button-container">
+                            <a href="https://wispy-dream.floral.workers.dev/blog/" class="main-button">Lihat</a>
+                            <button class="quote-button">Quote Lain</button>
+                        </div>
+                        <div class="button-divider"></div>
+                        <p class="quote smaller-text"></p>
+                    </div>
+
+                    <div class="project-item">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 3">
+                        <h3>Web Download</h3>
+                        <p class="smaller-text">Simpanlah serpihan-serpihan kisah ini, seperti menyimpan kenangan dalam botol, berharap suatu saat nanti bisa membukanya kembali dan merasakan kehangatannya.</p>
+                        <div class="button-container">
+                            <button class="main-button">Kunjungi</button>  <button class="quote-button">Quote Lain</button>
+                        </div>
+                        <div class="button-divider"></div>
+                        <p class="quote smaller-text"></p>
+                    </div>
+
+                    <div class="project-item">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 4">
+                        <h3>Wangy Wangy Web</h3>
+                        <p class="smaller-text">Di balik setiap tawa, ada air mata yang tak terlihat. Di balik setiap keharuman, ada kesedihan yang mendalam. Selamat datang di dunia yang wangy, namun fana.</p>
+                        <div class="button-container">
+                            <a href="https://wangy.floral.workers.dev/" class="main-button">Lihat</a>
+                            <button class="quote-button">Quote Lain</button>
+                        </div>
+                        <div class="button-divider"></div>
+                        <p class="quote smaller-text"></p>
+                    </div>
+
+                    <div class="project-item contact-form-container">
+                        <h5><b>Hubungi saya di bawah ini :</b></h5>
+                        <form action="https://formspree.io/f/xaylarpo" method="POST" id="my-form">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="massage">Message</label>
+                                <textarea name="massage" id="massage" cols="30" rows="10" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-button">SEND MESSAGE</button>
+                        </form>
+                    </div>
+                </div>
+                <a href="/blog">Lihat Semua Postingan</a>
+            </main>
+             <Sidebar /> {/* Sidebar di sini */}
+        </div>
+
+        <Footer />
+        <script>
+            /* ... (script Anda yang sudah ada, TIDAK PERLU DIUBAH) ... */
+           const quotes = [
+             [
+               "Rindu itu berat, tapi lebih berat lagi kalau rindunya sama orang yang salah.",
+               "Kadang, yang paling menyakitkan bukanlah perpisahan, tapi kenyataan bahwa kita tak akan pernah bisa kembali.",
+               "Seperti senja, indah namun hanya sesaat.  Begitulah kenangan tentangmu.",
+             ],
+             [
+               "Cinta itu kayak kopi, awalnya pahit, tapi kalau dinikmati pelan-pelan, terasa manisnya...meski akhirnya tetap habis juga.",
+               "Hujan mengingatkanku padamu, pada air mata yang jatuh, dan pada janji yang tak pernah ditepati.",
+               "Ada luka yang tak terlihat, ada rindu yang tak terucap, ada cinta yang tak terbalas.",
+             ],
+             [
+                "Mungkin aku hanya sebatas file .zip di hatimu, yang suatu saat nanti akan kau ekstrak lalu kau lupakan.",
+                "Seperti mendownload file yang corrupt, harapanku padamu sia-sia.",
+                "Aku ini ibarat link download yang mati, tak bisa lagi kau akses.",
+             ],
+             [
+               "Wangy itu fana, seperti sinyal wifi yang hilang timbul.",
+               "Bahagia itu kayak kuota internet, cepet banget habisnya.",
+               "Aku tanpamu bagaikan handphone lowbat, lemah tak berdaya.",
+             ]
+
+           ];
+
+           const mainButtonQuotes = [
+               "Bayar dulu, Boss! Gak ada yang gratis di dunia ini, kecuali kentut.",
+               "Mau lihat? Duitnya mana? Receh pun jadi, asal jangan daun!",
+               "Klik ini = siap-siap rogoh kocek! Gak bayar, gak sayang~",
+               "Tombol ajaib! Sekali klik, dompet langsung nangis. Tapi worth it, kok!",
+               "Penasaran? Bayar dulu, baru lanjut! Gak mahal, kok, cuma seharga kenangan mantan.",
+               "Ini tombol premium, Bos! Khusus buat yang berduit. Yang kere, minggir dulu!",
+               "Jangan klik kalau gak kuat iman! Bisa bikin ketagihan bayar.",
+               "Sekali klik, langsung auto transfer! Tenang, gak bakal nyesel.",
+               "Tombol ini lebih mahal dari harga dirimu. Eh, tapi boong, ding!",
+               "Gratis? Yakin? Coba cek saldo dulu, gih!",
+               "Dompetmu menjerit? Itu tandanya kamu harus klik tombol ini!",
+               "Klik dengan bijak, ya! Ingat, ada tagihan yang menanti.",
+           ];
+
+            function showRandomQuote(projectBox) {
+                const quoteElement = projectBox.querySelector('.quote');
+                const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
+                const randomIndex = Math.floor(Math.random() * quotes[projectIndex].length);
+                quoteElement.textContent = quotes[projectIndex][randomIndex];
+            }
+
+            function showMainButtonQuote(projectBox) {
+                const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
+                if (projectIndex === 2) {
+                    const randomIndex = Math.floor(Math.random() * mainButtonQuotes.length);
+                    alert(mainButtonQuotes[randomIndex]);
+                }
+            }
+
+            function initializeQuotes() {
+                const projectBoxes = document.querySelectorAll('.project-item');
+                projectBoxes.forEach(box => {
+                    // Skip the contact form container for quote initialization
+                    if (!box.classList.contains('contact-form-container')) {
+                      showRandomQuote(box);
+
+                      const quoteButton = box.querySelector('.quote-button');
+                      quoteButton.addEventListener('click', () => showRandomQuote(box));
+
+                      const mainButton = box.querySelector('.main-button');
+                      mainButton.addEventListener('click', () => showMainButtonQuote(box));
+                    }
+
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', initializeQuotes);
+        </script>
+    </body>
+    </html>

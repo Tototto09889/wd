@@ -1,11 +1,10 @@
 ---
 // src/pages/list.astro
-import BaseLayout from '../layouts/BaseLayout.astro'; // Ganti dengan layout Anda
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
 
-// Urutkan berdasarkan judul, case-insensitive
 const sortedPosts = allPosts.sort((a, b) => {
   const titleA = a.data.title.toLowerCase();
   const titleB = b.data.title.toLowerCase();
@@ -14,7 +13,6 @@ const sortedPosts = allPosts.sort((a, b) => {
   return 0;
 });
 
-// Kelompokkan berdasarkan huruf pertama
 const postsByLetter = sortedPosts.reduce((acc, post) => {
   const firstLetter = post.data.title[0].toUpperCase();
   if (!acc[firstLetter]) {
@@ -26,98 +24,127 @@ const postsByLetter = sortedPosts.reduce((acc, post) => {
 
 ---
 
-<BaseLayout title="Indeks Postingan (A-Z)" description="Semua postingan, diurutkan berdasarkan abjad.">
-    <main>
-      <h5>Indeks Postingan (A-Z)</h5>
+<BaseLayout title="Indeks (A-Z)" description="Semua postingan, diurutkan berdasarkan abjad.">
+  <main>
+    <h5>Indeks (A-Z)</h5>
 
-      <div class="index-grid">
-        {Object.keys(postsByLetter).sort().map((letter) => (
-          <section>
-              <h5>{letter}</h5> {/* Gunakan h5 untuk huruf */}
-              <ul>
-                  {postsByLetter[letter].map((post) =>(
-                      <li>
-                        <a href={`/blog/${post.id}`}>{post.data.title}</a>
-                      </li>
-                  ))}
-              </ul>
-          </section>
-        ))}
-      </div>
-    </main>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Cari..." />
+    </div>
+
+    {Object.keys(postsByLetter).sort().map((letter) => (
+      <section id={`section-${letter}`}>
+        <h5>{letter}</h5>
+        <ul class="post-list">
+          {postsByLetter[letter].map((post) => (
+            <li class="post-item">
+              <span>•</span>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </main>
+
+  <script>
+    const searchInput = document.getElementById('search-input');
+    const postLists = document.querySelectorAll('.post-list'); // Semua ul
+    const postItems = document.querySelectorAll('.post-item'); // Semua li
+    const sections = document.querySelectorAll('section[id^="section-"]') //semua section
+
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+
+      // Sembunyikan/tampilkan setiap postingan
+      postItems.forEach(item => {
+        const title = item.querySelector('a').textContent.toLowerCase();
+        if (title.includes(searchTerm)) {
+          item.style.display = 'flex'; // Gunakan flex, sesuai dengan CSS kita
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Sembunyikan section jika tidak ada postingan yang ditampilkan
+      sections.forEach(section => {
+            const list = section.querySelector('.post-list');
+            const hasVisibleItems = Array.from(list.querySelectorAll('.post-item')).some(item => item.style.display !== 'none');
+            section.style.display = hasVisibleItems ? 'block' : 'none';
+      });
+    });
+  </script>
 </BaseLayout>
 
 <style>
-    /* CSS Reset Sederhana */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+  /* CSS Reset (tetap sama) */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: sans-serif;
+  }
+
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem; /* Kurangi sedikit */
+  }
+
+  .search-container {
+    text-align: center; /* Pusatkan input */
+    margin-bottom: 1rem;
+  }
+
+  .search-container input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Full width */
+    max-width: 400px; /* Batasi lebar maksimum */
+  }
+
+  section {
+    margin-bottom: 2rem;
+  }
+
+  h5 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: bold;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    display: flex;
+    align-items: baseline;
+  }
+    li span{
+        margin-right: 0.5em; /* Beri sedikit jarak antara bullet dan teks */
     }
 
-    body {
-        font-family: sans-serif; /* Contoh */
-    }
-
-    main {
-        width: 100%; /* Tetap 100% */
-        max-width: 100%; /* Hapus atau ubah max-width di sini */
-        margin: 0 auto;
-        padding: 1rem;
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .index-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ganti auto-fill ke auto-fit */
-        gap: 1rem; /* Perkecil sedikit */
-        justify-content: center; /* Pusatkan grid */
-    }
-
-    section {
-        break-inside: avoid;
-    }
-
-    h5 {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-        color: #333;
-        font-weight: bold;
-    }
-
-    ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    li {
-        margin-bottom: 0.25rem;
-        padding-left: 0.5rem;
-        /* border-left: 3px solid #007bff; */
-    }
-
-    a {
-        text-decoration: none;
-        color: #007bff;
-        transition: color 0.2s ease;
-    }
-
-    a:hover {
-        color: #0056b3;
-    }
-
-     /* Khusus Mobile */
-    @media (max-width: 768px) {
-        main {
-            padding: 0.5rem; /* Padding lebih kecil di mobile */
-        }
-        .index-grid {
-            gap: 0.5rem;  /* Spasi antar item lebih kecil di mobile */
-             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /*Perkecil ukuran di mobile*/
-        }
+  a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.2s ease;
+  }
+  a:hover {
+        color:#0056b3;
     }
 </style>

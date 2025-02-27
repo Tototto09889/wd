@@ -1,6 +1,19 @@
 ---
 // src/components/Header.astro
 import { SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content'; // Impor getCollection
+
+// Ambil semua postingan di sini (di Header.astro)
+const allPosts = await getCollection('blog');
+
+// JSON.stringify() di sini.  Ini PENTING!
+const allPostsJSON = JSON.stringify(allPosts.map(post => ({
+    title: post.data.title,
+    slug: post.id,
+    // Tambahkan data lain yang mungkin ingin Anda tampilkan di hasil pencarian, misalnya deskripsi
+    description: post.data.description,
+})));
+
 ---
 
 <header>
@@ -19,7 +32,8 @@ import { SITE_TITLE } from '../consts';
         <a href="/disclaimer">Disclaimer</a>
         <a href="/about">Tentang</a>
         <div class="search-container-dropdown">
-          <input type="text" id="search-input-header" placeholder="Cari..." onkeyup="handleSearch(event)" />
+          <input type="text" id="search-input-header" placeholder="Cari..." oninput="searchPosts(this.value)" />
+          <ul id="search-results" class="search-results-list"></ul> {/* Tambahkan ul untuk hasil */}
         </div>
       </div>
     </div>
@@ -27,17 +41,15 @@ import { SITE_TITLE } from '../consts';
 </header>
 
 <script>
-  /* Toggle between showing and hiding the dropdown content */
+  /* Toggle dropdown */
   function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
 
-  // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
       var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
+      for (var i = 0; i < dropdowns.length; i++) {
         var openDropdown = dropdowns[i];
         if (openDropdown.classList.contains('show')) {
           openDropdown.classList.remove('show');
@@ -46,20 +58,43 @@ import { SITE_TITLE } from '../consts';
     }
   }
 
-  function handleSearch(event) {
-    if (event.key === 'Enter') { // Hanya proses jika tombol Enter ditekan
-      const searchTerm = event.target.value;
-      if (searchTerm.trim() !== "") { // Pastikan input tidak kosong
-        // Redirect ke halaman indexpostingan dengan query parameter
-        window.location.href = `/list?search=${encodeURIComponent(searchTerm)}`;
-      }
-    }
-  }
+  // Data postingan (dari server, di-parse dari JSON)
+  const posts = JSON.parse(JSON.stringify(<Fragment set:html={allPostsJSON} />));
+
+    function searchPosts(searchTerm) {
+        const resultsList = document.getElementById('search-results');
+        resultsList.innerHTML = ''; // Kosongkan hasil sebelumnya
+
+        const term = searchTerm.toLowerCase();
+
+        if (term.trim() === "") {
+            resultsList.style.display = 'none'; // Sembunyikan jika input kosong
+            return;
+        }
+
+        const filteredPosts = posts.filter(post => post.title.toLowerCase().includes(term));
+
+        if (filteredPosts.length > 0) {
+            filteredPosts.forEach(post => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = `/blog/${post.slug}`;
+                link.textContent = post.title;
+                listItem.appendChild(link);
+                resultsList.appendChild(listItem);
+            });
+            resultsList.style.display = 'block'; // Tampilkan daftar hasil
+        } else {
+            resultsList.style.display = 'none'; // Sembunyikan jika tidak ada hasil
+        }
+}
+
+// Event listener di-attach langsung di HTML (oninput)
 </script>
 
 <style>
-  /* ... (CSS Anda yang sudah ada, tidak ada perubahan di sini) ... */
-    header {
+  /* ... (CSS Anda yang sudah ada) ... */
+  header {
     margin: 0;
     padding: 0 1em;
     background: white;
@@ -135,7 +170,7 @@ import { SITE_TITLE } from '../consts';
     /* Style untuk input pencarian di dalam dropdown */
   .search-container-dropdown {
     padding: 0.5rem; /* Beri sedikit padding */
-    border-bottom: 1px solid #ddd; /* Garis bawah (opsional) */
+    border-bottom: 1px solid #ddd;
   }
 
   .search-container-dropdown input {
@@ -143,5 +178,29 @@ import { SITE_TITLE } from '../consts';
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+  }
+
+  /* Style untuk daftar hasil pencarian */
+  .search-results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Tambahkan ini */
+  }
+
+  .search-results-list li {
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+  }
+    .search-results-list li a{
+        display: block; /* Agar link mengisi seluruh lebar list item */
+        color: #333;
+        text-decoration: none;
+    }
+
+  .search-results-list li:last-child {
+    border-bottom: none; /* Hilangkan border pada item terakhir */
+  }
+  .search-results-list{
+    display: none;
   }
 </style>

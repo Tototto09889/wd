@@ -3,7 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import RecentPosts from '../components/RecentPosts.astro'; // Impor
+import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah diimpor
 ---
 
 <!doctype html>
@@ -11,7 +11,7 @@ import RecentPosts from '../components/RecentPosts.astro'; // Impor
 <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
-        /* ... (CSS Anda yang asli dari index.astro, TIDAK PERLU DIUBAH) ... */
+        /* ... (CSS Anda yang sudah ada, TIDAK PERLU DIUBAH) ... */
         *, *::before, *::after {
           box-sizing: border-box;
         }
@@ -262,7 +262,11 @@ import RecentPosts from '../components/RecentPosts.astro'; // Impor
           <p>"Di sini, di mana kode-kode usang ..."</p>
         </div>
 
-        <RecentPosts /> {/* Tambahkan ini */}
+        {/* Kotak untuk Recent Posts - MULAI */}
+        <div class="project-item">  {/* Gunakan class yang sama dengan kotak proyek */}
+            <RecentPosts />
+        </div>
+        {/* Kotak untuk Recent Posts - SELESAI */}
 
         <div class="project-container">
           {/* ... (Konten proyek Anda, TIDAK PERLU DIUBAH) ... */}
@@ -336,11 +340,9 @@ import RecentPosts from '../components/RecentPosts.astro'; // Impor
                 </form>
             </div>
         </div>
-        <a href="/blog">Lihat Semua Postingan</a>
     </main>
     <Footer />
      <script>
-        /* ... (script Anda yang sudah ada, TIDAK PERLU DIUBAH) ... */
        const quotes = [
          [
            "Rindu itu berat, tapi lebih berat lagi kalau rindunya sama orang yang salah.",
@@ -360,7 +362,7 @@ import RecentPosts from '../components/RecentPosts.astro'; // Impor
          [
            "Wangy itu fana, seperti sinyal wifi yang hilang timbul.",
            "Bahagia itu kayak kuota internet, cepet banget habisnya.",
-                      "Aku tanpamu bagaikan handphone lowbat, lemah tak berdaya.",
+           "Aku tanpamu bagaikan handphone lowbat, lemah tak berdaya.",
          ]
 
        ];
@@ -368,7 +370,7 @@ import RecentPosts from '../components/RecentPosts.astro'; // Impor
        const mainButtonQuotes = [
            "Bayar dulu, Boss! Gak ada yang gratis di dunia ini, kecuali kentut.",
            "Mau lihat? Duitnya mana? Receh pun jadi, asal jangan daun!",
-           "Klik ini = siap-siap rogoh kocek! Gak bayar, gak sayang~",
+                      "Klik ini = siap-siap rogoh kocek! Gak bayar, gak sayang~",
            "Tombol ajaib! Sekali klik, dompet langsung nangis. Tapi worth it, kok!",
            "Penasaran? Bayar dulu, baru lanjut! Gak mahal, kok, cuma seharga kenangan mantan.",
            "Ini tombol premium, Bos! Khusus buat yang berduit. Yang kere, minggir dulu!",

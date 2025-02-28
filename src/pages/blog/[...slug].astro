@@ -1,6 +1,7 @@
----
+----
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+// Hapus: import { render } from 'astro:content';  // Tidak diperlukan lagi
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -33,7 +34,10 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'> & { customSlug?: string; originalId?: string };
 
 const post = Astro.props;
-const { Content } = await post.render();
+// const { Content } = await render(post); // Tidak diperlukan lagi, gunakan <Content /> langsung di bawah
+const { Content } = await post.render(); // Gunakan post.render()
+
+
 
 ---
 

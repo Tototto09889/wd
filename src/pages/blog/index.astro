@@ -16,7 +16,7 @@ interface Post {
     description?: string;
     externalHeroImage?: string;
     heroImage?: string;
-    category?: string;
+    category?: string; // Tetap ada, tapi tidak ditampilkan jika tidak diinginkan
   };
   slug: string;
 }
@@ -40,7 +40,7 @@ interface Post {
 			}
 
 			body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font lebih mirip */
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 background-color: #f0f0f0;
             }
 
@@ -51,7 +51,7 @@ interface Post {
 			}
 
             section {
-                margin-top: 1rem; /* Kurangi margin atas */
+                margin-top: 1rem;
             }
 
 			ul {
@@ -61,10 +61,10 @@ interface Post {
 			ul li {
                 background-color: #fff;
                 border: 1px solid #ddd;
-                border-radius: 4px; /*  Kurangi border-radius */
+                border-radius: 4px;
                 overflow: hidden;
-                box-shadow: 0 1px 2px rgba(0,0,0,0.1); /*  Kurangi shadow */
-                margin-bottom: 0.75rem; /*  Kurangi margin bawah */
+                box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+                margin-bottom: 0.75rem;
                 width: 100%;
 			}
 
@@ -91,7 +91,7 @@ interface Post {
 
             .no-image-placeholder {
                 width: 100%;
-                height: 150px; /* Kurangi tinggi placeholder */
+                height: 120px; /*  Kurangi lagi */
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -102,43 +102,29 @@ interface Post {
             }
 
             .text-content {
-                padding: 0.75rem; /*  Kurangi padding */
+                padding: 0.5rem; /*  Kurangi lagi */
             }
 
 			.title {
-				margin: 0 0 0.25rem 0; /* Kurangi margin bawah */
-				font-size: 1rem;      /*  Kurangi ukuran font */
+				margin: 0; /*  Hilangkan margin */
+				font-size: 1rem;
 				font-weight: bold;
                 line-height: 1.2;
 			}
 
             .smaller-text, .category {
-                font-size: 0.75rem; /*  Kurangi ukuran font */
-                color: #777;       /*  Warna abu-abu sedikit lebih gelap */
-                margin: 0.25rem 0; /*  Kurangi margin */
+                font-size: 0.7rem; /*  Lebih kecil */
+                color: #777;
+                margin: 0; /* Hilangkan margin */
             }
 
             .date {
-                font-size: 0.65rem;  /*  Kurangi ukuran font */
+                font-size: 0.6rem;  /*  Lebih kecil */
                 color: #999;
-                margin: 0.25rem 0 0 0;
+                margin: 0;    /*  Hilangkan margin */
             }
 
-            /* Tombol "Lihat" */
-            .button {
-                display: inline-block;
-                background-color: #4CAF50;
-                color: white;
-                padding: 0.25rem 0.5rem; /*  Kurangi padding */
-                text-decoration: none;
-                border-radius: 4px;
-                margin-top: 0.5rem;
-				font-size: 0.75rem;     /*  Kurangi ukuran font */
-            }
 
-			.button:hover {
-				background-color: #367c39;
-			}
 
             /* Responsif */
             @media (max-width: 720px) {
@@ -147,11 +133,7 @@ interface Post {
                 }
 
                 section {
-                    margin-top: 0.75rem; /* Kurangi margin */
-                }
-
-                .text-content {
-                    padding: 0.5rem; /*  Lebih kecil lagi */
+                    margin-top: 0.75rem; /* Kurangi lagi */
                 }
             }
 		</style>
@@ -177,16 +159,18 @@ interface Post {
                                 </div>
                                 <div class="text-content">
                                     <h4 class="title">{post.data.title}</h4>
-                                    {post.data.description && (
+                                    {/* Hapus deskripsi jika tidak diinginkan */}
+                                    {/* {post.data.description && (
                                         <p class="smaller-text">{post.data.description}</p>
-                                    )}
-                                    {post.data.category && (
-                                         <p class="category">{post.data.category}</p>
-                                    )}
+                                    )} */}
+                                    {/* Hapus kategori jika tidak diinginkan */}
+                                    {/* {post.data.category && (
+                                        <p class="category">{post.data.category}</p>
+                                    )} */}
                                     <p class="date">
                                         <FormattedDate date={post.data.pubDate} />
                                     </p>
-                                    <span class="button">Lihat</span>
+                                    {/* Hapus tombol "Lihat" */}
                                 </div>
 							</a>
 						</li>
@@ -197,4 +181,3 @@ interface Post {
 		<Footer />
 	</body>
 </html>
-

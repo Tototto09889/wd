@@ -1,7 +1,7 @@
 import { defineCollection, z } from "astro:content";
 
 const blog = defineCollection({
-  loader: async ({ glob }) => {
+  loader: async ({ glob }) => { //  <--  PASTIKAN INI BENAR!
     const posts = await glob("./src/content/blog/**/*.{md,mdx}");
     const nestedPosts = await glob("./src/content/blog/*/*/*.{md,mdx}");
     return [...posts, ...nestedPosts];

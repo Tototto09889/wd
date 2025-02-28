@@ -57,7 +57,7 @@ interface Post {
 			ul {
 				list-style: none;
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); /* Sedikit kurangi min */
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Tetap fleksibel di desktop */
                 gap: 1rem;
 			}
 
@@ -68,7 +68,7 @@ interface Post {
                 overflow: hidden;
                 box-shadow: 0 1px 2px rgba(0,0,0,0.1);
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
-                margin-bottom: 1rem;
+                margin-bottom: 1rem; /* Kembalikan margin */
 
 			}
 
@@ -85,7 +85,7 @@ interface Post {
 
             .image-container {
                 width: 100%;
-                height: 150px; /* Sesuaikan */
+                height: 150px;
                 overflow: hidden;
             }
 
@@ -99,7 +99,7 @@ interface Post {
 
             .no-image-placeholder {
                 width: 100%;
-                height: 150px; /* Sesuaikan */
+                height: 150px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -133,10 +133,12 @@ interface Post {
                 margin: 0.25rem 0 0 0;
             }
 
-            /* Responsif */
+
+
+            /* Responsif (HP) */
             @media (max-width: 720px) {
                 main {
-                    padding: 0.3rem; /* Sedikit lebih kecil */
+                    padding: 0.5rem; /*  Kembalikan ke 0.5rem, atau sesuaikan */
                 }
 
                 section {
@@ -144,13 +146,14 @@ interface Post {
                 }
 
                 ul {
-                    gap: 0.6rem;  /*  Lebih kecil dari sebelumnya */
-                }
-                .image-container{
-                    height: auto;
+                    grid-template-columns: 1fr; /*  PAKSA SATU KOLOM */
+                    gap: 0.75rem;            /*  Sesuaikan gap */
                 }
 
-                .text-content{
+                .image-container {
+                    height: auto;
+                }
+              	.text-content{
                     padding: 0.5rem;
                 }
             }
@@ -163,7 +166,7 @@ interface Post {
 				<ul>
 					{posts.map((post: Post) => (
 						<li>
-							<a href={`/blog/${post.id}/`}>
+							<a href={`/blog/${post.slug}/`}>
                                 <div class="image-container">
                                     {post.data.externalHeroImage ? (
                                         <img src={post.data.externalHeroImage} alt={post.data.title || "Thumbnail"} />
@@ -186,6 +189,7 @@ interface Post {
                                     {post.data.category && (
                                          <p class="category">{post.data.category}</p>
                                     )}
+
                                     <p class="date">
                                         <FormattedDate date={post.data.pubDate} />
                                     </p>

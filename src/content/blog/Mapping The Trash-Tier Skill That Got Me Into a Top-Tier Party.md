@@ -2,7 +2,7 @@
 title: "Mapping The Trash-Tier Skill That Got Me Into a Top-Tier Party Bahasa Indonesia"
 description: "Fantasi, Aksi, Petualangan, Isekai"
 pubDate: "28 Februari 2025"
-heroImage: "https://cdn.myanimelist.net/images/manga/3/283787.jpg"
+heroImage: "https://cdn.novelupdates.com/images/2018/08/Hazure-Skill.jpg"
 ---
 
 Penulis:  SAVAN (サバン)

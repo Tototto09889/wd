@@ -57,7 +57,7 @@ interface Post {
 			ul {
 				list-style: none;
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); /* Sedikit kurangi min */
                 gap: 1rem;
 			}
 
@@ -68,7 +68,7 @@ interface Post {
                 overflow: hidden;
                 box-shadow: 0 1px 2px rgba(0,0,0,0.1);
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
-                margin-bottom: 1rem; /* Kembalikan margin */
+                margin-bottom: 1rem;
 
 			}
 
@@ -85,7 +85,7 @@ interface Post {
 
             .image-container {
                 width: 100%;
-                height: 150px;
+                height: 150px; /* Sesuaikan */
                 overflow: hidden;
             }
 
@@ -99,7 +99,7 @@ interface Post {
 
             .no-image-placeholder {
                 width: 100%;
-                height: 150px;
+                height: 150px; /* Sesuaikan */
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -111,6 +111,7 @@ interface Post {
 
             .text-content {
                 padding: 0.5rem;
+                width: 100%;
             }
 
 			.title {
@@ -132,24 +133,26 @@ interface Post {
                 margin: 0.25rem 0 0 0;
             }
 
-
             /* Responsif */
             @media (max-width: 720px) {
                 main {
-                    padding: 0.4rem; /*  Sedikit lebih kecil dari sebelumnya */
+                    padding: 0.3rem; /* Sedikit lebih kecil */
                 }
 
                 section {
                     margin-top: 0.75rem;
                 }
-               .image-container{
-                height: auto;
-               }
+
+                ul {
+                    gap: 0.6rem;  /*  Lebih kecil dari sebelumnya */
+                }
+                .image-container{
+                    height: auto;
+                }
 
                 .text-content{
                     padding: 0.5rem;
                 }
-
             }
 		</style>
 	</head>
@@ -177,13 +180,12 @@ interface Post {
                                     {post.data.description && (
                                         <p class="smaller-text">{post.data.description}</p>
                                     )}
-                                    {/*  Satu Pembatas di Sini */}
+
                                     <hr style={{ border: 'none', borderTop: '1px solid #eee', margin: '0.5rem 0' }} />
 
                                     {post.data.category && (
                                          <p class="category">{post.data.category}</p>
                                     )}
-
                                     <p class="date">
                                         <FormattedDate date={post.data.pubDate} />
                                     </p>

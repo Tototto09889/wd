@@ -117,28 +117,34 @@ const posts = (await getCollection('blog')).sort(
 			<section>
 				<ul>
 					{
-						posts.map((post) => (
-							<li>
-                <a href={`/blog/${post.id}/`}>
-                  <div class="post-container">
-                    {/* Perubahan utama ada di sini */}
-                    {post.data.externalImage ? (
-                      <img width={720} height={360} src={post.data.externalImage} alt="" />
-                    ) : (
-                      <img width={720} height={360} src={post.data.heroImage} alt="" />
-                    )}
-                    <div class="post-content">
-                      <h4 class="title">{post.data.title}</h4>
-                      <p class="smaller-text">{post.data.description}</p>
-                      <p class="date">
-                        <FormattedDate date={post.data.pubDate} />
-                      </p>
+						posts.map((post) => {
+              // 1. Cek apakah heroImage adalah URL eksternal
+              const isExternal = post.data.heroImage.startsWith('http://') || post.data.heroImage.startsWith('https://');
+
+              return (
+                <li>
+                  <a href={`/blog/${post.id}/`}>
+                    <div class="post-container">
+                      {/* 2. Gunakan URL eksternal jika ya, jika tidak gunakan path lokal */}
+                      <img
+                        width={720}
+                        height={360}
+                        src={isExternal ? post.data.heroImage : post.data.heroImage}
+                        alt=""
+                      />
+                      <div class="post-content">
+                        <h4 class="title">{post.data.title}</h4>
+                        <p class="smaller-text">{post.data.description}</p>
+                        <p class="date">
+                          <FormattedDate date={post.data.pubDate} />
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </a>
-              </li>
-						))
-					}
+                  </a>
+                </li>
+              );
+            })
+          }
 				</ul>
 			</section>
 		</main>

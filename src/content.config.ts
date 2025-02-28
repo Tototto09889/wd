@@ -10,7 +10,7 @@ const blog = defineCollection({
         pattern: "*/*/*.{md,mdx}", // File di dalam  blog/judul/bagian/
       });
 
-    return [...posts, ...nestedPosts];
+    return [...posts, ...nestedPosts]; // Perhatikan koma setelah ...posts
   },
   // Type-check frontmatter using a schema
   schema: z.object({

@@ -22,13 +22,14 @@ const posts = (await getCollection('blog')).sort(
 			ul {
 				display: flex;
 				flex-wrap: wrap;
-				gap: 2rem;
+				gap: 2rem; /* Hapus jika pakai margin */
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
 			}
 			ul li {
 				width: calc(50% - 1rem);
+        margin-bottom: 2rem; /* Tambahkan ini */
 			}
 			ul li * {
 				text-decoration: none;
@@ -36,7 +37,7 @@ const posts = (await getCollection('blog')).sort(
 			}
 			ul li:first-child {
 				width: 100%;
-				margin-bottom: 1rem;
+				margin-bottom: 1rem; /* Jarak bawah postingan pertama */
 				text-align: center;
 			}
 			ul li:first-child img {
@@ -90,11 +91,12 @@ const posts = (await getCollection('blog')).sort(
 
 			@media (max-width: 720px) {
 				ul {
-					gap: 0.5em;
+					gap: 0.5em; /* Hapus atau sesuaikan jika pakai margin */
 				}
 				ul li {
 					width: 100%;
 					text-align: center;
+          margin-bottom: 1rem; /* Margin lebih kecil di mobile */
 				}
 				ul li:first-child {
 					margin-bottom: 0;

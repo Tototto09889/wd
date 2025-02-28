@@ -2,7 +2,7 @@
 title: "10-nen Goshi no HikiNEET o Yamete, Gaishutsushitara Jitaku goto Isekai ni Ten'ishiteta Bahasa Indonesia"
 description: "Novel"
 pubDate: "23 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2019/09/91CD601F-C526-439B-B218-7575EABA9248.jpeg"
 ---
 
 Penulis: Bandou Tarou

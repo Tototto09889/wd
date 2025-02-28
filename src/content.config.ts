@@ -1,27 +1,19 @@
-import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
 const blog = defineCollection({
-  // Load Markdown and MDX files in the `src/content/blog/` directory.
-  loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
-  //konten kedua
-  const nestedPosts = await glob({
-        base: "./src/content/blog",
-        pattern: "*/*/*.{md,mdx}", // File di dalam  blog/judul/bagian/
-      });
-
-    return [...posts, ...nestedPosts]; // Perhatikan koma setelah ...posts
+  loader: async ({ glob }) => {
+    const posts = await glob("./src/content/blog/**/*.{md,mdx}");
+    const nestedPosts = await glob("./src/content/blog/*/*/*.{md,mdx}");
+    return [...posts, ...nestedPosts]; // Sudah benar
   },
-  // Type-check frontmatter using a schema
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    // Transform string to Date object
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
+    isNested: z.boolean().optional(),
   }),
 });
 
 export const collections = { blog };
-

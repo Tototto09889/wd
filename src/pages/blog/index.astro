@@ -68,6 +68,7 @@ interface Post {
                 overflow: hidden;
                 box-shadow: 0 1px 2px rgba(0,0,0,0.1);
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
+                margin-bottom: 0.75rem;
 
 			}
 
@@ -84,7 +85,7 @@ interface Post {
 
             .image-container {
                 width: 100%;
-                height: 150px; /*  Tetap beri tinggi awal */
+                height: 150px; /* Sesuaikan */
                 overflow: hidden;
             }
 
@@ -98,7 +99,7 @@ interface Post {
 
             .no-image-placeholder {
                 width: 100%;
-                height: 150px;
+                height: 150px; /* Sesuaikan */
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -110,7 +111,6 @@ interface Post {
 
             .text-content {
                 padding: 0.5rem;
-                width: 100%; /*  Pastikan mengisi lebar */
             }
 
 			.title {
@@ -132,27 +132,24 @@ interface Post {
                 margin: 0.25rem 0 0 0;
             }
 
+
             /* Responsif */
             @media (max-width: 720px) {
                 main {
-                    padding: 0.25rem; /*  Kurangi lagi padding di main */
+                    padding: 0.25rem;
                 }
 
                 section {
                     margin-top: 0.75rem;
                 }
-
-                ul {
-                    gap: 0.5rem; /*  Kurangi gap */
-                }
-
-                .image-container {
-                    height: auto; /*  Biarkan tinggi menyesuaikan */
-                }
+               .image-container{
+                height: auto;
+               }
 
                 .text-content{
                     padding: 0.5rem;
                 }
+
             }
 		</style>
 	</head>
@@ -177,15 +174,21 @@ interface Post {
                                 </div>
                                 <div class="text-content">
                                     <h4 class="title">{post.data.title}</h4>
+                                    <hr style={{ border: 'none', borderTop: '1px solid #eee', margin: '0.5rem 0' }} />
                                     {post.data.description && (
                                         <p class="smaller-text">{post.data.description}</p>
                                     )}
+
+                                    <hr style={{ border: 'none', borderTop: '1px solid #eee', margin: '0.5rem 0' }} />
+
                                     {post.data.category && (
                                          <p class="category">{post.data.category}</p>
                                     )}
+                                     <hr style={{ border: 'none', borderTop: '1px solid #eee', margin: '0.5rem 0' }} />
                                     <p class="date">
                                         <FormattedDate date={post.data.pubDate} />
                                     </p>
+                                     {/* Hapus tombol "Lihat" */}
                                 </div>
 							</a>
 						</li>

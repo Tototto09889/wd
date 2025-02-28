@@ -1,85 +1,111 @@
 ---
+// src/layouts/BlogPost.astro
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Tag from '../components/Tag.astro'; // Impor komponen Tag
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, genres } = Astro.props; // Ambil genres
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
+			/* ... (CSS Anda yang sudah ada, JANGAN DIHAPUS) ... */
+             /* CSS untuk layout dua kolom */
+             .blog-layout {
+                 display: grid; /* Atau flex */
+                 grid-template-columns: 3fr 1fr; /* Kolom utama 3x lebih lebar dari sidebar */
+                 gap: 2rem; /* Spasi antar kolom */
+                 width: 95%;
+                 max-width: 1200px; /* Lebar maksimum konten */
+                 margin: auto; /* Pusatkan */
+             }
+             .main-content{
+                 /* Gaya untuk div main-content */
+                 width: 100%;
+
+             }
+
+
+             @media (max-width: 768px) {
+                 .blog-layout {
+                     grid-template-columns: 1fr; /* Satu kolom di mobile */
+                 }
+             }
+
+             /* ... (CSS Anda yang lain) ... */
 		</style>
 	</head>
 
 	<body>
 		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
+		<div class="blog-layout"> {/* Tambahkan div pembungkus */}
+			<main class = "main-content">
+				<article>
+					<div class="hero-image">
+						{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
 					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
+					<div class="prose">
+						<div class="title">
+							<div class="date">
+								<FormattedDate date={pubDate} />
+								{
+									updatedDate && (
+										<div class="last-updated-on">
+											Last updated on <FormattedDate date={updatedDate} />
+										</div>
+									)
+								}
+							</div>
+							<h1>{title}</h1>
+                             {genres && (
+                                <div class="genres">
+                                    {genres.map((genre) => (
+                                        <Tag tag={genre} />
+                                    ))}
+                                </div>
+                             )}
+							<hr />
+						</div>
+						<slot />
+					</div>
+				</article>
+			</main>
+			<Sidebar />  {/* Tambahkan Sidebar di sini */}
+		</div>
 		<Footer />
 	</body>
 </html>
+<style>
+/* ... CSS yang sudah ada ... */
+ .blog-layout {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+    width: 95%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.main-content {
+    width: 100%;
+}
+
+.genres {
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .blog-layout {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+

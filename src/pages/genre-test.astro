@@ -28,41 +28,64 @@ const genres = [
 </BaseLayout>
 
 <style>
+/* CSS Reset (PENTING!) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ini SANGAT penting */
+}
+
+body {
+    font-family: sans-serif; /* Contoh */
+}
+
 main {
-  width: 95%;
-  max-width: 800px; /* Atau sesuaikan */
-  margin: 0 auto;
-  padding: 2rem;
+    width: 100%;  /* Gunakan 100% */
+    max-width: 100%; /* Hapus atau set ke 100% */
+    margin: 0 auto;
+    padding: 0.5rem; /* Kurangi padding, terutama di mobile */
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 2rem;
+    text-align: center;
+    margin-bottom: 1rem; /* Kurangi margin */
 }
 
 /* Ini yang PENTING untuk membuat tampilan grid */
 .genre-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Sesuaikan minmax */
-  gap: 1rem;  /* Spasi antar tombol */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Lebih kecilkan minmax */
+  gap: 0.5rem;  /* Kurangi gap */
   justify-content: center; /* Pusatkan grid */
 }
 
 .genre-button {
-  display: inline-block; /* Penting agar padding, margin, dll. berfungsi dengan baik */
-  padding: 0.5rem 1rem; /* Sesuaikan */
-  background-color: #cc0000; /* Merah, sesuaikan */
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #cc0000;
   color: white;
   text-decoration: none;
-  border-radius: 5px; /* Sesuaikan */
+  border-radius: 5px;
   text-align: center;
-  transition: background-color 0.2s ease; /* Efek hover */
-  border: none; /* Hapus border bawaan */
-  font-size: 1rem; /* Sesuaikan */
-  cursor: pointer; /* Ubah kursor menjadi pointer */
+  transition: background-color 0.2s ease;
+  border: none;
+  font-size: 0.9rem; /* Perkecil sedikit */
+  word-break: break-word; /* Tambahkan ini */
+
 }
 
 .genre-button:hover {
-  background-color: #990000; /* Merah lebih gelap, sesuaikan */
+  background-color: #990000;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) { /* Atau breakpoint yang Anda gunakan */
+  .genre-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Perkecil lagi di mobile*/
+        gap: 0.5rem; /* Perkecil gap di mobile */
+    }
+    .genre-button{
+        font-size: 0.8rem; /*Perkecil lagi di mobile*/
+    }
 }
 </style>

@@ -45,7 +45,7 @@ interface Post {
             }
 
 			main {
-				max-width: 800px;
+				max-width: 800px; /* Tetap batasi lebar di desktop */
                 margin: 0 auto;
                 padding: 1rem;  /* Padding untuk desktop */
 			}
@@ -56,7 +56,6 @@ interface Post {
 
 			ul {
 				list-style: none;
-                /* Hapus grid untuk semua ukuran layar */
 			}
 
 			ul li {
@@ -64,18 +63,11 @@ interface Post {
                 border: 1px solid #ddd;
                 border-radius: 4px;
                 overflow: hidden;
-                box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Shadow tipis */
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-                display: block; /*  Penting */
-                width: 100%;      /*  Penting */
+                box-shadow: 0 1px 2px rgba(0,0,0,0.1);
                 margin-bottom: 0.75rem;
-
+                width: 100%;      /* PENTING */
+                display: block;    /* PENTING */
 			}
-
-            ul li:hover {
-                transform: translateY(-2px); /*  Efek hover (opsional) */
-                box-shadow: 0 2px 4px rgba(0,0,0,0.2); /*  Shadow lebih kuat saat hover */
-            }
 
 			ul li a {
                 display: block;
@@ -99,7 +91,7 @@ interface Post {
 
             .no-image-placeholder {
                 width: 100%;
-                height: 150px; /* Sesuaikan */
+                height: 150px;  /* Sesuaikan */
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -111,7 +103,6 @@ interface Post {
 
             .text-content {
                 padding: 0.5rem;
-                width: 100%;
             }
 
 			.title {
@@ -136,25 +127,22 @@ interface Post {
             /* Responsif (HP) */
             @media (max-width: 720px) {
                 main {
-                    padding: 0.2rem; /*  Padding SANGAT minimal */
+                    padding: 0; /* HILANGKAN PADDING */
+                }
+                ul{
+                    margin: 0;
                 }
 
                 section {
                     margin-top: 0.75rem;
                 }
-
-                ul {
-                    margin: 0; /*  Hilangkan margin pada ul */
+                .image-container{
+                    height: auto;
                 }
-                /*  ul li sudah block-level dan width: 100% */
-
-                .image-container {
-                    height: auto; /* Biarkan tinggi menyesuaikan */
-                }
-
                 .text-content{
                     padding: 0.5rem;
                 }
+
             }
 		</style>
 	</head>

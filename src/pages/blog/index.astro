@@ -9,6 +9,17 @@ import FormattedDate from '../../components/FormattedDate.astro';
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+interface Post {
+  data: {
+    title: string;
+    description?: string;
+    externalHeroImage?: string;
+    heroImage?: string;
+    category?: string;
+  };
+  slug: string;
+}
 ---
 
 <!doctype html>
@@ -16,59 +27,46 @@ const posts = (await getCollection('blog')).sort(
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			/* Reset CSS yang SANGAT Kuat */
-			html {
-                box-sizing: border-box; /* 1. Terapkan di level html */
-                overflow-x: hidden;     /* 2. Cegah scroll horizontal */
-            }
-            *, *:before, *:after { /* 3. Terapkan ke semua elemen */
-                box-sizing: inherit;  /* 4. Warisi dari html */
-                margin: 0;
-                padding: 0;
-            }
+			/* Reset CSS */
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			html, body {
+				width: 100%;
+				overflow-x: hidden;
+			}
 
 			body {
-                font-family: sans-serif;
-				width: 100%;		/*Pastikan body 100%*/
-				overflow-x: hidden; /*Penting*/
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font lebih mirip */
+                background-color: #f0f0f0;
             }
 
 			main {
 				max-width: 800px;
                 margin: 0 auto;
                 padding: 1rem;
-                /*outline: 2px solid red;  DEBUG: Garis merah di sekitar main */
 			}
 
             section {
-                margin-top: 2rem;
+                margin-top: 1rem; /* Kurangi margin atas */
             }
 
 			ul {
 				list-style: none;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 1rem;
-                /*outline: 2px solid blue; DEBUG: Garis biru di sekitar ul */
 			}
 
 			ul li {
+                background-color: #fff;
                 border: 1px solid #ddd;
-                border-radius: 4px;
+                border-radius: 4px; /*  Kurangi border-radius */
                 overflow: hidden;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-               /*  margin-bottom: 1rem;  Hapus ini, gunakan gap */
-               /*  display: block;  Tidak perlu, sudah diatur oleh grid */
-               /*  width: 100%;   Tidak perlu, sudah diatur oleh grid */
-                /*outline: 2px solid green; DEBUG: Garis hijau di sekitar li */
+                box-shadow: 0 1px 2px rgba(0,0,0,0.1); /*  Kurangi shadow */
+                margin-bottom: 0.75rem; /*  Kurangi margin bawah */
+                width: 100%;
 			}
-
-
-            ul li:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            }
 
 			ul li a {
                 display: block;
@@ -77,94 +75,83 @@ const posts = (await getCollection('blog')).sort(
 			}
 
             .image-container {
-                height: 150px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: #f0f0f0;
-				max-width: 100%; /*PENTING*/
-				overflow: hidden; /*PENTING*/
-                /*outline: 2px solid yellow; DEBUG: Garis kuning di sekitar image-container */
+				width: 100%;
             }
 
 			ul li img {
                 width: 100%;
-                height: auto;  /*  Gunakan height: auto */
+                height: auto;
                 object-fit: cover;
                 object-position: center;
                 display: block;
-				max-width: 100%; /*PENTING*/
 			}
 
             .no-image-placeholder {
                 width: 100%;
-                height: 200px;  /* Beri tinggi */
+                height: 150px; /* Kurangi tinggi placeholder */
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 color: #666;
                 font-style: italic;
-				/*outline: 2px solid orange;  DEBUG */
+                background-color: #eee;
 
             }
 
             .text-content {
-                padding: 1rem;
-				/*outline: 2px solid purple; DEBUG */
+                padding: 0.75rem; /*  Kurangi padding */
             }
 
 			.title {
-				margin: 0 0 0.5rem 0;
-				font-size: 1.1rem;
+				margin: 0 0 0.25rem 0; /* Kurangi margin bawah */
+				font-size: 1rem;      /*  Kurangi ukuran font */
 				font-weight: bold;
                 line-height: 1.2;
-                border-bottom: 1px solid #eee;
-                padding-bottom: 0.5rem;
 			}
 
             .smaller-text, .category {
-                font-size: 0.8rem;
-                color: #666;
-                margin: 0.5rem 0;
-                border-bottom: 1px solid #eee;
-                padding-bottom: 0.5rem;
+                font-size: 0.75rem; /*  Kurangi ukuran font */
+                color: #777;       /*  Warna abu-abu sedikit lebih gelap */
+                margin: 0.25rem 0; /*  Kurangi margin */
             }
 
-			.date {
-				font-size: 0.7rem;
-				color: #999;
-                margin: 0.5rem 0 0 0;
+            .date {
+                font-size: 0.65rem;  /*  Kurangi ukuran font */
+                color: #999;
+                margin: 0.25rem 0 0 0;
+            }
+
+            /* Tombol "Lihat" */
+            .button {
+                display: inline-block;
+                background-color: #4CAF50;
+                color: white;
+                padding: 0.25rem 0.5rem; /*  Kurangi padding */
+                text-decoration: none;
+                border-radius: 4px;
+                margin-top: 0.5rem;
+				font-size: 0.75rem;     /*  Kurangi ukuran font */
+            }
+
+			.button:hover {
+				background-color: #367c39;
 			}
 
-            /* Responsif untuk Mobile (HP) */
+            /* Responsif */
             @media (max-width: 720px) {
-				/*Hampir semua tidak perlu diganti*/
                 main {
                     padding: 0.5rem;
                 }
 
                 section {
-                    margin-top: 1rem;
-                }
-
-                .image-container {
-					height: auto;
+                    margin-top: 0.75rem; /* Kurangi margin */
                 }
 
                 .text-content {
-                    padding: 0.75rem;
-                }
-
-                .title {
-                    font-size: 1rem;
-                }
-
-                .smaller-text, .category {
-                    font-size: 0.75rem;
-                }
-
-                .date {
-                    font-size: 0.65rem;
+                    padding: 0.5rem; /*  Lebih kecil lagi */
                 }
             }
 		</style>
@@ -174,9 +161,9 @@ const posts = (await getCollection('blog')).sort(
 		<main>
 			<section>
 				<ul>
-					{posts.map((post) => (
+					{posts.map((post: Post) => (
 						<li>
-							<a href={`/blog/${post.slug}/`}>
+							<a href={`/blog/${post.id}/`}>
                                 <div class="image-container">
                                     {post.data.externalHeroImage ? (
                                         <img src={post.data.externalHeroImage} alt={post.data.title || "Thumbnail"} />
@@ -199,6 +186,7 @@ const posts = (await getCollection('blog')).sort(
                                     <p class="date">
                                         <FormattedDate date={post.data.pubDate} />
                                     </p>
+                                    <span class="button">Lihat</span>
                                 </div>
 							</a>
 						</li>
@@ -209,3 +197,4 @@ const posts = (await getCollection('blog')).sort(
 		<Footer />
 	</body>
 </html>
+

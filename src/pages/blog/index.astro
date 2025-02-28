@@ -166,7 +166,7 @@ interface Post {
 				<ul>
 					{posts.map((post: Post) => (
 						<li>
-							<a href={`/blog/${post.slug}/`}>
+							<a href={`/blog/${post.id}/`}>
                                 <div class="image-container">
                                     {post.data.externalHeroImage ? (
                                         <img src={post.data.externalHeroImage} alt={post.data.title || "Thumbnail"} />

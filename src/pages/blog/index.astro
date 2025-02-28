@@ -56,9 +56,9 @@ interface Post {
 
 			ul {
 				list-style: none;
-                display: grid; /*  Kembalikan grid */
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /*  Kolom fleksibel */
-                gap: 1rem; /*  Jarak antar item */
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
 			}
 
 			ul li {
@@ -67,7 +67,7 @@ interface Post {
                 border-radius: 4px;
                 overflow: hidden;
                 box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-                transition: transform 0.2s ease, box-shadow 0.2s ease; /*  Efek hover */
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
 
 			}
 
@@ -83,17 +83,16 @@ interface Post {
 			}
 
             .image-container {
-                /*  Hapus display: flex, justify-content, align-items */
                 width: 100%;
-                height: 150px; /*  Beri tinggi awal (akan di-override di mobile) */
-                overflow: hidden; /*  Penting! */
+                height: 150px; /*  Tetap beri tinggi awal */
+                overflow: hidden;
             }
 
 			ul li img {
-                width: 100%; /*  Isi lebar container */
-                height: 100%; /* Isi tinggi container */
-                object-fit: cover; /*  PENTING: Potong gambar jika perlu */
-                object-position: center; /*  Pusatkan gambar */
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
                 display: block;
 			}
 
@@ -111,6 +110,7 @@ interface Post {
 
             .text-content {
                 padding: 0.5rem;
+                width: 100%; /*  Pastikan mengisi lebar */
             }
 
 			.title {
@@ -132,20 +132,26 @@ interface Post {
                 margin: 0.25rem 0 0 0;
             }
 
-            /*  Hapus hr */
-
             /* Responsif */
             @media (max-width: 720px) {
                 main {
-                    padding: 0.5rem;
+                    padding: 0.25rem; /*  Kurangi lagi padding di main */
                 }
 
                 section {
                     margin-top: 0.75rem;
                 }
 
+                ul {
+                    gap: 0.5rem; /*  Kurangi gap */
+                }
+
                 .image-container {
-                    height: auto; /*  Biarkan tinggi menyesuaikan di mobile */
+                    height: auto; /*  Biarkan tinggi menyesuaikan */
+                }
+
+                .text-content{
+                    padding: 0.5rem;
                 }
             }
 		</style>

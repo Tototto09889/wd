@@ -2,7 +2,7 @@
 title: "Ankoku Kishi Monogatari ~Yuusha wo Taosu Tameni Maou ni Shoukansaremashita~ Bahasa Indonesia"
 description: "Novel"
 pubDate: "23 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2020/05/ankoku_v1a.jpg"
 ---
 
 Penulis: Rokuro Kageura

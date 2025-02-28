@@ -16,10 +16,21 @@ const posts = (await getCollection('blog')).sort(
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
+			/* Reset CSS yang Kuat */
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box; /* Ini SANGAT PENTING */
+			}
+
+			html, body {
+				width: 100%;
+				overflow-x: hidden; /* Cegah scroll horizontal di level body */
+			}
 			/* Gaya Dasar */
 			body {
                 font-family: sans-serif;
-                margin: 0;
+                
             }
 			main {
 				max-width: 800px;
@@ -33,8 +44,8 @@ const posts = (await getCollection('blog')).sort(
 
 			ul {
 				list-style: none;
-				padding: 0;
-				margin: 0;
+				/*padding: 0;
+				margin: 0;  Sudah di-reset */
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 1rem;

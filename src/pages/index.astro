@@ -11,16 +11,16 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
 <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
-        /* ... (CSS Anda yang sudah ada, TIDAK PERLU DIUBAH) ... */
+        /* CSS yang sudah bagus (dan sudah saya rapikan), akan saya tambahkan komentar untuk penjelasan */
         *, *::before, *::after {
-          box-sizing: border-box;
+          box-sizing: border-box; /* Sangat penting untuk model kotak yang konsisten */
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font yang umum dan mudah dibaca */
             line-height: 1.6;
             color: #333;
-            background-color: #f8f9fa;
+            background-color: #f8f9fa; /* Warna latar belakang yang lembut */
         }
 
         .project-container {
@@ -36,50 +36,50 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
             margin-bottom: 1rem;
             width: 95%; /* Lebar kotak proyek untuk mobile */
-            max-width: 500px;
-            margin-left: auto;
+            max-width: 500px; /* Lebar maksimum untuk mobile */
+            margin-left: auto; /* Pusatkan secara horizontal */
             margin-right: auto;
-            position: relative;
+            position: relative; /* Penting untuk positioning tombol quote */
         }
 
         .project-item h3 {
             margin-top: 0;
             font-size: 1.25rem;
-            color: #0056b3;
+            color: #0056b3;  /* Warna biru yang lebih profesional */
             margin-bottom: 0.5rem;
-            text-align: center;
+            text-align: center; /* Pusatkan judul */
         }
 
       .smaller-text {
             font-size: 0.85rem;
             color: #555;
             text-align: center;
-            overflow-wrap: break-word;
+            overflow-wrap: break-word; /* Hindari teks keluar dari kotak */
             line-height: 1.4;
         }
 
         .smaller-text.quote {
-            font-style: italic;
+            font-style: italic; /* Gaya untuk kutipan */
         }
 
         .project-item .main-button {
-            background-color: #28a745;
+            background-color: #28a745; /* Warna hijau yang umum untuk tombol aksi */
             color: white;
             border: none;
             padding: 0.5rem 1rem;
             border-radius: 0.25rem;
             cursor: pointer;
             font-size: 1rem;
-            display: block;
+            display: block; /* Mengisi lebar kotak */
             width: 100%;
             margin: 0.5rem 0;
             text-align: center;
-            text-decoration: none;
-            transition: background-color: 0.2s ease-in-out;
+            text-decoration: none; /* Hilangkan underline pada link */
+            transition: background-color: 0.2s ease-in-out; /* Transisi hover yang halus */
         }
 
         .project-item .main-button:hover {
-            background-color: #218838;
+            background-color: #218838; /* Warna hijau lebih gelap saat hover */
         }
 
         .project-item .button-divider {
@@ -92,23 +92,23 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
         .project-item .quote {
           margin-top: 0.75rem;
           text-align: center;
-          position: relative;
-          z-index: 1;
+          position: relative; /* Pastikan z-index berfungsi */
+          z-index: 1;      /* Quote di bawah tombol */
         }
 
         .project-item img {
             width: 100%;
-            max-width: 100%;
-            height: auto;
+            max-width: 100%;  /* Pastikan gambar tidak melebihi container */
+            height: auto;     /* Jaga rasio aspek */
             border-radius: 0.25rem;
             margin-bottom: 1rem;
-            display: block;
-            object-fit: cover;
-            aspect-ratio: 16 / 9;
+            display: block;  /* Hilangkan spasi ekstra di bawah gambar */
+            object-fit: cover; /* Gambar mengisi kotak tanpa distorsi */
+            aspect-ratio: 16 / 9;  /* Rasio aspek 16:9 yang umum */
         }
 
         .quote-button {
-            background-color: #6c757d;
+            background-color: #6c757d; /* Warna abu-abu yang netral */
             color: white;
             border: none;
             padding: 0.25rem 0.5rem;
@@ -116,14 +116,14 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
             cursor: pointer;
             font-size: 0.75rem;
             transition: background-color: 0.2s ease-in-out;
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            z-index: 2;
+            position: absolute; /* Posisi absolut di dalam .project-item */
+            bottom: 10px; /* Jarak dari bawah */
+            right: 10px;  /* Jarak dari kanan */
+            z-index: 2;      /* Tombol di atas quote */
         }
 
         .quote-button:hover {
-            background-color: #5a6268;
+            background-color: #5a6268; /* Warna abu-abu lebih gelap saat hover */
         }
 
         .button-container {
@@ -134,20 +134,20 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
             text-align: center;
             margin-bottom: 2rem;
             padding: 1rem;
-            background-color: #f0f8ff;
+            background-color: #f0f8ff; /* Warna latar belakang yang sangat lembut */
             border-radius: 0.5rem;
             box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
             width: 97%; /* Lebar kotak welcome untuk mobile */
             max-width: 500px; /* Lebar maksimum untuk mobile */
-            margin-left: auto;
+            margin-left: auto; /* Pusatkan */
             margin-right: auto;
         }
 
         .welcome-section h3 {
             font-size: 2rem;
-            color: #495057;
+            color: #495057; /* Warna teks yang lebih gelap */
             margin-bottom: 0.5rem;
-            font-weight: bold;
+            font-weight: bold; /* Judul yang tebal */
         }
 
         .welcome-section p {
@@ -196,8 +196,8 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
         }
 
         .contact-form-container .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
+            resize: vertical; /* Izinkan ubah ukuran vertikal */
+            min-height: 100px; /* Tinggi minimal */
         }
 
         /* Fokus state untuk input */
@@ -205,7 +205,7 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
         .contact-form-container .form-group input[type="email"]:focus,
         .contact-form-container .form-group textarea:focus {
             border-color: #80bdff; /* Warna border saat fokus */
-            outline: 0;
+            outline: 0; /* Hilangkan outline bawaan browser */
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Efek shadow */
         }
 
@@ -230,25 +230,27 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
             background-color: #218838; /* Warna hijau lebih gelap saat hover */
         }
 
+       /* Media query untuk desktop (lebar layar >= 768px) */
        @media (min-width: 768px) {
             .project-container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
+                display: flex;        /* Menggunakan flexbox */
+                flex-wrap: wrap;    /* Item akan turun ke baris baru jika tidak cukup */
+                justify-content: center; /* Pusatkan item secara horizontal */
+                gap: 1rem;         /* Jarak antar item */
             }
 
             .project-item, .contact-form-container {
-                width: calc(50% - 1rem);
+                width: calc(50% - 1rem); /* Lebar 50% dikurangi gap */
+                /* margin: tidak perlu lagi karena sudah ada gap */
             }
 
             /* Style untuk welcome section di desktop */
             .welcome-section {
-                grid-column: 1 / -1;
-                width: auto;
-                max-width: none;
-                margin-left: 1rem;
-                margin-right: 1rem;
+                grid-column: 1 / -1;  /* welcome section menggunakan 1 baris penuh */
+                width: auto;         /* Lebar menyesuaikan konten */
+                max-width: none;    /* Tidak ada lebar maksimum */
+                margin-left: 1rem;   /* Margin kiri */
+                margin-right: 1rem;  /* Margin kanan */
 
             }
         }
@@ -258,8 +260,8 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
     <Header />
     <main>
         <div class="welcome-section">
-          <h3>Selamat Datang... di Ambang Sunyi</h3>
-          <p>"Di sini, di mana kode-kode usang ..."</p>
+          <h3>Selamat Datang...</h3>
+          <p>"Di sini, gak ada apa-apa..."</p>
         </div>
 
         {/* Kotak untuk Recent Posts - MULAI */}
@@ -340,10 +342,9 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
                 </form>
             </div>
         </div>
-        <a href="/blog">Lihat Semua Postingan</a>
     </main>
     <Footer />
-     <script>
+         <script>
        const quotes = [
          [
            "Rindu itu berat, tapi lebih berat lagi kalau rindunya sama orang yang salah.",
@@ -371,7 +372,7 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
        const mainButtonQuotes = [
            "Bayar dulu, Boss! Gak ada yang gratis di dunia ini, kecuali kentut.",
            "Mau lihat? Duitnya mana? Receh pun jadi, asal jangan daun!",
-                      "Klik ini = siap-siap rogoh kocek! Gak bayar, gak sayang~",
+           "Klik ini = siap-siap rogoh kocek! Gak bayar, gak sayang~",
            "Tombol ajaib! Sekali klik, dompet langsung nangis. Tapi worth it, kok!",
            "Penasaran? Bayar dulu, baru lanjut! Gak mahal, kok, cuma seharga kenangan mantan.",
            "Ini tombol premium, Bos! Khusus buat yang berduit. Yang kere, minggir dulu!",
@@ -390,8 +391,10 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
             quoteElement.textContent = quotes[projectIndex][randomIndex];
         }
 
+        //Fungsi untuk menampilkan quote untuk main button project ke 3
         function showMainButtonQuote(projectBox) {
             const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
+            // Hanya tampilkan alert quote jika itu project ke-3 (index 2)
             if (projectIndex === 2) {
                 const randomIndex = Math.floor(Math.random() * mainButtonQuotes.length);
                 alert(mainButtonQuotes[randomIndex]);
@@ -406,17 +409,19 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
                   showRandomQuote(box);
 
                   const quoteButton = box.querySelector('.quote-button');
+                  //Arrow function, event listener untuk menampilkan random quote ketika button quote di klik
                   quoteButton.addEventListener('click', () => showRandomQuote(box));
 
                   const mainButton = box.querySelector('.main-button');
+                  //Arrow function, event listener untuk menampilkan random quote ketika main button di klik
                   mainButton.addEventListener('click', () => showMainButtonQuote(box));
                 }
 
             });
         }
 
+        //Jalankan fungsi initializeQuotes setelah DOM selesai dimuat.
         document.addEventListener('DOMContentLoaded', initializeQuotes);
     </script>
 </body>
 </html>
-

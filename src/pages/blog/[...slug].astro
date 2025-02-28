@@ -1,19 +1,40 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
-import { render } from 'astro:content';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+	return posts.map((post) => {
+		// Pisahkan ID menjadi bagian-bagian berdasarkan '/'
+		const idParts = post.id.split('/');
+
+		// Jika hanya ada satu bagian, itu adalah postingan flat
+		if (idParts.length === 1) {
+			return {
+				params: { slug: idParts[0] }, // Gunakan id langsung sebagai slug
+				props: post,
+			};
+		} else {
+			// Jika ada lebih dari satu bagian, itu adalah postingan nested
+			// Gabungkan semua bagian KECUALI yang terakhir sebagai slug
+			const slug = idParts.slice(0, -1).join('/'); //  "first-post/bagian-1"  ->  "first-post"
+			return {
+				params: { slug: slug },
+				props: {
+                    ...post,  //Sangat penting
+                    customSlug: slug, //Pass custom slug ke post
+                    originalId: post.id // pass id asli ke dalam props, jika dibutuhkan
+                },
+			};
+		}
+	});
 }
-type Props = CollectionEntry<'blog'>;
+
+type Props = CollectionEntry<'blog'> & { customSlug?: string; originalId?: string };
 
 const post = Astro.props;
-const { Content } = await render(post);
+const { Content } = await post.render();
+
 ---
 
 <BlogPost {...post.data}>

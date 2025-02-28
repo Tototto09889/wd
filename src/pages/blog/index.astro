@@ -40,7 +40,7 @@ interface Post {
 			}
 
 			body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font lebih mirip */
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 background-color: #f0f0f0;
             }
 
@@ -51,22 +51,30 @@ interface Post {
 			}
 
             section {
-                margin-top: 1rem; /* Kurangi margin atas */
+                margin-top: 1rem;
             }
 
 			ul {
 				list-style: none;
+                display: grid; /*  Kembalikan grid */
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /*  Kolom fleksibel */
+                gap: 1rem; /*  Jarak antar item */
 			}
 
 			ul li {
                 background-color: #fff;
                 border: 1px solid #ddd;
-                border-radius: 4px; /*  Kurangi border-radius */
+                border-radius: 4px;
                 overflow: hidden;
-                box-shadow: 0 1px 2px rgba(0,0,0,0.1); /*  Kurangi shadow */
-                margin-bottom: 0.75rem; /*  Kurangi margin bawah */
-                width: 100%;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+                transition: transform 0.2s ease, box-shadow 0.2s ease; /*  Efek hover */
+
 			}
+
+            ul li:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }
 
 			ul li a {
                 display: block;
@@ -75,23 +83,23 @@ interface Post {
 			}
 
             .image-container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-				width: 100%;
+                /*  Hapus display: flex, justify-content, align-items */
+                width: 100%;
+                height: 150px; /*  Beri tinggi awal (akan di-override di mobile) */
+                overflow: hidden; /*  Penting! */
             }
 
 			ul li img {
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-                object-position: center;
+                width: 100%; /*  Isi lebar container */
+                height: 100%; /* Isi tinggi container */
+                object-fit: cover; /*  PENTING: Potong gambar jika perlu */
+                object-position: center; /*  Pusatkan gambar */
                 display: block;
 			}
 
             .no-image-placeholder {
                 width: 100%;
-                height: 150px; /* Kurangi tinggi placeholder */
+                height: 150px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -102,43 +110,29 @@ interface Post {
             }
 
             .text-content {
-                padding: 0.75rem; /*  Kurangi padding */
+                padding: 0.5rem;
             }
 
 			.title {
-				margin: 0 0 0.25rem 0; /* Kurangi margin bawah */
-				font-size: 1rem;      /*  Kurangi ukuran font */
+				margin: 0 0 0.25rem 0;
+				font-size: 1rem;
 				font-weight: bold;
                 line-height: 1.2;
 			}
 
             .smaller-text, .category {
-                font-size: 0.75rem; /*  Kurangi ukuran font */
-                color: #777;       /*  Warna abu-abu sedikit lebih gelap */
-                margin: 0.25rem 0; /*  Kurangi margin */
+                font-size: 0.7rem;
+                color: #777;
+                margin: 0.25rem 0;
             }
 
             .date {
-                font-size: 0.65rem;  /*  Kurangi ukuran font */
+                font-size: 0.6rem;
                 color: #999;
                 margin: 0.25rem 0 0 0;
             }
 
-            /* Tombol "Lihat" */
-            .button {
-                display: inline-block;
-                background-color: #4CAF50;
-                color: white;
-                padding: 0.25rem 0.5rem; /*  Kurangi padding */
-                text-decoration: none;
-                border-radius: 4px;
-                margin-top: 0.5rem;
-				font-size: 0.75rem;     /*  Kurangi ukuran font */
-            }
-
-			.button:hover {
-				background-color: #367c39;
-			}
+            /*  Hapus hr */
 
             /* Responsif */
             @media (max-width: 720px) {
@@ -147,11 +141,11 @@ interface Post {
                 }
 
                 section {
-                    margin-top: 0.75rem; /* Kurangi margin */
+                    margin-top: 0.75rem;
                 }
 
-                .text-content {
-                    padding: 0.5rem; /*  Lebih kecil lagi */
+                .image-container {
+                    height: auto; /*  Biarkan tinggi menyesuaikan di mobile */
                 }
             }
 		</style>
@@ -186,7 +180,6 @@ interface Post {
                                     <p class="date">
                                         <FormattedDate date={post.data.pubDate} />
                                     </p>
-                                    <span class="button">Lihat</span>
                                 </div>
 							</a>
 						</li>

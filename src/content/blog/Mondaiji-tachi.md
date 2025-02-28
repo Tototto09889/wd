@@ -2,7 +2,7 @@
 title: "Mondaiji-tachi ga Isekai kara Kuru Sou desu yo? Bahasa Indonesia"
 description: "Fantasi, Aksi, Komedi, Supernatural"
 pubDate: "28 Februari 2025"
-heroImage: "https://cdn.myanimelist.net/images/manga/3/179084.jpg"
+heroImage: "https://cdn.novelupdates.com/images/2016/09/Mondaiji-tachi-ga-Isekai-kara-Kuru-Sou-Desu-yo-1.jpg"
 ---
 
 Penulis: Tarou Tatsunoko (竜ノ湖 太郎)

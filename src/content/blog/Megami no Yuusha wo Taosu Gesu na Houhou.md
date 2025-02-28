@@ -2,7 +2,7 @@
 title: "Megami no Yuusha wo Taosu Gesu na Houhou Bahasa Indonesia"
 description: "Fantasi, Isekai, Aksi, Dewasa, Ecchi, Harem"
 pubDate: "28 Februari 2025"
-heroImage: "https://cdn.myanimelist.net/images/manga/3/207007.jpg"
+heroImage: "https://cdn.novelupdates.com/images/2019/08/Hero-Blessed-by-the-Demon-King-the-Largest-Human-Traitor.jpg"
 ---
 
 Penulis: Sakamoto Yuuma (坂本遊馬)

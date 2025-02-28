@@ -3,7 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah diimpor
+import RecentPosts from '../components/RecentPosts.astro';
 ---
 
 <!doctype html>
@@ -11,8 +11,8 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
 <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
-        /* CSS yang sudah bagus (dan sudah saya rapikan), akan saya tambahkan komentar untuk penjelasan */
-        *, *::before, *::after {
+        /* CSS Sebelumnya (tetap sama, tidak perlu diubah) */
+		*, *::before, *::after {
           box-sizing: border-box; /* Sangat penting untuk model kotak yang konsisten */
         }
 
@@ -192,7 +192,7 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
             border-radius: 0.25rem; /* Border radius yang sama */
             font-size: 1rem;      /* Ukuran font yang sama */
             font-family: inherit; /* Font yang sama dengan body */
-             transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Transisi */
+             transition: border-color 0.15s ease-in-out, box-shadow: 0.15s ease-in-out; /* Transisi */
         }
 
         .contact-form-container .form-group textarea {
@@ -253,25 +253,44 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
                 margin-right: 1rem;  /* Margin kanan */
 
             }
+
+            /* ---- CSS Grid untuk Recent Posts (Desktop) ---- */
+            .recent-posts-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+                gap: 1rem;
+                margin: 2rem 1rem; /* Margin di sekeliling grid */
+                width: auto;
+                max-width: none;
+             }
         }
+
+        /* ---- CSS untuk Recent Posts (Mobile) ---- */
+        .recent-posts-container {
+            width: 95%; /* Lebar kotak recent posts untuk mobile */
+            max-width: 500px; /* Lebar maksimum untuk mobile */
+            margin-left: auto; /* Pusatkan secara horizontal */
+            margin-right: auto;
+            margin-bottom: 1rem; /* Jarak dengan form kontak */
+         }
+
+        .recent-posts-container .project-item {
+            /* Pastikan style .project-item juga diterapkan di dalam recent-posts-container */
+            margin-bottom: 1rem; /* Spasi antar post di mobile */
+        }
+
     </style>
 </head>
 <body>
     <Header />
     <main>
         <div class="welcome-section">
-          <h3>Selamat Datang...</h3>
-          <p>"Di sini, gak ada apa-apa..."</p>
+          <h3>Selamat Datang... di Ambang Sunyi</h3>
+          <p>"Di sini, di mana kode-kode usang ..."</p>
         </div>
-
-        {/* Kotak untuk Recent Posts - MULAI */}
-        <div class="project-item">  {/* Gunakan class yang sama dengan kotak proyek */}
-            <RecentPosts />
-        </div>
-        {/* Kotak untuk Recent Posts - SELESAI */}
 
         <div class="project-container">
-          {/* ... (Konten proyek Anda, TIDAK PERLU DIUBAH) ... */}
+            {/* ... (Konten proyek Anda) ... */}
             <div class="project-item">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-xLvIXhnuerxSoHHQQmPccemUr5dlTH-lPRvJHYxYVx2K0wawuW4VMNA&s=10" alt="Proyek 1">
                 <h3>Daftar Indeks Web Novel dan Light Novel Jepang</h3>
@@ -318,33 +337,41 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
                 <div class="button-divider"></div>
                 <p class="quote smaller-text"></p>
             </div>
-
-            <div class="project-item contact-form-container">
-                <h5><b>Hubungi saya di bawah ini :</b></h5>
-                <form action="https://formspree.io/f/xaylarpo" method="POST" id="my-form">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" name="lastName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="massage">Message</label>
-                        <textarea name="massage" id="massage" cols="30" rows="10" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">SEND MESSAGE</button>
-                </form>
-            </div>
         </div>
+
+        {/* --- Recent Posts Container --- */}
+        <div class="recent-posts-container">
+            <RecentPosts />
+        </div>
+
+
+        <div class="project-item contact-form-container">
+            <h5><b>Hubungi saya di bawah ini :</b></h5>
+            <form action="https://formspree.io/f/xaylarpo" method="POST" id="my-form">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                                        <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="massage">Message</label>
+                    <textarea name="massage" id="massage" cols="30" rows="10" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">SEND MESSAGE</button>
+            </form>
+        </div>
+
+        <a href="/blog">Lihat Semua Postingan</a>
     </main>
     <Footer />
-         <script>
+     <script>
        const quotes = [
          [
            "Rindu itu berat, tapi lebih berat lagi kalau rindunya sama orang yang salah.",
@@ -387,15 +414,28 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
         function showRandomQuote(projectBox) {
             const quoteElement = projectBox.querySelector('.quote');
             const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
-            const randomIndex = Math.floor(Math.random() * quotes[projectIndex].length);
-            quoteElement.textContent = quotes[projectIndex][randomIndex];
+
+            //Menyesuaikan indeks karena Recent Post
+            let adjustedIndex = projectIndex;
+            if (projectBox.parentElement.classList.contains('recent-posts-container')){
+                adjustedIndex = -1; //Tidak ada quotes
+            } else if (projectIndex >= 0 && projectBox.parentElement.classList.contains('project-container')){
+                //Penomoran index disesuaikan karena recent post di skip
+                adjustedIndex = projectIndex;
+            }
+
+            if(adjustedIndex >= 0 && adjustedIndex < quotes.length) {
+                const randomIndex = Math.floor(Math.random() * quotes[adjustedIndex].length);
+                quoteElement.textContent = quotes[adjustedIndex][randomIndex];
+            }
+
         }
 
         //Fungsi untuk menampilkan quote untuk main button project ke 3
         function showMainButtonQuote(projectBox) {
             const projectIndex = Array.from(projectBox.parentElement.children).indexOf(projectBox);
-            // Hanya tampilkan alert quote jika itu project ke-3 (index 2)
-            if (projectIndex === 2) {
+            // Hanya tampilkan alert quote jika itu project ke-3 (index 2) DAN ada di project-container
+            if (projectIndex === 2 && projectBox.parentElement.classList.contains('project-container')) {
                 const randomIndex = Math.floor(Math.random() * mainButtonQuotes.length);
                 alert(mainButtonQuotes[randomIndex]);
             }
@@ -425,3 +465,4 @@ import RecentPosts from '../components/RecentPosts.astro'; // Pastikan sudah dii
     </script>
 </body>
 </html>
+

@@ -17,30 +17,36 @@ const posts = (await getCollection('blog')).sort(
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			/* Gaya Dasar */
+			body {
+                font-family: sans-serif; /* Font yang lebih umum */
+                margin: 0; /* Hilangkan margin default body */
+            }
 			main {
-				max-width: 960px; /* Lebar maksimum konten */
-                margin: 0 auto;
-                padding: 1rem;
+				max-width: 800px; /* Lebar maksimum konten (untuk desktop) */
+                margin: 0 auto;  /* Pusatkan di layar lebar */
+                padding: 1rem;   /* Padding di semua sisi */
 			}
+
+            section {
+                margin-top: 2rem;
+            }
 
 			ul {
 				list-style: none;
 				padding: 0;
 				margin: 0;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 1rem;
+                display: grid; /* Gunakan Grid untuk tata letak */
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Kolom fleksibel */
+                gap: 1rem; /* Jarak antar item */
 			}
 
 			ul li {
-                flex: 1 1 calc(50% - 1rem); /* 2 kolom di desktop */
-                min-width: 250px; /* Lebar minimum item */
+                /* Hapus flex properties yang lama */
                 border: 1px solid #ddd;
                 border-radius: 8px;
-                overflow: hidden; /* Potong konten yang melebihi batas */
+                overflow: hidden;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
-
 			}
 
             ul li:hover {
@@ -49,31 +55,30 @@ const posts = (await getCollection('blog')).sort(
             }
 
 			ul li a {
-                display: block; /* Link mengisi seluruh kotak */
-				text-decoration: none; /* Hilangkan garis bawah link */
-                color: inherit; /* Warna teks dari parent (li) */
-
+                display: block;
+				text-decoration: none;
+                color: inherit;
 			}
 
             .image-container {
-                height: 200px; /* Tinggi tetap untuk gambar (sesuaikan) */
+                height: 150px; /* Tinggi gambar lebih kecil */
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: #f0f0f0; /* Warna latar jika gambar tidak ada */
+                background-color: #f0f0f0;
             }
 
 			ul li img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover; /* PENTING: Gambar mengisi kotak, terpotong jika perlu */
-                object-position: center; /* Posisikan gambar di tengah */
+                object-fit: cover;
+                object-position: center;
                 display: block;
 			}
 
             .no-image-placeholder {
                 width: 100%;
-                height: 100%; /* Isi container */
+                height: 100%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -87,32 +92,36 @@ const posts = (await getCollection('blog')).sort(
 
 			.title {
 				margin: 0 0 0.5rem 0;
-				font-size: 1.25rem;
+				font-size: 1.1rem; /* Ukuran font sedikit lebih kecil */
 				font-weight: bold;
                 line-height: 1.2;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 0.5rem;
 			}
 
             .smaller-text, .category {
-                font-size: 0.875rem;
+                font-size: 0.8rem; /* Lebih kecil */
                 color: #666;
-                margin: 0 0 0.25rem 0;
+                margin: 0.5rem 0;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 0.5rem;
             }
 
-
 			.date {
-				font-size: 0.75rem;
+				font-size: 0.7rem; /* Lebih kecil */
 				color: #999;
-                margin: 0;
+                margin: 0.5rem 0 0 0;
 			}
 
-            /* Responsif untuk Mobile */
+            /* Responsif (Tidak perlu banyak perubahan di sini) */
             @media (max-width: 720px) {
-                ul li {
-                    flex: 1 1 100%; /* 1 kolom di mobile */
-                }
                 .image-container {
-                    height: auto; /* Tinggi gambar menyesuaikan di mobile */
+                    height: auto; /* Biarkan tinggi menyesuaikan di mobile */
                 }
+                 section {
+                    margin-top: 1rem; /* Jarak lebih kecil di mobile */
+                }
+                /*  ul sudah diatur dengan grid, jadi tidak perlu diubah lagi */
             }
 		</style>
 	</head>
@@ -137,8 +146,12 @@ const posts = (await getCollection('blog')).sort(
                                 </div>
                                 <div class="text-content">
                                     <h4 class="title">{post.data.title}</h4>
-                                    {post.data.description && <p class="smaller-text">{post.data.description}</p>}
-                                    {post.data.category && <p class="category">{post.data.category}</p>}
+                                    {post.data.description && (
+                                        <p class="smaller-text">{post.data.description}</p>
+                                    )}
+                                    {post.data.category && (
+                                         <p class="category">{post.data.category}</p>
+                                    )}
                                     <p class="date">
                                         <FormattedDate date={post.data.pubDate} />
                                     </p>

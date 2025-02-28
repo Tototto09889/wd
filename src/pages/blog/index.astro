@@ -10,123 +10,110 @@ const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			/* Gaya Dasar (untuk desktop, dll.) */
+			/* Gaya Dasar */
 			main {
-				width: 960px; /* Lebar maksimum, HAPUS jika ingin full width */
-                margin: 0 auto; /* Pusatkan main di layar lebar */
-                padding: 0 1rem; /* Beri sedikit padding kiri-kanan */
+				max-width: 960px; /* Lebar maksimum konten */
+                margin: 0 auto;
+                padding: 1rem;
 			}
 
 			ul {
-				display: flex;
-				flex-wrap: wrap; /* Ini PENTING: Biarkan item list 'melipat' ke bawah */
-				gap: 1rem;       /* Jarak antar item */
-				list-style-type: none;
-				margin: 0;
+				list-style: none;
 				padding: 0;
+				margin: 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
 			}
 
 			ul li {
-				/* Awalnya, biarkan lebar item diatur otomatis */
-				/* width: calc(50% - 1rem);  HAPUS INI */
-                flex: 1 1 45%;  /* Lebih fleksibel daripada width */
-                /* Flex: grow shrink basis */
-                /*  grow: Boleh membesar jika ada ruang */
-                /*  shrink: Boleh mengecil jika perlu */
-                /*  basis: Lebar dasar (kira-kira 45%, beri sedikit ruang untuk gap) */
-                min-width: 150px; /* Lebar minimum item (cegah terlalu kecil) */
+                flex: 1 1 calc(50% - 1rem); /* 2 kolom di desktop */
+                min-width: 250px; /* Lebar minimum item */
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                overflow: hidden; /* Potong konten yang melebihi batas */
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+
 			}
 
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-
-            /* Hapus gaya khusus untuk item pertama */
-			/* ul li:first-child { ... } */
-            /* Kita akan atur di media query */
-
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-                width: 100%;       /* Gambar mengisi lebar item */
-                height: auto;      /* Tinggi menyesuaikan, jaga rasio aspek */
-                display: block;    /* Hilangkan ruang kosong di bawah gambar */
-			}
-
-			ul li a {
-				display: block;
-			}
-
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-                font-size: 1rem; /* Ukuran font dasar */
-			}
-
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-                font-size: 0.875rem; /* Ukuran font sedikit lebih kecil */
-			}
-            .smaller-text{
-                font-size: 0.875rem;
+            ul li:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             }
 
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
+			ul li a {
+                display: block; /* Link mengisi seluruh kotak */
+				text-decoration: none; /* Hilangkan garis bawah link */
+                color: inherit; /* Warna teks dari parent (li) */
+
 			}
 
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-
-            /* Placeholder */
-            .no-image-placeholder {
-                width: 100%; /* PENTING: Isi lebar item */
-                height: 200px; /* Sesuaikan tinggi sesuai kebutuhan */
-                background-color: #ddd;
+            .image-container {
+                height: 200px; /* Tinggi tetap untuk gambar (sesuaikan) */
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                border-radius: 12px; /* Samakan dengan border-radius gambar */
+                background-color: #f0f0f0; /* Warna latar jika gambar tidak ada */
+            }
+
+			ul li img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* PENTING: Gambar mengisi kotak, terpotong jika perlu */
+                object-position: center; /* Posisikan gambar di tengah */
+                display: block;
+			}
+
+            .no-image-placeholder {
+                width: 100%;
+                height: 100%; /* Isi container */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #666;
+                font-style: italic;
+            }
+
+            .text-content {
+                padding: 1rem;
+            }
+
+			.title {
+				margin: 0 0 0.5rem 0;
+				font-size: 1.25rem;
+				font-weight: bold;
+                line-height: 1.2;
+			}
+
+            .smaller-text, .category {
+                font-size: 0.875rem;
+                color: #666;
+                margin: 0 0 0.25rem 0;
             }
 
 
-			/* Media Query untuk Layar Kecil (HP) */
-			@media (max-width: 720px) {
-				main {
-                    /* Hilangkan lebar maksimum, jadi full width */
-                    /* width: auto; */  /* Atau hapus properti width */
-                    padding: 0 0.5rem; /* Padding lebih kecil di HP */
-				}
-
-				ul {
-					gap: 0.5rem; /* Jarak antar item lebih kecil */
-				}
-
-				ul li {
-                    /* Di HP, setiap item jadi satu kolom */
-                    flex: 1 1 100%; /* Mengisi seluruh lebar */
-                    min-width: 0;  /* Reset min-width */
-                    margin-bottom: 1rem; /* Beri jarak bawah */
-				}
-
-                /* Hapus styling untuk li:first-child yang lama */
-
-                .title {
-                    font-size: 1.25rem; /* Judul lebih besar di HP */
-                }
-
-                /* .date sudah cukup kecil */
+			.date {
+				font-size: 0.75rem;
+				color: #999;
+                margin: 0;
 			}
+
+            /* Responsif untuk Mobile */
+            @media (max-width: 720px) {
+                ul li {
+                    flex: 1 1 100%; /* 1 kolom di mobile */
+                }
+                .image-container {
+                    height: auto; /* Tinggi gambar menyesuaikan di mobile */
+                }
+            }
 		</style>
 	</head>
 	<body>
@@ -134,29 +121,31 @@ const posts = (await getCollection('blog')).sort(
 		<main>
 			<section>
 				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{/* Prioritaskan externalHeroImage, lalu heroImage, lalu placeholder */}
-									{post.data.externalHeroImage ? (
-										<img  src={post.data.externalHeroImage} alt={post.data.title || "Thumbnail"} />
-									) : post.data.heroImage ? (
-										<img  src={post.data.heroImage} alt={post.data.title || "Thumbnail"}  />
-									) : (
-										<div class="no-image-placeholder">
-											<p>No Image Available</p>
-										</div>
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="smaller-text">{post.data.description}</p>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
+					{posts.map((post) => (
+						<li>
+							<a href={`/blog/${post.id}/`}>
+                                <div class="image-container">
+                                    {post.data.externalHeroImage ? (
+                                        <img src={post.data.externalHeroImage} alt={post.data.title || "Thumbnail"} />
+                                    ) : post.data.heroImage ? (
+                                        <img src={post.data.heroImage} alt={post.data.title || "Thumbnail"} />
+                                    ) : (
+                                        <div class="no-image-placeholder">
+                                            <p>No Image Available</p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div class="text-content">
+                                    <h4 class="title">{post.data.title}</h4>
+                                    {post.data.description && <p class="smaller-text">{post.data.description}</p>}
+                                    {post.data.category && <p class="category">{post.data.category}</p>}
+                                    <p class="date">
+                                        <FormattedDate date={post.data.pubDate} />
+                                    </p>
+                                </div>
+							</a>
+						</li>
+					))}
 				</ul>
 			</section>
 		</main>

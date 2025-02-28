@@ -1,7 +1,7 @@
 ---
 title: "Maou Gakuin no Futekigousha Bahasa Indonesia"
-description: "Novel"
-pubDate: "28 Januari 2025"
+description: "Fantasi, Aksi, Sekolah"
+pubDate: "28 Februari 2025"
 heroImage: "https://cdn.novelupdates.com/images/2021/10/Maou-Gakuin-No-Futekigousha-LN.jpg"
 ---
 

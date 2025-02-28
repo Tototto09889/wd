@@ -1,0 +1,67 @@
+---
+// src/pages/genres/[genre].astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro'
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const allGenres = [...new Set(allPosts.flatMap(post => post.data.genres))];
+
+  return allGenres.map(genre => {
+    const filteredPosts = allPosts.filter(post => post.data.genres.includes(genre));
+
+    return {
+      params: { genre: genre.toLowerCase().replace(/\s+/g, '-') }, // action-adventure
+      props: { posts: filteredPosts, genre }, // Kirim postingan yang difilter dan nama genre
+    };
+  });
+}
+
+interface Props {
+  posts: any[]; // Ganti any dengan tipe yang lebih spesifik jika perlu
+  genre: string;
+}
+
+const { posts, genre } = Astro.props;
+const capitalizedGenre = genre.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); // Action-Adventure
+---
+
+<BaseLayout title={capitalizedGenre} description={`Postingan dengan genre ${capitalizedGenre}`}>
+  <main>
+    <h1>Genre: {capitalizedGenre}</h1>
+
+    <ul>
+      {posts.map(post => (
+        <li>
+          <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            <p><FormattedDate date={post.data.pubDate} /></p>
+        </li>
+      ))}
+    </ul>
+     {posts.length === 0 && <p>Tidak ada postingan dengan genre ini.</p>}
+  </main>
+</BaseLayout>
+
+<style>
+ main{
+     width: 95%;
+     max-width: 800px;
+     margin: auto;
+     padding: 1rem;
+ }
+ h1{
+     text-align: center;
+     margin-bottom: 1rem;
+ }
+ ul{
+     list-style: none;
+ }
+ li{
+     margin-bottom: 0.5rem;
+ }
+ a{
+     text-decoration: none;
+     color:#007bff
+ }
+</style>

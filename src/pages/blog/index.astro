@@ -16,25 +16,25 @@ const posts = (await getCollection('blog')).sort(
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			/* Reset CSS yang Lebih Kuat */
+			/* Reset CSS (PENTING) */
 			* {
 				margin: 0;
 				padding: 0;
-				box-sizing: border-box; /* Pastikan border-box */
+				box-sizing: border-box;
 			}
 
 			html, body {
 				width: 100%;
-				overflow-x: hidden; /* Cegah scroll horizontal di level tertinggi */
+				overflow-x: hidden;
 			}
 
 			/* Gaya Dasar */
 			body {
                 font-family: sans-serif;
-
             }
+
 			main {
-				max-width: 800px;
+				max-width: 800px; /* Tetap batasi lebar di desktop */
                 margin: 0 auto;
                 padding: 1rem;
 			}
@@ -45,20 +45,20 @@ const posts = (await getCollection('blog')).sort(
 
 			ul {
 				list-style: none;
-                display: grid;
-                /* Perbaikan grid-template-columns: Lebih eksplisit */
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Coba 200px */
-                gap: 1rem;
+                /* Hapus display: grid dan properti grid lainnya */
 			}
 
 			ul li {
                 border: 1px solid #ddd;
                 border-radius: 8px;
-                overflow: hidden; /* Ini penting! */
+                overflow: hidden;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
-
+                margin-bottom: 1rem; /* Jarak antar item */
+                display: block;       /* Jadikan block-level */
+                width: 100%;          /* Isi lebar parent */
 			}
+
 
             ul li:hover {
                 transform: translateY(-4px);
@@ -72,32 +72,31 @@ const posts = (await getCollection('blog')).sort(
 			}
 
             .image-container {
-                height: 150px;
+                /* height: 150px;  Hapus ini, biarkan auto di semua ukuran */
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 background-color: #f0f0f0;
-                max-width: 100%; /* Tambahkan ini! */
-
+				width: 100%; /* Pastikan mengisi lebar */
             }
 
 			ul li img {
                 width: 100%;
-                height: 100%;
+                height: auto; /* Ubah height menjadi auto */
                 object-fit: cover;
                 object-position: center;
                 display: block;
-
 			}
 
             .no-image-placeholder {
                 width: 100%;
-                height: 100%; /* Isi container */
+                height: 200px; /* Beri tinggi */
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 color: #666;
                 font-style: italic;
+
             }
 
             .text-content {
@@ -136,16 +135,7 @@ const posts = (await getCollection('blog')).sort(
                 section {
                     margin-top: 1rem;
                 }
-
-                ul {
-                    /* grid-template-columns sudah benar */
-                    gap: 0.75rem;
-                }
-
-                .image-container {
-					height: auto;
-                    /* Hapus padding-top dan position jika Anda tidak menggunakan aspect ratio trick */
-                }
+                /* Tidak perlu mengubah ul lagi */
 
                 .text-content {
                     padding: 0.75rem;
@@ -172,7 +162,7 @@ const posts = (await getCollection('blog')).sort(
 				<ul>
 					{posts.map((post) => (
 						<li>
-							<a href={`/blog/${post.slug}/`}>
+							<a href={`/blog/${post.id}/`}>
                                 <div class="image-container">
                                     {post.data.externalHeroImage ? (
                                         <img src={post.data.externalHeroImage} alt={post.data.title || "Thumbnail"} />
@@ -205,3 +195,4 @@ const posts = (await getCollection('blog')).sort(
 		<Footer />
 	</body>
 </html>
+

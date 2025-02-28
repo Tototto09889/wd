@@ -1,0 +1,33 @@
+---
+const categories = [
+  "Action", "Adult", "Adventure", "Cars", "Comedy", "Dementia", 
+  "Demons", "Drama", "Fanfiction", "Fantasy", "Game", "Gender Bender",
+  "Harem", "Historical", "Horror", "Isekai", "Josei", "Kids", "Magic",
+  "Martial Arts", "Mature", "Mecha", "Military", "Music", "Mystery", 
+  "Parody", "Police", "Psychological", "Romance", "Samurai", 
+  "School Life", "Sci-Fi", "Seinen", "Shoujo", "Shoujo Ai", "Shounen",
+  "Shounen Ai", "Slice of Life", "Space", "Sports", "Super Power",
+  "Supernatural", "Suspense", "Thriller", "Tragedy", "Vampire", "Yuri"
+];
+---
+
+<html>
+<head>
+  <title>Categories</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background-color: #f8f8f8; }
+    .container { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
+    .button { background-color: red; color: white; border: none; padding: 10px 20px; margin: 5px; 
+              font-size: 16px; cursor: pointer; border-radius: 5px; }
+    .button:hover { background-color: darkred; }
+  </style>
+</head>
+<body>
+  <h1>Category List</h1>
+  <div class="container">
+    {categories.map(category => (
+      <button class="button">{category}</button>
+    ))}
+  </div>
+</body>
+</html>

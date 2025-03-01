@@ -1,8 +1,8 @@
 ---
 title: "Date Alive Bahasa Indonesia"
-description: "Novel"
+description: "Fantasi, Harem, Komedi romantis, Aksi, Sci-fi"
 pubDate: "23 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2021/11/Date-A-Live.jpg"
 ---
 
 Penulis : Koushi Tachibana

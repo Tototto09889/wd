@@ -2,7 +2,7 @@
 title: "Shijou Saikyou no Daimaou, Murabito A ni Tensei suru Bahasa Indonesia"
 description: "Fantasi, Isekai, Aksi, Petualangan, Reinkarnasi, Sekolah"
 pubDate: "28 Februari 2025"
-heroImage: "https://static.wikia.nocookie.net/shijou-saikyou-daimaou/images/6/64/Light_Novel_Volume_1_%28ENG%29.jpg/revision/latest?cb=20230829082158"
+heroImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMkddaEh6WWLIcsIixyexLx-SD18ySp_VrfrG4REdktNp4lyyLA0t2r3E&s=10"
 ---
 
 Penulis: Myojin Katou (Myojin Katou)

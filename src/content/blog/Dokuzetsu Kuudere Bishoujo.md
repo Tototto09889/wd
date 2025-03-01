@@ -1,8 +1,8 @@
 ---
 title: "Dokuzetsu Kuudere Bishoujo Bahasa Indonesia"
-description: "Novel"
+description: "Romantic Comedy, School, Slice of Life"
 pubDate: "26 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2020/11/101.jpg"
 ---
 
 Penulis: Fukada Sametarou

@@ -1,8 +1,8 @@
----
+![image](https://github.com/user-attachments/assets/b1c42d39-8830-442f-a4ea-db8434b40ee6)---
 title: "Bofuri Bahasa Indonesia"
-description: "Novel"
+description: "Isekai, VRMMO, Adventure, Comedy, Fantasy"
 pubDate: "23 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2017/08/itai-no-wa-iya.jpg"
 ---
 
 Penulis: Yuumikan

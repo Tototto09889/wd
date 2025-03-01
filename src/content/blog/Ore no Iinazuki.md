@@ -2,7 +2,7 @@
 title: "My Plain-looking Fiance is Secretly Sweet with Me Bahasa Indonesia"
 description: "Komedi Romantis, Kehidupan Sekolah"
 pubDate: "28 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2021/02/My-Plainlooking-Fiance-is-Secretly-Sweet-with-Me_1614145093.jpg"
 ---
 
 Penulis: Hachiro Kitarayama (喜多山 八郎)

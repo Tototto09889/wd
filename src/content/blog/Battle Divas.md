@@ -2,7 +2,7 @@
 title: "Battle Divas Bahasa Indonesia"
 description: "Novel"
 pubDate: "23 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2015/07/magikanokenshi.jpg"
 ---
 
 Penulis: 

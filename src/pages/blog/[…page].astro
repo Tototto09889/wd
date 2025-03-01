@@ -1,0 +1,75 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('blog'))
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  return paginate(posts, { pageSize: 10 }); // Menampilkan 10 posting per halaman
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const pageNums = Array.from({ length: page.lastPage }, (_, i) => i + 1);
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <BaseHead title={`${SITE_TITLE} - Halaman ${page.currentPage}`} description={SITE_DESCRIPTION} />
+  <style>
+    /* ... (CSS Anda) ... */
+  </style>
+</head>
+<body>
+  <Header />
+  <main>
+    <section>
+      <ul>
+        {page.data.map((post) => {
+          const isExternal = post.data.heroImage.startsWith('http://') || post.data.heroImage.startsWith('https://');
+          return (
+            <li key={post.id}>
+              <a href={`/blog/${post.id}/`}>
+                <div class="post-container">
+                  <img
+                    width={720}
+                    height={360}
+                    src={isExternal ? post.data.heroImage : post.data.heroImage}
+                    alt=""
+                  />
+                  <div class="post-content">
+                    <h4 class="title">{post.data.title}</h4>
+                    <p class="smaller-text">{post.data.description}</p>
+                    <p class="date">
+                      <FormattedDate date={post.data.pubDate} />
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+    {page.lastPage > 1 && (
+      <nav>
+        {page.url.prev && (
+          <a href={page.url.prev}>Halaman Sebelumnya</a>
+        )}
+        {pageNums.map((num) => (
+          <a href={`/blog/${num === 1 ? '' : num + '/'}`} class={page.currentPage === num ? 'active' : ''}>{num}</a>
+        ))}
+        {page.url.next && (
+          <a href={page.url.next}>Halaman Selanjutnya</a>
+        )}
+      </nav>
+    )}
+  </main>
+  <Footer />
+</body>
+</html>

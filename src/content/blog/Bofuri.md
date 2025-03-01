@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/b1c42d39-8830-442f-a4ea-db8434b40ee6)---
+---
 title: "Bofuri Bahasa Indonesia"
 description: "Isekai, VRMMO, Adventure, Comedy, Fantasy"
 pubDate: "23 Februari 2025"

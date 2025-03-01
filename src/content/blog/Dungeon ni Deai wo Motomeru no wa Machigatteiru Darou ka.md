@@ -1,8 +1,8 @@
 ---
 title: "Dungeon ni Deai wo Motomeru no wa Machigatteiru Darou ka Bahasa Indonesia"
-description: "Novel"
+description: "Fantasy, Action, Adventure, Harem"
 pubDate: "26 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2015/08/dungeonni.jpg"
 ---
 
 Penulis: Fujino Ōmori

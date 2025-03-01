@@ -1,8 +1,8 @@
 ---
 title: "Dungeon Battle Royale ~ Since I Became a Demon King, I Will Aim for World Domination Bahasa Indonesia"
-description: "Novel"
+description: "Fantasy, Action, Adventure, Isekai, Comedy"
 pubDate: "26 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2021/12/Dungeon-Battle-Royale-Since-I-Became-a-Demon-King-I-Will-Aim-for-World-Domination.jpg"
 ---
 
 Penulis: Nagihashi Choko

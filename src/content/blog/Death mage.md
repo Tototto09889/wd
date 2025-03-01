@@ -1,8 +1,8 @@
 ---
 title: "Yondome wa Iyana Shi Zokusei Majutsushi"
-description: "novel"
+description: "Action, Dark Fantasy, Isekai"
 pubDate: "23 Februari 2025"
-heroImage: "/blog-placeholder-3.jpg"
+heroImage: "https://cdn.novelupdates.com/images/2016/11/image.jpg"
 ---
 
 "Yondome wa Iyana Shi Zokusei Majutsushi" juga dikenal dengan judul bahasa Inggris "The Death Mage Who Doesn't Want a Fourth Time," adalah seri novel ringan web Jepang yang ditulis oleh Densuke.

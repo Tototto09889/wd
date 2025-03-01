@@ -1,8 +1,8 @@
 ---
 title: "Boku no Kanojo Sensei Bahasa Indonesia"
-description: "Novel"
+description: "Romance, Comedy, Ecchi, School"
 pubDate: "23 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2019/02/53320029_2280472305527220_6163136597832237056_n.jpg"
 ---
 
 Penulis: Kagami Yuu

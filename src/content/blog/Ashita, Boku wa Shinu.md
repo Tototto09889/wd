@@ -2,7 +2,7 @@
 title: "Ashita, Boku wa Shinu. Kimi wa Ikikaeru. Bahasa Indonesia"
 description: "Drama, Romansa, Supernatural, Tragedi"
 pubDate: "28 Februari 2025"
-heroImage: ""
+heroImage: "https://cdn.novelupdates.com/images/2015/07/ashita.jpg"
 ---
 
 Penulis: Fuji Maru (藤まる)

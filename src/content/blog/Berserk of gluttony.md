@@ -1,6 +1,6 @@
 ---
 title: "Berserk of Gluttony Bahasa Indonesia"
-description: "Novel"
+description: "Action , Adventure , Drama , Fantasy , Harem , Romance , Seinen"
 pubDate: "22 Februari 2025"
 heroImage: "/berserk of gluttony.jpeg"
 ---

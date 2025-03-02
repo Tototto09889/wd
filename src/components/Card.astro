@@ -3,9 +3,9 @@
 export interface Props {
   frontmatter: {
     title: string;
-    description?: string; // Opsional
-    date?: string;       // Opsional
-    // ... properti frontmatter lainnya
+    description?: string;
+    pubDate?: string; // Perhatikan, saya ganti jadi pubDate
+    heroImage?: string;
   };
   url: string;
 }
@@ -15,10 +15,20 @@ const { frontmatter, url } = Astro.props;
 
 <li class="card">
   <a href={url}>
+    {frontmatter.heroImage && (
+      <img src={frontmatter.heroImage} alt={frontmatter.title} width="200" />
+    )}
     <h2>{frontmatter.title}</h2>
     {frontmatter.description && <p>{frontmatter.description}</p>}
-    {frontmatter.date && <time>{frontmatter.date}</time>}
-    {/* Tambahkan elemen lain sesuai kebutuhan, misalnya gambar */}
+    {frontmatter.pubDate && (
+      <time datetime={frontmatter.pubDate}>
+        {new Date(frontmatter.pubDate).toLocaleDateString('id-ID', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </time>
+    )}
   </a>
 </li>
 
@@ -27,9 +37,18 @@ const { frontmatter, url } = Astro.props;
   border: 1px solid #ddd;
   padding: 1em;
   margin-bottom: 1em;
+  display: flex; /* Gunakan flexbox */
+  flex-direction: column; /* Tata elemen secara vertikal */
 }
 .card a {
     text-decoration: none;
     color: inherit;
 }
+
+.card img {
+  margin-bottom: 0.5em; /* Spasi antara gambar dan judul */
+  max-width: 100%;    /* Pastikan gambar tidak terlalu besar */
+  height: auto;       /* Biarkan tinggi menyesuaikan */
+}
 </style>
+

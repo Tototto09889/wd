@@ -50,66 +50,72 @@ import { SITE_TITLE } from '../consts';
 </script>
 
 <style>
-  /* ... (semua style sebelumnya, KECUALI .search-container) ... */
-
   header {
     margin: 0;
     padding: 0 1em;
     background: white;
-    box-shadow: 0 2px 8px rgba(var(--black), 5%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Shadow lebih halus */
   }
+
   h2 {
     margin: 0;
     font-size: 1em;
   }
+
   h2 a,
   h2 a.active {
+    color: inherit; /* Warna teks sama dengan parent */
     text-decoration: none;
   }
+
   nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ddd; /* Garis pemisah */
   }
+
   nav a {
     padding: 1em 0.5em;
-    color: var(--black);
+    color: var(--black); /* Ganti dengan variabel warna jika ada */
     border-bottom: 4px solid transparent;
     text-decoration: none;
   }
+
   nav a.active {
     text-decoration: none;
-    border-bottom-color: var(--accent);
+    border-bottom-color: var(--accent); /* Ganti dengan variabel warna */
   }
+
   /* Dropdown container */
   .dropdown {
     position: relative;
     display: inline-block;
-    margin-left: auto; /* Aligns dropdown to the right */
+    margin-left: auto; /* Rata kanan */
   }
 
   /* Dropdown button */
   .dropbtn {
     background-color: transparent;
-    color: var(--black);
+    color: var(--black); /* Ganti dengan variabel warna */
     padding: 1em 0.5em;
     font-size: 1em;
     border: none;
     cursor: pointer;
-    display: flex; /* Untuk menempatkan svg didalam tombol*/
+    display: flex;
     align-items: center;
     justify-content: center;
   }
-    /* Dropdown Content */
+
+  /* Dropdown Content (Hidden by Default) */
   .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    right: 0; /* Align dropdown content to the right edge of button*/
+    right: 0; /* Rata kanan */
   }
 
   .dropdown-content a {
@@ -119,53 +125,53 @@ import { SITE_TITLE } from '../consts';
     display: block;
     border-bottom: 1px solid #ddd;
   }
-   .dropdown-content a:last-child {
-       border-bottom: none; /* Hilangkan garis di item terakhir*/
-   }
 
-  .dropdown-content a:hover {background-color: #f1f1f1}
+  .dropdown-content a:last-child {
+    border-bottom: none; /* Hilangkan garis di item terakhir */
+  }
 
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+
+  /* Show the dropdown menu on hover */
   .dropdown:hover .dropdown-content {
     display: block;
   }
-  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+
+   /* Show the dropdown menu (use JS to add this class) */
   .show {display:block;}
 
-/* CSS untuk Search Bar *DI DALAM* Dropdown */
-.search-container-dropdown {
-    padding: 12px 16px; /* Beri padding seperti tautan lain */
-    border-bottom: 1px solid #ddd; /*Garis bawah*/
+  /* Search Bar Styles (INSIDE Dropdown) */
+  .search-container-dropdown {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+  }
 
-}
-
-.search-container-dropdown form {
-    display: flex; /* Agar input dan tombol sejajar */
-    align-items: center; /* Pusatkan secara vertikal */
-
-}
-
+  .search-container-dropdown form {
+    display: flex;
+    align-items: center;
+  }
 
   .search-container-dropdown input[type=text] {
     padding: 6px;
     font-size: 17px;
-    border: 1px solid #ccc; /* Tambah border agar konsisten */
-    border-radius: 5px; /* Rounded corners */
-    flex-grow: 1;  /* Input akan mengisi ruang yang tersedia */
-    margin-right: 8px; /* Jarak antara input dan tombol */
-
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Sedikit rounded */
+    flex-grow: 1;
+    margin-right: 8px;
   }
 
   .search-container-dropdown button {
-     padding: 6px 10px;
+    padding: 6px 10px;
     background: #ddd;
     font-size: 17px;
-    border: 1px solid #ccc; /* Tambah border agar konsisten */
+    border: 1px solid #ccc;
     cursor: pointer;
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 4px; /* Sedikit rounded */
   }
 
-.search-container-dropdown button:hover {
-  background: #ccc;
-}
-
+  .search-container-dropdown button:hover {
+    background: #ccc;
+  }
 </style>

@@ -3,20 +3,23 @@
 import { SITE_TITLE } from '../consts';
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import { getCollection } from 'astro:content'; // Impor getCollection
 
 const query = Astro.url.searchParams.get('query');
-const allPosts = await Astro.glob('../content/blog/*.{md,mdx}');
+
+// Gunakan getCollection untuk memuat HANYA postingan dari koleksi 'blog'
+const allPosts = await getCollection('blog');
 
 let results = [];
 
 if (query) {
-  // Hapus spasi di awal dan akhir query, lalu ubah ke huruf kecil
   const lowerQuery = query.trim().toLowerCase();
 
   results = allPosts.filter(post => {
-    const title = (post.frontmatter.title || '').toLowerCase();
-    const description = (post.frontmatter.description || '').toLowerCase();
-    const content = (post.compiledContent() || '').toLowerCase();
+    // Akses data langsung dari post.data (frontmatter) dan post.body (konten mentah)
+    const title = (post.data.title || '').toLowerCase();
+    const description = (post.data.description || '').toLowerCase();
+    const content = (post.body || '').toLowerCase(); // Konten Markdown mentah
 
     return (
       title.includes(lowerQuery) ||
@@ -37,7 +40,8 @@ if (query) {
           ) : (
             <ul class="post-list">
               {results.map((post) => (
-                <Card frontmatter={post.frontmatter} url={post.id} />
+                // Perhatikan, kita sekarang menggunakan post.data dan post.slug
+                <Card frontmatter={post.data} url={`/blog/${post.id}/`} />
               ))}
             </ul>
           )
@@ -49,9 +53,3 @@ if (query) {
   </main>
 </Layout>
 
-<style>
-  .post-list {
-    list-style: none;
-    padding: 0;
-  }
-</style>

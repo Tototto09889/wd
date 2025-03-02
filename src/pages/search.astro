@@ -1,10 +1,7 @@
 ---
 // src/pages/search.astro
 import { SITE_TITLE } from '../consts';
-import Layout from '../layouts/Layout.astro'; // Pastikan path ini benar!
-import Header from '../components/Header.astro'; // Pastikan path ini benar!
-import Footer from '../components/Footer.astro'; // Pastikan path ini benar!
-import BaseHead from '../components/BaseHead.astro'; // Pastikan path ini benar!
+import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import { getCollection } from 'astro:content';
 
@@ -12,7 +9,7 @@ const allPosts = await getCollection('blog');
 const query = Astro.url.searchParams.get('query'); // Ambil query dari URL
 
 function createPostUrl(post) {
-    return `/blog/${post.id}/`;
+    return `/blog/${post.slug}/`;
 }
 
 let searchTerm = ''; // Variabel untuk menyimpan kata kunci pencarian
@@ -22,13 +19,11 @@ if (query) {
 ---
 
 <Layout title={`Search - ${SITE_TITLE}`}>
-    <BaseHead title={query ? `Hasil Pencarian: "${query}" - ${SITE_TITLE}`: `Search - ${SITE_TITLE}`} description={"Search Page"} />
-  <Header /> {/* Pastikan komponen ini ada! */}
   <main>
     <section>
       <h1>Search</h1>
       <div class="search-container">
-        {/* Set value input ke searchTerm */}
+        {/* Perhatikan value={searchTerm} di sini */}
         <input type="text" id="search-input" placeholder="Cari..." value={searchTerm} />
       </div>
       <ul class="post-list">
@@ -36,16 +31,9 @@ if (query) {
           <Card frontmatter={post.data} url={createPostUrl(post)} />
         ))}
       </ul>
-        <p id="no-results" style=`display: ${allPosts.filter(post => {
-            const title = (post.data.title || '').toLowerCase();
-            const description = (post.data.description || '').toLowerCase();
-            return title.includes(searchTerm) || description.includes(searchTerm);
-        }).length === 0 && searchTerm !== '' ? 'block' : 'none'};`>
-            Tidak ada hasil yang ditemukan.
-        </p>
+      <p id="no-results" style=`display: ${allPosts.filter(post => { const title = (post.data.title || '').toLowerCase(); const description = (post.data.description || '').toLowerCase(); return title.includes(searchTerm) || description.includes(searchTerm); }).length === 0 && searchTerm !== '' ? 'block' : 'none'};`>Tidak ada hasil yang ditemukan.</p>
     </section>
   </main>
-  <Footer /> {/* Pastikan komponen ini ada! */}
 </Layout>
 
 <script>
@@ -71,12 +59,4 @@ if (query) {
     });
         noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
   });
-
-//   // Opsional: Jika ingin otomatis melakukan pencarian saat halaman dimuat dengan query
-//   if (searchTerm) {
-//     searchInput.dispatchEvent(new Event('input')); // Picu event 'input'
-//   }
 </script>
-<style>
-/* ... (CSS kamu) ... */
-</style>

@@ -37,7 +37,7 @@ if (query) {
           ) : (
             <ul class="post-list">
               {results.map((post) => (
-                <Card frontmatter={post.frontmatter} url={post.url} />
+                <Card frontmatter={post.frontmatter} url={post.id} />
               ))}
             </ul>
           )

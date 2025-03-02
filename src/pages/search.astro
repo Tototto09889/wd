@@ -12,7 +12,7 @@ const allPosts = await getCollection('blog');
 const query = Astro.url.searchParams.get('query'); // Ambil query dari URL
 
 function createPostUrl(post) {
-    return `/blog/${post.slug}/`;
+    return `/blog/${post.id}/`;
 }
 
 let searchTerm = ''; // Variabel untuk menyimpan kata kunci pencarian

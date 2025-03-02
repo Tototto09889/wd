@@ -5,17 +5,23 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 
 const query = Astro.url.searchParams.get('query');
+// 1. Gunakan Astro.glob() untuk memuat semua file .md dan .mdx
 const allPosts = await Astro.glob('../content/blog/*.{md,mdx}');
 
 let results = [];
 
 if (query) {
-  const lowerQuery = query.toLowerCase(); // Simpan di sini agar tidak dihitung berulang
-  results = allPosts.filter(post => {
-    const title = post.frontmatter.title ? post.frontmatter.title.toLowerCase() : '';
-    const description = post.frontmatter.description ? post.frontmatter.description.toLowerCase() : '';
-    const content = post.compiledContent ? post.compiledContent().toLowerCase() : '';
+  const lowerQuery = query.toLowerCase(); // Ubah ke huruf kecil HANYA SEKALI
 
+  results = allPosts.filter(post => {
+    // 2. Akses frontmatter dengan aman, dan handle jika properti tidak ada
+    const title = (post.frontmatter.title || '').toLowerCase();
+    const description = (post.frontmatter.description || '').toLowerCase();
+    // 3. Gunakan compiledContent() untuk mendapatkan konten HTML yang sudah di-render
+    const content = (post.compiledContent() || '').toLowerCase();
+
+
+    // 4. Lakukan pencarian (case-insensitive)
     return (
       title.includes(lowerQuery) ||
       description.includes(lowerQuery) ||
@@ -35,6 +41,7 @@ if (query) {
           ) : (
             <ul class="post-list">
               {results.map((post) => (
+                // 5. Teruskan frontmatter dan url ke komponen Card
                 <Card frontmatter={post.frontmatter} url={post.url} />
               ))}
             </ul>
@@ -43,7 +50,6 @@ if (query) {
           <p>Masukkan kata kunci untuk mencari.</p>
         )
       }
-
     </section>
   </main>
 </Layout>
@@ -53,5 +59,5 @@ if (query) {
     list-style: none;
     padding: 0;
   }
-    /* Tambahkan styling lain jika diperlukan */
+  /* Tambahkan styling lain jika diperlukan di sini */
 </style>

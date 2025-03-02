@@ -1,0 +1,51 @@
+---
+// src/pages/search.astro
+import { SITE_TITLE } from '../consts'; // Ganti jika nama konstanta berbeda
+import Layout from '../layouts/Layout.astro'; // Ganti jika nama layout berbeda
+import Card from '../components/Card.astro'; // Ganti jika nama komponen berbeda
+
+const query = Astro.url.searchParams.get('query');
+const allPosts = await Astro.glob('../content/blog/*.{md,mdx}');
+
+let results = [];
+
+if (query) {
+  results = allPosts.filter(post => {
+    const title = post.frontmatter.title ? post.frontmatter.title.toLowerCase() : '';
+    const description = post.frontmatter.description ? post.frontmatter.description.toLowerCase() : '';
+    const content = post.compiledContent ? post.compiledContent().toLowerCase() : ''; // Konten HTML
+    const lowerQuery = query.toLowerCase();
+
+    return (
+      title.includes(lowerQuery) ||
+      description.includes(lowerQuery) ||
+      content.includes(lowerQuery)
+    );
+  });
+}
+---
+
+<Layout title={`Search: ${query} - ${SITE_TITLE}`}>
+  <main>
+    <section>
+      <h1>Hasil Pencarian: "{query}"</h1>
+      {results.length === 0 ? (
+        <p>Tidak ada hasil yang ditemukan untuk "{query}".</p>
+      ) : (
+          <ul class="post-list">
+            {results.map((post) => (
+              <Card frontmatter={post.frontmatter} url={post.url} />
+            ))}
+          </ul>
+      )}
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+    /* Tambahkan styling lain jika diperlukan */
+</style>

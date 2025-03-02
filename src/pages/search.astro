@@ -6,16 +6,17 @@ import Card from '../components/Card.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
-const query = Astro.url.searchParams.get('query'); // Ambil query dari URL
 
 function createPostUrl(post) {
-    return `/blog/${post.slug}/`;
+    return `/blog/${post.id}/`;
 }
 
-let searchTerm = ''; // Variabel untuk menyimpan kata kunci pencarian
-if (query) {
-  searchTerm = query.trim().toLowerCase(); // Simpan query jika ada
-}
+// Hapus bagian ini, karena kita tidak lagi mengambil query dari URL
+// const query = Astro.url.searchParams.get('query');
+// let searchTerm = '';
+// if (query) {
+//   searchTerm = query.trim().toLowerCase();
+// }
 ---
 
 <Layout title={`Search - ${SITE_TITLE}`}>
@@ -23,15 +24,15 @@ if (query) {
     <section>
       <h1>Search</h1>
       <div class="search-container">
-        {/* Perhatikan value={searchTerm} di sini */}
-        <input type="text" id="search-input" placeholder="Cari..." value={searchTerm} />
+        {/* Hapus value={searchTerm} */}
+        <input type="text" id="search-input" placeholder="Cari..."  />
       </div>
       <ul class="post-list">
         {allPosts.map((post) => (
           <Card frontmatter={post.data} url={createPostUrl(post)} />
         ))}
       </ul>
-      <p id="no-results" style=`display: ${allPosts.filter(post => { const title = (post.data.title || '').toLowerCase(); const description = (post.data.description || '').toLowerCase(); return title.includes(searchTerm) || description.includes(searchTerm); }).length === 0 && searchTerm !== '' ? 'block' : 'none'};`>Tidak ada hasil yang ditemukan.</p>
+        <p id="no-results" style="display: none">Tidak ada hasil yang ditemukan.</p>
     </section>
   </main>
 </Layout>
@@ -60,3 +61,7 @@ if (query) {
         noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
   });
 </script>
+
+<style>
+/* ... (CSS kamu) ... */
+</style>

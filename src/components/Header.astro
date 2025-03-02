@@ -37,7 +37,7 @@ import { SITE_TITLE } from '../consts';
   }
   // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
-    if (!event.target.closest('.dropdown, .dropbtn')) { // Perubahan di sini
+    if (!event.target.closest('.dropdown, .dropbtn')) {
       if (myDropdown.classList.contains('show')) {
         myDropdown.classList.remove('show');
       }

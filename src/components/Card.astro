@@ -1,0 +1,35 @@
+---
+// src/components/Card.astro
+export interface Props {
+  frontmatter: {
+    title: string;
+    description?: string; // Opsional
+    date?: string;       // Opsional
+    // ... properti frontmatter lainnya
+  };
+  url: string;
+}
+
+const { frontmatter, url } = Astro.props;
+---
+
+<li class="card">
+  <a href={url}>
+    <h2>{frontmatter.title}</h2>
+    {frontmatter.description && <p>{frontmatter.description}</p>}
+    {frontmatter.date && <time>{frontmatter.date}</time>}
+    {/* Tambahkan elemen lain sesuai kebutuhan, misalnya gambar */}
+  </a>
+</li>
+
+<style>
+.card {
+  border: 1px solid #ddd;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+.card a {
+    text-decoration: none;
+    color: inherit;
+}
+</style>

@@ -4,13 +4,13 @@ import { SITE_TITLE } from '../consts';
 
 <header>
   <nav>
-    <h2><a href="/">{SITE_TITLE}</a></h2>
     <button class="menu-btn" onclick="toggleMenu()">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M2 6H22M2 12H22M2 18H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
-
+    <h2><a href="/">{SITE_TITLE}</a></h2>
+    
     <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
       <a href="/">Beranda</a>
@@ -18,18 +18,14 @@ import { SITE_TITLE } from '../consts';
       <a href="/list">List Novel</a>
       <a href="/disclaimer">Disclaimer</a>
       <a href="/about">Tentang</a>
-
-      <form class="search-form" action="/search" method="GET">
-        <input type="text" name="q" placeholder="Search" />
-        <button type="submit">Search</button>
-      </form>
     </div>
   </nav>
 </header>
+
 <script>
 function toggleMenu() {
     const sidebar = document.getElementById("mySidebar");
-    if (sidebar.style.right === "0px") {
+    if (sidebar.style.width === "250px") {
         closeMenu();
     } else {
         openMenu();
@@ -37,13 +33,16 @@ function toggleMenu() {
 }
 
 function openMenu() {
-  document.getElementById("mySidebar").style.right = "0px";
+  document.getElementById("mySidebar").style.width = "250px";
+  // document.getElementById("main").style.marginLeft = "250px"; // Optional
 }
 
 function closeMenu() {
-  document.getElementById("mySidebar").style.right = "-100%"; // Sembunyikan ke kanan (penuh)
+  document.getElementById("mySidebar").style.width = "0";
+  // document.getElementById("main").style.marginLeft= "0"; // Optional
 }
 </script>
+
 <style>
 header {
   margin: 0;
@@ -65,9 +64,8 @@ h2 a.active {
 nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Penting untuk posisi tombol */
 }
-
 nav a {
     padding: 1em 0.5em;
     color: var(--black);
@@ -78,11 +76,11 @@ nav a {
 /* Sidebar Styles */
 .sidebar {
   height: 100%;
-  width: 100%; /* Lebar penuh */
+  width: 0;
   position: fixed;
   z-index: 1;
   top: 0;
-  right: -100%; /* Awalnya tersembunyi di kanan (penuh) */
+  left: 0;
   background-color: white;
   overflow-x: hidden;
   transition: 0.5s;
@@ -96,15 +94,10 @@ nav a {
   color: #333;
   display: block;
   transition: 0.3s;
-  border-bottom: 1px solid #ddd; /* Garis pembatas */
-}
-
-.sidebar a:last-child{
-    border-bottom: none;
 }
 
 .sidebar a:hover {
-  color: #6495ed;
+   color: #6495ed;
 }
 
 .sidebar .closebtn {
@@ -112,8 +105,9 @@ nav a {
   top: 0;
   right: 25px;
   font-size: 36px;
-  margin-left: 50px; /* Mungkin perlu dihilangkan */
+  margin-left: 50px;
 }
+
 .menu-btn {
     background-color: transparent;
     color: var(--black);
@@ -124,33 +118,5 @@ nav a {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/* Styling Form Pencarian */
-.search-form {
-  padding: 8px 8px 8px 32px;
-  display: flex;
-  align-items: center;
-}
-
-.search-form input[type="text"] {
-  padding: 8px;
-  margin-right: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  flex-grow: 1;
-}
-
-.search-form button {
-  padding: 8px 12px;
-  background-color: #e84934;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.search-form button:hover {
-  background-color: #c82333;
 }
 </style>

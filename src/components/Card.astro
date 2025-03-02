@@ -13,10 +13,10 @@ export interface Props {
 const { frontmatter, url } = Astro.props;
 ---
 
-<li class="card"> {/* PERHATIKAN class="card" di sini */}
+<li class="card"> {/* PENTING: Harus ada class="card" */}
   <a href={url}>
     {frontmatter.heroImage && (
-      <img src={frontmatter.heroImage} alt={frontmatter.title} width="200" />
+      <img src={frontmatter.heroImage} alt={frontmatter.title}  />
     )}
     <h2>{frontmatter.title}</h2>
     {frontmatter.description && <p>{frontmatter.description}</p>}
@@ -31,3 +31,7 @@ const { frontmatter, url } = Astro.props;
     )}
   </a>
 </li>
+<style>
+/* CSS untuk Card, sudah dipindahkan ke search.astro */
+</style>
+

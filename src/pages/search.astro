@@ -1,8 +1,8 @@
 ---
 // src/pages/search.astro
-import { SITE_TITLE } from '../consts'; // Ganti jika nama konstanta berbeda
-import Layout from '../layouts/Layout.astro'; // Ganti jika nama layout berbeda
-import Card from '../components/Card.astro'; // Ganti jika nama komponen berbeda
+import { SITE_TITLE } from '../consts';
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
 
 const query = Astro.url.searchParams.get('query');
 const allPosts = await Astro.glob('../content/blog/*.{md,mdx}');
@@ -10,11 +10,11 @@ const allPosts = await Astro.glob('../content/blog/*.{md,mdx}');
 let results = [];
 
 if (query) {
+  const lowerQuery = query.toLowerCase(); // Simpan di sini agar tidak dihitung berulang
   results = allPosts.filter(post => {
     const title = post.frontmatter.title ? post.frontmatter.title.toLowerCase() : '';
     const description = post.frontmatter.description ? post.frontmatter.description.toLowerCase() : '';
-    const content = post.compiledContent ? post.compiledContent().toLowerCase() : ''; // Konten HTML
-    const lowerQuery = query.toLowerCase();
+    const content = post.compiledContent ? post.compiledContent().toLowerCase() : '';
 
     return (
       title.includes(lowerQuery) ||
@@ -25,19 +25,25 @@ if (query) {
 }
 ---
 
-<Layout title={`Search: ${query} - ${SITE_TITLE}`}>
+<Layout title={query ? `Search: ${query} - ${SITE_TITLE}` : `Search - ${SITE_TITLE}`}>
   <main>
     <section>
-      <h1>Hasil Pencarian: "{query}"</h1>
-      {results.length === 0 ? (
-        <p>Tidak ada hasil yang ditemukan untuk "{query}".</p>
-      ) : (
-          <ul class="post-list">
-            {results.map((post) => (
-              <Card frontmatter={post.frontmatter} url={post.url} />
-            ))}
-          </ul>
-      )}
+      <h1>{query ? `Hasil Pencarian: "${query}"` : 'Search'}</h1>
+      {query ? (
+          results.length === 0 ? (
+            <p>Tidak ada hasil yang ditemukan untuk "{query}".</p>
+          ) : (
+            <ul class="post-list">
+              {results.map((post) => (
+                <Card frontmatter={post.frontmatter} url={post.id} />
+              ))}
+            </ul>
+          )
+        ) : (
+          <p>Masukkan kata kunci untuk mencari.</p>
+        )
+      }
+
     </section>
   </main>
 </Layout>

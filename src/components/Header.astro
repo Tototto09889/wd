@@ -30,26 +30,23 @@ import { SITE_TITLE } from '../consts';
 
 <script>
   /* Toggle between showing and hiding the dropdown content */
-  function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-  }
+  const myDropdown = document.getElementById("myDropdown");
 
+  function myFunction() {
+    myDropdown.classList.toggle("show");
+  }
   // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
+    if (!event.target.closest('.dropdown, .dropbtn')) { // Perubahan di sini
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
       }
     }
   }
 </script>
 
 <style>
+  /* ... (CSS yang sudah ada, tidak perlu diubah) ... */
   header {
     margin: 0;
     padding: 0 1em;

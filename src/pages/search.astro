@@ -2,21 +2,17 @@
 // src/pages/search.astro
 import { SITE_TITLE } from '../consts';
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Header from '../components/Header.astro'; // Impor Header
+import Footer from '../components/Footer.astro'; // Impor Footer
+import BaseHead from '../components/BaseHead.astro'; // Impor BaseHead
+import Card from '../components/Card.astro'; // Pastikan Card.astro sudah dimodifikasi
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
 
 function createPostUrl(post) {
-    return `/blog/${post.id}/`;
+  return `/blog/${post.slug}/`; // Lebih baik gunakan post.slug
 }
-
-// Hapus bagian ini, karena kita tidak lagi mengambil query dari URL
-// const query = Astro.url.searchParams.get('query');
-// let searchTerm = '';
-// if (query) {
-//   searchTerm = query.trim().toLowerCase();
-// }
 ---
 
 <Layout title={`Search - ${SITE_TITLE}`}>
@@ -24,44 +20,122 @@ function createPostUrl(post) {
     <section>
       <h1>Search</h1>
       <div class="search-container">
-        {/* Hapus value={searchTerm} */}
-        <input type="text" id="search-input" placeholder="Cari..."  />
+        <input type="text" id="search-input" placeholder="Cari..." />
       </div>
-      <ul class="post-list">
-        {allPosts.map((post) => (
-          <Card frontmatter={post.data} url={createPostUrl(post)} />
-        ))}
-      </ul>
+      <div class="results-container"> {/* Tambahkan container */}
+        <ul class="post-list">
+          {allPosts.map((post) => (
+            <Card frontmatter={post.data} url={createPostUrl(post)} />
+          ))}
+        </ul>
+      </div>
         <p id="no-results" style="display: none">Tidak ada hasil yang ditemukan.</p>
     </section>
   </main>
 </Layout>
 
 <script>
-  const searchInput = document.getElementById('search-input');
-  const postList = document.querySelector('.post-list');
-  const cards = document.querySelectorAll('.card');
-    const noResultsMessage = document.getElementById('no-results');
+const searchInput = document.getElementById('search-input');
+const postList = document.querySelector('.post-list');
+const cards = document.querySelectorAll('.card');
+const noResultsMessage = document.getElementById('no-results');
 
-  searchInput.addEventListener('input', () => {
-    const searchTerm = searchInput.value.trim().toLowerCase();
-    let visibleCount = 0;
+searchInput.addEventListener('input', () => {
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  let visibleCount = 0;
 
-    cards.forEach(card => {
-      const title = card.querySelector('h2')?.textContent.toLowerCase() || '';
-      const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+  cards.forEach(card => {
+    const title = card.querySelector('h2')?.textContent.toLowerCase() || '';
+    const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+      //Jika ingin search juga di content, aktifkan code dibawah, dan tambahkan di if bawah
+      //const content = card.querySelector('.content')?.textContent.toLowerCase() || '';
 
-      if (title.includes(searchTerm) || description.includes(searchTerm)) {
-        card.style.display = 'block';
-        visibleCount++;
-      } else {
-        card.style.display = 'none';
-      }
-    });
-        noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
+    if (title.includes(searchTerm) || description.includes(searchTerm) /*|| content.includes(searchTerm) */) {
+      card.style.display = 'block'; // Ganti jadi 'flex' jika Card.astro menggunakan flex
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
   });
+     noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
+});
 </script>
 
 <style>
-/* ... (CSS kamu) ... */
+/* CSS untuk tampilan kotak */
+.results-container {
+  display: flex; /* Menggunakan Flexbox */
+  flex-wrap: wrap; /* Izinkan item untuk wrap ke baris baru */
+  justify-content: space-between; /* Distribusikan ruang antar item */
+  gap: 1rem; /* Beri jarak antar kotak */
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  width: 100%; /* Lebar penuh */
+  /* Hapus margin: 0; (tidak diperlukan lagi karena kita pakai flexbox) */
+}
+
+
+/* Gaya untuk Card.astro (PENTING) */
+/* Sesuaikan ini dengan KEBUTUHAN kamu. Ini HANYA CONTOH. */
+.card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: calc(50% - 0.5rem); /* 2 kolom, kurangi gap */
+  box-sizing: border-box; /* Sertakan padding dan border dalam perhitungan lebar */
+  display: block; /* Awalnya, tampilkan semua */
+  /* Jika Card.astro kamu menggunakan flexbox, ganti display: block; menjadi: */
+  /* display: flex;  */
+  /* flex-direction: column; */ /* Jika ingin tata letak vertikal */
+  margin-bottom: 1rem; /* Jarak antar card di baris yang sama (optional) */
+}
+
+.card a {
+    text-decoration: none; /* Hapus garis bawah */
+    color: inherit;
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0; /* Hapus margin bawah default pada <p> */
+
+}
+  .card img {
+    max-width: 100%; /* Pastikan gambar tidak keluar dari kotak */
+    height: auto;
+    border-radius: 4px; /* Sedikit rounded corners */
+     margin-bottom: 0.5rem;
+  }
+    .search-container {
+    margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+  }
+  .search-container input {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        max-width: 400px;
+    }
+
+/* Responsive (untuk layar kecil) */
+@media (max-width: 768px) {
+  .card {
+    width: 100%; /* 1 kolom di layar kecil */
+  }
+}
+
+/* Gaya tambahan (sesuaikan) */
+  /* ... (CSS lain yang mungkin kamu perlukan) ... */
 </style>

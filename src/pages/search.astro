@@ -3,58 +3,52 @@
 import { SITE_TITLE } from '../consts';
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import { getCollection } from 'astro:content'; // Menggunakan getCollection
+import { getCollection } from 'astro:content';
 
-const allPosts = await getCollection('blog'); // Ambil semua postingan
+const allPosts = await getCollection('blog');
 
-// Fungsi untuk membuat URL ke postingan
 function createPostUrl(post) {
-  return `/blog/${post.slug}/`;
+    return `/blog/${post.id}/`;
 }
 ---
-
 <Layout title={`Search - ${SITE_TITLE}`}>
-  <main>
+<main>
     <section>
-      <h1>Search</h1>
-      <div class="search-container">
+    <h1>Search</h1>
+    <div class="search-container">
         <input type="text" id="search-input" placeholder="Cari..." />
-      </div>
-      <ul class="post-list">
-        {/* Perubahan di sini: .slice(0, 3) */}
-        {allPosts.slice(0, 3).map((post) => (
-          <Card frontmatter={post.data} url={createPostUrl(post)} />
+    </div>
+    <ul class="post-list">
+        {allPosts.map((post) => (
+        <Card frontmatter={post.data} url={createPostUrl(post)} />
         ))}
-      </ul>
-      {/* Tampilkan pesan jika tidak ada hasil pencarian, setelah difilter */}
-       <p id="no-results" style="display: none;">Tidak ada hasil yang ditemukan.</p>
+    </ul>
+    <p id="no-results" style="display: none;">Tidak ada hasil yang ditemukan.</p>
     </section>
-  </main>
+</main>
 </Layout>
-
 <script>
   const searchInput = document.getElementById('search-input');
   const postList = document.querySelector('.post-list'); // Hanya satu ul
   const cards = document.querySelectorAll('.card'); // Semua elemen card
-  const noResultsMessage = document.getElementById('no-results'); // Tambahkan ini
+  const noResultsMessage = document.getElementById('no-results');
 
   searchInput.addEventListener('input', () => {
     const searchTerm = searchInput.value.trim().toLowerCase();
-     let visibleCount = 0; // Hitung postingan yang visible
+     let visibleCount = 0;
 
     cards.forEach(card => {
       const title = card.querySelector('h2')?.textContent.toLowerCase() || '';
       const description = card.querySelector('p')?.textContent.toLowerCase() || '';
 
-      if (title.includes(searchTerm) || description.includes(searchTerm)) {
+      if ((title.includes(searchTerm) || description.includes(searchTerm)) && visibleCount < 3) {
         card.style.display = 'block'; // atau 'flex', tergantung layout kamu
         visibleCount++;
       } else {
         card.style.display = 'none';
       }
     });
-    // Tampilkan atau sembunyikan pesan "Tidak ada hasil..."
-     noResultsMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+     noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
   });
 </script>
 

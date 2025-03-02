@@ -6,66 +6,69 @@ import Card from '../components/Card.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
+const query = Astro.url.searchParams.get('query'); // Ambil query dari URL
 
 function createPostUrl(post) {
-    return `/blog/${post.id}/`;
+    return `/blog/${post.slug}/`;
+}
+
+let searchTerm = ''; // Variabel untuk menyimpan kata kunci pencarian
+if (query) {
+  searchTerm = query.trim().toLowerCase(); // Simpan query jika ada
 }
 ---
+
 <Layout title={`Search - ${SITE_TITLE}`}>
-<main>
+  <main>
     <section>
-    <h1>Search</h1>
-    <div class="search-container">
-        <input type="text" id="search-input" placeholder="Cari..." />
-    </div>
-    <ul class="post-list">
+      <h1>Search</h1>
+      <div class="search-container">
+        {/* Set value input ke searchTerm */}
+        <input type="text" id="search-input" placeholder="Cari..." value={searchTerm} />
+      </div>
+      <ul class="post-list">
         {allPosts.map((post) => (
-        <Card frontmatter={post.data} url={createPostUrl(post)} />
+          <Card frontmatter={post.data} url={createPostUrl(post)} />
         ))}
-    </ul>
-    <p id="no-results" style="display: none;">Tidak ada hasil yang ditemukan.</p>
+      </ul>
+        <p id="no-results" style=`display: ${allPosts.filter(post => {
+            const title = (post.data.title || '').toLowerCase();
+            const description = (post.data.description || '').toLowerCase();
+            return title.includes(searchTerm) || description.includes(searchTerm);
+        }).length === 0 && searchTerm !== '' ? 'block' : 'none'};`>
+            Tidak ada hasil yang ditemukan.
+        </p>
     </section>
-</main>
+  </main>
 </Layout>
+
 <script>
   const searchInput = document.getElementById('search-input');
-  const postList = document.querySelector('.post-list'); // Hanya satu ul
-  const cards = document.querySelectorAll('.card'); // Semua elemen card
-  const noResultsMessage = document.getElementById('no-results');
+  const postList = document.querySelector('.post-list');
+  const cards = document.querySelectorAll('.card');
+    const noResultsMessage = document.getElementById('no-results');
 
   searchInput.addEventListener('input', () => {
     const searchTerm = searchInput.value.trim().toLowerCase();
-     let visibleCount = 0;
+    let visibleCount = 0;
 
     cards.forEach(card => {
       const title = card.querySelector('h2')?.textContent.toLowerCase() || '';
       const description = card.querySelector('p')?.textContent.toLowerCase() || '';
 
-      if ((title.includes(searchTerm) || description.includes(searchTerm)) && visibleCount < 3) {
-        card.style.display = 'block'; // atau 'flex', tergantung layout kamu
+      if (title.includes(searchTerm) || description.includes(searchTerm)) {
+        card.style.display = 'block';
         visibleCount++;
       } else {
         card.style.display = 'none';
       }
     });
-     noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
+        noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
   });
+
+//   // Opsional: Jika ingin otomatis melakukan pencarian saat halaman dimuat dengan query
+//   if (searchTerm) {
+//     searchInput.dispatchEvent(new Event('input')); // Picu event 'input'
+//   }
 </script>
 
-<style>
-  .post-list {
-    list-style: none;
-    padding: 0;
-  }
-  .search-container {
-    margin-bottom: 1rem;
-  }
-  .search-container input {
-        padding: 0.5rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        width: 100%;
-        max-width: 400px;
-    }
-  /* Tambahkan styling lain jika diperlukan di sini */
-</style>

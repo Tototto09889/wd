@@ -1,69 +1,21 @@
 ---
-// src/pages/blog/[...slug].astro
-import { getCollection, type CollectionEntry } from 'astro:content';
-import BaseHead from '../../../components/BaseHead.astro'; // Sesuaikan path
-import Header from '../../../components/Header.astro'; // Sesuaikan path
-import Footer from '../../../components/Footer.astro'; // Sesuaikan path
-import FormattedDate from '../../../components/FormattedDate.astro'; // Sesuaikan path
+import { type CollectionEntry, getCollection } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+import { render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map(post => ({
-    params: { slug: post.id }, // Gunakan post.slug!
-    props: { post }, // Teruskan seluruh objek post
-  }));
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post,
+	}));
 }
+type Props = CollectionEntry<'blog'>;
 
-interface Props {
-  post: CollectionEntry<'blog'>;
-}
-
-const { post } = Astro.props;
-const { Content } = await post.render(); // Cara yang benar untuk merender konten
+const post = Astro.props;
+const { Content } = await render(post);
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead title={post.data.title} description={post.data.description} />
-		<style>
-      /* ... (CSS kamu untuk halaman postingan individual) ... */
-      .title {
-        font-size: 2em;
-        margin: 0.25em 0 0;
-      }
-      .date {
-        color: rgb(var(--gray));
-      }
-      .last-updated-on {
-        font-style: italic;
-      }
-      .content{
-        line-height: 1.6;
-      }
-
-    </style>
-  </head>
-  <body>
-    <Header />
-    <main>
-      <article>
-        {post.data.heroImage && ( // Tampilkan gambar jika ada
-          <img
-            width={720}
-            height={360}
-            src={post.data.heroImage}
-            alt={post.data.title}
-          />
-        )}
-        <h1 class="title">{post.data.title}</h1>
-        <time datetime={post.data.pubDate.toISOString()}>
-          <FormattedDate date={post.data.pubDate} />
-        </time>
-        <div class="content">
-          <Content /> {/* Tampilkan konten yang sudah di-render */}
-        </div>
-      </article>
-    </main>
-    <Footer />
-  </body>
-</html>
+<BlogPost {...post.data}>
+	<Content />
+</BlogPost>

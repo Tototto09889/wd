@@ -3,53 +3,68 @@
 import { SITE_TITLE } from '../consts';
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
-import { getCollection } from 'astro:content'; // Impor getCollection
+import { getCollection } from 'astro:content'; // Menggunakan getCollection
 
-const query = Astro.url.searchParams.get('query');
+const allPosts = await getCollection('blog'); // Ambil semua postingan
 
-// Gunakan getCollection untuk memuat HANYA postingan dari koleksi 'blog'
-const allPosts = await getCollection('blog');
-
-let results = [];
-
-if (query) {
-  const lowerQuery = query.trim().toLowerCase();
-
-  results = allPosts.filter(post => {
-    // Akses data langsung dari post.data (frontmatter) dan post.body (konten mentah)
-    const title = (post.data.title || '').toLowerCase();
-    const description = (post.data.description || '').toLowerCase();
-    const content = (post.body || '').toLowerCase(); // Konten Markdown mentah
-
-    return (
-      title.includes(lowerQuery) ||
-      description.includes(lowerQuery) ||
-      content.includes(lowerQuery)
-    );
-  });
+// Fungsi untuk membuat URL ke postingan
+function createPostUrl(post) {
+  return `/blog/${post.id}/`;
 }
 ---
 
-<Layout title={query ? `Search: ${query} - ${SITE_TITLE}` : `Search - ${SITE_TITLE}`}>
+<Layout title={`Search - ${SITE_TITLE}`}>
   <main>
     <section>
-      <h1>{query ? `Hasil Pencarian: "${query}"` : 'Search'}</h1>
-      {query ? (
-          results.length === 0 ? (
-            <p>Tidak ada hasil yang ditemukan untuk "{query}".</p>
-          ) : (
-            <ul class="post-list">
-              {results.map((post) => (
-                // Perhatikan, kita sekarang menggunakan post.data dan post.slug
-                <Card frontmatter={post.data} url={`/blog/${post.id}/`} />
-              ))}
-            </ul>
-          )
-        ) : (
-          <p>Masukkan kata kunci untuk mencari.</p>
-        )
-      }
+      <h1>Search</h1>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Cari..." />
+      </div>
+      <ul class="post-list">
+        {allPosts.map((post) => (
+          <Card frontmatter={post.data} url={createPostUrl(post)} />
+        ))}
+      </ul>
     </section>
   </main>
 </Layout>
 
+<script>
+  const searchInput = document.getElementById('search-input');
+  const postList = document.querySelector('.post-list'); // Hanya satu ul
+  const cards = document.querySelectorAll('.card'); // Semua elemen card
+
+  searchInput.addEventListener('input', () => {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    cards.forEach(card => {
+      const title = card.querySelector('h2')?.textContent.toLowerCase() || '';
+      const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+      //  const content = card.querySelector('.content')?.textContent.toLowerCase() || ''; //Opsi jika ingin menyertakan konten
+
+      if (title.includes(searchTerm) || description.includes(searchTerm) /* || content.includes(searchTerm) */) {
+        card.style.display = 'block'; // atau 'flex', tergantung layout kamu
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+  .search-container {
+    margin-bottom: 1rem;
+  }
+  .search-container input {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        max-width: 400px;
+    }
+  /* Tambahkan styling lain jika diperlukan di sini */
+</style>
